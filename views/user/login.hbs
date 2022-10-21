@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Molla - Bootstrap eCommerce Template</title>
+    <meta name="keywords" content="HTML5 Template">
+    <meta name="description" content="Molla - Bootstrap eCommerce Template">
+    <meta name="author" content="p-themes">
+    <!-- Favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/icons/favicon-16x16.png">
+    <link rel="manifest" href="/assets/images/icons/site.html">
+    <link rel="mask-icon" href="/assets/images/icons/safari-pinned-tab.svg" color="#666666">
+    <link rel="shortcut icon" href="/assets/images/icons/favicon.ico">
+    <meta name="apple-mobile-web-app-title" content="Molla">
+    <meta name="application-name" content="Molla">
+    <meta name="msapplication-TileColor" content="#cc9966">
+    <meta name="msapplication-config" content="/assets/images/icons/browserconfig.xml">
+    <meta name="theme-color" content="#ffffff">
+
+	<meta name="google-signin-client_id" content="249952376720-otko94593qf88b4u892a1b8kslpg2e9i.apps.googleusercontent.com">
+    <!-- Plugins CSS File -->
+    <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
+    <!-- Main CSS File -->
+    <link rel="stylesheet" href="/assets/css/style.css">
+</head>
+<body>
+
+	<div class="page-wrapper">
+
+
+		<main class="main">
+			<!-- End .breadcrumb-nav -->
+
+			<div class="login-page bg-image pt-8 pb-8 pt-md-12 pb-md-12 pt-lg-17 pb-lg-17"
+				style="background-color:#fcb941 "> 
+				<div class="container">
+					<div class="form-box2">
+						<div class="form-tab">
+							<ul class="nav nav-pills nav-fill" role="tablist">
+								<li class="nav-item">
+									<a class="nav-link" id="signin-tab-2" data-toggle="tab" href="#signin-2" role="tab"
+										aria-controls="signin-2" aria-selected="false">Login</a>
+								</li>
+							</ul>
+
+							<form action="/login" method="post">
+
+								{{#if loginerror}}
+								<p style="color: red;">{{loginerror}}</p>
+								{{/if}}
+								<div class="form-group">
+									<label for="singin-email-2">Username or email address *</label>
+									<input type="text" class="form-control" id="singin-email-2" name="email" required>
+								</div><!-- End .form-group -->
+
+								<div class="form-group">
+									<label for="singin-password-2">Password *</label>
+									<input type="password" class="form-control" id="singin-password-2" name="password"
+										required>
+								</div><!-- End .form-group -->
+
+								<div class="form-footer">
+									<button type="submit" class="btn btn-outline-primary-2">
+										<span>LOG IN</span>
+										<i class="icon-long-arrow-right"></i>
+									</button>
+									<div class="custom-control custom-checkbox">
+										<input type="checkbox" class="custom-control-input " id="signin-remember-2">
+										<a href="/loginotp " style="text-decoration:none">Login with otp</a>
+									</div><!-- End .custom-checkbox -->
+
+									<a href="#" class="forgot-link">Forgot Your Password?</a>
+								</div><!-- End .form-footer -->
+							</form>
+							<div class="form-choice">
+								<p class="text-center">or sign in with</p>
+								<div class="row">
+
+                               <div class="g-signin2" data-onsuccess="onSignIn"></div>
+								<div class="data">
+									<p>Name</p>
+									<p id="alert alert-success"></p>
+									<p>profile pic</p>
+									<img id="image" class="rounded-circle" width="100" height="100" src="" alt="">
+                                     <p>Email</p>
+									 <p id="email"></p>
+									 <button type="button" class="btn btn-danger" onclick="signOut()">signout</button>
+								</div>
+                    <style>
+						.data{
+							display:none;
+						}
+						.g-signin2{
+							position:absolute
+							top:50%;
+							left:50%;
+							margin-top:-50px;
+							margin-left:-50px;
+
+						}
+
+					</style>
+									{{!-- <div class="col-sm-6">
+										<a href="#" class="btn btn-login btn-g">
+											<i class="icon-google"></i>
+											Login With Google
+										</a>
+									</div><!-- End .col-6 --> --}}
+
+
+
+
+									<div class="col-sm-6">
+										<a href="#" class="btn btn-login btn-f">
+											<i class="icon-facebook-f"></i>
+											Login With Facebook
+										</a>
+									</div><!-- End .col-6 -->
+								</div><!-- End .row -->
+								{{!--
+							</div><!-- End .form-choice --> --}}
+							{{!--
+						</div><!-- .End .tab-pane --> --}}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+					</div><!-- .End .tab-pane -->
+				</div><!-- End .tab-content -->
+			</div><!-- End .form-tab -->
+	</div><!-- End .form-box -->
+	</div><!-- End .container -->
+	{{!-- </div> --}}<!-- End .login-page section-bg -->
+	</main><!-- End .main -->
+
+
+	</div><!-- End .page-wrapper -->
+	<button id="scroll-top" title="Back to Top"><i class="icon-arrow-up"></i></button>
+    
+   
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	  <script src="https://apis.google.com/js/platform.js" async defer></script>
+<script>
+function onSignIn(googleUser) {
+	console.log('*******************************************')
+  console.log(googleUser)
+  console.log('*******************************************')
+  var profile = googleUser.getBasicProfile();
+  // Do not send to your backend! Use an ID token instead.
+ $('#name').test(profile.getName())
+  $('#email').text(profile.getEmail())
+   $('#image').attr('src',profile.getImageUrl())
+   $(".data").css("display","block")
+    $(".g-signin2").css("display","none")
+
+
+
+  
+  
+  console.log('Name: ' + profile.getName());
+  console.log('Image URL: ' + profile.getImageUrl());
+  console.log('Email: ' + profile.getEmail());  
+  // This is null if the 'email' scope is not present.
+}
+
+
+ function signOut() {
+    var auth2 = gapi.auth2.getAuthInstance();
+    auth2.signOut().then(function () {
+      console.log('User signed out.');
+
+	   $(".data").css("display","none")
+	    $(".g-signin2").css("display","block")
+
+    });
+  }
+</script>
+
+
+
+</body>
+
+
+<!-- molla/login.html  22 Nov 2019 10:04:03 GMT -->
+
+</html>

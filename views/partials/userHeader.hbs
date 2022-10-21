@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+</head>
+
+<body>
+    <header class="header header-intro-clearance header-3">
+        <div class="header-top">
+            <div class="container">
+                <div class="header-left">
+                    <a href="tel:#"><i class="icon-phone"></i>Call: +0123 456 789</a>
+                </div><!-- End .header-left -->
+
+                <div class="header-right">
+                    <ul class="top-menu">
+                        <li>
+                            <a href="#">Links</a>
+                            <ul>
+                                <li>
+                                    <div class="header-dropdown">
+                                        <a href="#">USD</a>
+                                        <div class="header-menu">
+                                            <ul>
+                                                <li><a href="#">Eur</a></li>
+                                                <li><a href="#">Usd</a></li>
+                                            </ul>
+                                        </div><!-- End .header-menu -->
+                                    </div>
+                                </li>
+                                <li>
+                                    <div>
+                                        <a href="/signup">Signup</a>
+                                        <div class="header-menu">
+                                            <ul>
+
+
+                                            </ul>
+                                        </div><!-- End .header-menu -->
+                                    </div>
+                                </li>
+                                {{#if loginaano}}
+                                <li> <a href="/logout">Logout </a></li>
+                                {{else}}
+                                <li> <a href="/login">Login </a></li>
+                                {{/if}}
+                            </ul>
+                        </li>
+                    </ul><!-- End .top-menu -->
+                </div><!-- End .header-right -->
+
+            </div><!-- End .container -->
+        </div><!-- End .header-top -->
+        {{!-- ----------------------------------------------LOGO
+        HEADER------------------------------------------------------------------ --}}
+        <div class="header-middle">
+            <div class="container">
+                <div class="header-left">
+                    <button class="mobile-menu-toggler">
+                        <span class="sr-only">Toggle mobile menu</span>
+                        <i class="icon-bars"></i>
+                    </button>
+
+                    <a href="index.html" class="logo">
+
+                        Lap World
+                        {{!-- <img src="" alt="Molla Logo" width="105" height="25"> --}}
+                    </a>
+                </div><!-- End .header-left -->
+                <div class="header-center">
+                    <div class="header-search header-search-extended header-search-visible d-none d-lg-block">
+                        <a href="#" class="search-toggle" role="button"><i class="icon-search"></i></a>
+                        <form action="#" method="get">
+                            <div class="header-search-wrapper search-wrapper-wide">
+                                <label for="q" class="sr-only">Search</label>
+                                <button class="btn btn-primary" type="submit"><i class="icon-search"></i></button>
+
+
+                                <input type="search" class="form-control" id="searchbar"
+                                    placeholder="Search product ..." onkeyup="sendData(this)" required>
+
+
+                            </div><!-- End .header-search-wrapper -->
+                            
+                        </form>
+                    </div><!-- End .header-search -->
+                </div>
+               
+
+                <div class="header-right">
+                    <div class="dropdown compare-dropdown">
+                        <a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true"
+                            aria-expanded="false" data-display="static" title="Compare Products"
+                            aria-label="Compare Products">
+                            <div class="icon">
+                                <i class="icon-random"></i>
+                            </div>
+
+
+                            <div class="wishlist">
+                                <a href="/wishlist-page" title="Wishlist">
+                                    <div class="icon">
+                                        <i class="icon-heart-o"></i>
+                                        <span class="wishlist-count badge">{{wishlistCount}}</span>
+                                    </div>
+                                    <p>Wishlist</p>
+                                </a>
+                            </div><!-- End .compare-dropdown -->
+
+                            <div class="dropdown cart-dropdown">
+                                <a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown"
+                                    aria-haspopup="true" aria-expanded="false" data-display="static">
+                                    <div class="icon">
+                                        {{!------------------- cart count----------------------------- --}}
+                                        <i class="icon-shopping-cart"></i>
+                                        <span class="cart-count">{{cartCount}}</span>
+                                    </div>
+                                    <a href="/cart">Cart</a>
+                                </a>
+
+                                <div class="dropdown-menu dropdown-menu-right">
+                                    <div class="dropdown-cart-products">
+                                        <div class="product">
+                                            <div class="product-cart-details">
+                                                <h4 class="product-title">
+                                                </h4>
+                                                <span class="cart-product-info">
+                                            </div><!-- End .product-cart-details -->
+                                            <figure class="product-image-container">
+                                                <a href="product.html" class="product-image">
+                                                </a>
+                                            </figure>
+                                        </div><!-- End .product -->
+                                        <div class="product">
+                                            <div class="product-cart-details">
+                                                <h4 class="product-title">
+                                                </h4>
+                                                <span class="cart-product-info">
+                                            </div><!-- End .product-cart-details -->
+                                            <figure class="product-image-container">
+                                                <a href="product.html" class="product-image">
+                                                </a>
+                                            </figure>
+                                            <a href="#" class="btn-remove" title="Remove Product"><i
+                                                    class="icon-close"></i></a>
+                                        </div><!-- End .product -->
+                                    </div><!-- End .cart-product -->
+                                </div>
+                            </div>
+                    </div>
+                </div>
+            </div>
+            <div class="header-bottom sticky-header">
+                <div class="container">
+
+                    <div class="header-center">
+                        <nav class="main-nav">
+                            <ul class="menu sf-arrows">
+                                <li class="megamenu-container active">
+
+
+
+
+                                    <a href="/" class="sf-with-ul">Home</a>
+
+                                </li>
+                                <li>
+
+                                    <a href="/account" class="sf-with-ul">Account</a>
+
+                                </li>
+                                <li>
+
+                                    <a href="/order-history" class="sf-with-ul">Orders</a>
+
+                                </li>
+
+
+
+                                <li>
+                                    <a href="/product-page/?page=1" class="sf-with-ul">Product</a>
+
+
+
+                                </li>
+                                <li>
+                           
+
+
+                                </li>
+
+                            </ul><!-- End .menu -->
+                        </nav><!-- End .main-nav -->
+                    </div><!-- End .header-center -->
+
+ 
+
+                    <div class="header-right">
+                        <i class="la la-lightbulb-o"></i>
+                        <p>Clearance<span class="highlight">&nbsp;Up to 30% Off</span></p>
+                    </div>
+                </div><!-- End .container -->
+            </div><!-- End .header-bottom -->
+    </header>
+                   
+<div class="container"  >
+  
+   
+    
+    
+    
+    
+    
+  
+    <ul id="productList" style="border: solid 2px; position: absolute; max-width: 360px; z-index: 5; background-color: white; width: 500px; display:none"> </ul>
+</div>
+
+
+
+
+
+    <script>
+    function sendData(e){
+
+        const productList=document.getElementById('productList')
+        
+        productList.style.display="block"
+
+        console.log(productList)
+        let match=e.value.match(/^[a-zA-Z ]*/)
+        let match2=e.value.match(/[ ]*/)
+        if(match2[0]===e.value){
+            productList.innerHTML='';
+            return;
+
+        }
+        if (match[0]===e.value){
+                    fetch('searchProducts',{
+            method:'post',
+            headers:{'Content-Type':'application/json'},
+            body:JSON.stringify({payload:e.value})
+        }).then(res=>res.json()).then(data=>{
+            let payload=data.payload;
+            productList.innerHTML= '';
+            if(payload.length < 1){
+                productList.innerHTML='<p>sorry.Nothing Found</p>';
+                return;
+
+            }
+            payload.forEach((item,index)=>{
+                if(index > 0)  productList.innerHTML+='<hr>';
+                productList.innerHTML+=`<a href="/product/${item._id}">
+                            <li style="display:flex">
+            <img src="/images/product/${item.img[0]}" style="width: 30px; height: 28px; margin-top:4px"> &nbsp; &nbsp; &nbsp;
+            <p class="text-black">${item.laptops}</p></li></a>`
+            })
+
+        
+        })
+        return;
+        }
+         productList.innerHTML= '';
+
+    }
+</script>
+
+
+    {{!-- <script>
+
++="<hr>";
+            showresult.innerHTML += `<a href="/product/${element._id}">
+            <li style="display:flex">
+            <img src="/images/product/${element.img[0]}" style="width: 30px; height: 28px; margin-top:4px"> &nbsp; &nbsp; &nbsp;
+            <p> ${element.productname}</p>
+            </li>
+            </a>`
+              
+
+        console.log('::::::::::::::::::')
+        console.log(searchBar)
+        let products = []
+
+        
+
+            searchBar.addEventListener('keyup', (e) => {
+                console.log('============')
+                console.log(e.target.value)
+                console.log('============')
+                const searchString = e.target.value;
+                 console.log('+++++++++++++')
+                 console.log(searchString)
+                 console.log('+++++++++++++')
+                const filteredProducts = products.filter(item => {
+                    return (
+                        item.name.includes(searchString)
+                    );
+                });
+                console.log('============')
+                console.log(searchString)
+                console.log(filteredProducts)
+            })
+
+            const loadProducts = async () => {
+                try {
+                      
+               
+                    products = await res.json();
+                    displayProducts(products)
+                    console.log('&&&&&&&&&&')
+                    console.log(products)
+                    console.log('&&&&&&&&&&')
+
+                } catch (err) {
+                    console.log(err)
+
+                }
+            }
+
+            const displayProducts = (items) => {
+                const htmlstring = items
+                .map((item) => {
+                    return `
+            <li class='item'>
+                <h2>${item.name}</h2>
+                </li>
+                `
+
+                }).join('')
+                productList.innerHTML=htmlstring
+                
+
+            }
+            loadProducts();
+     
+</script> --}}
+</body>
+
+</html>

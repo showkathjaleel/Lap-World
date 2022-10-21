@@ -1,0 +1,214 @@
+(function() {
+    function r(e, n, t) {
+        function o(i, f) {
+            if (!n[i]) {
+                if (!e[i]) {
+                    var c = "function" == typeof require && require;
+                    if (!f && c) return c(i, !0);
+                    if (u) return u(i, !0);
+                    var a = new Error("Cannot find module '" + i + "'");
+                    throw a.code = "MODULE_NOT_FOUND", a
+                }
+                var p = n[i] = {
+                    exports: {}
+                };
+                e[i][0].call(p.exports, function(r) {
+                    var n = e[i][1][r];
+                    return o(n || r)
+                }, p, p.exports, r, e, n, t)
+            }
+            return n[i].exports
+        }
+        for (var u = "function" == typeof require && require, i = 0; i < t.length; i++) o(t[i]);
+        return o
+    }
+    return r
+})()({
+    1: [function(require, module, exports) {
+        "use strict"; // fix special char
+
+        window.cmdOdin = function() {
+            var _body = document.querySelector('body');
+
+            var loadedCount = 0;
+            var loadTotal = 0;
+
+            var loadedfn = function loadedfn() {};
+
+            function loadResource(_ref) {
+                var _src = _ref.src,
+                    _type = _ref.type,
+                    _fn = _ref.fn;
+                var loadDom = null;
+
+                switch (_type) {
+                    case 'script':
+                        loadDom = document.createElement('script');
+                        loadDom.src = _src;
+                        loadDom.crossorigin = 'anonymous';
+                        break;
+
+                    case 'style':
+                        loadDom = document.createElement('style');
+                        loadDom.src = _src;
+                        break;
+
+                    default:
+                        break;
+                }
+
+                loadDom.onload = function() {
+                    //
+                    loadedCount = loadedCount + 1; //
+
+                    if (typeof _fn === 'function') {
+                        _fn();
+                    }
+
+                    loadedfn(loadTotal, loadedCount);
+                };
+
+                _body.appendChild(loadDom);
+            }
+
+            function loadrs(_srclist) {
+                var _loadedfn = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : function() {};
+
+                loadTotal = _srclist.length;
+                loadedfn = _loadedfn;
+
+                for (var index = 0; index < _srclist.length; index++) {
+                    var _src = _srclist[index];
+
+                    if (_src.src && _src.type) {
+                        loadResource(_src);
+                    }
+                }
+            } //
+
+
+            function createEvent(eventName) {
+                var _e = null;
+
+                if (typeof Event === 'function') {
+                    _e = new Event(eventName);
+                } else {
+                    _e = document.createEvent('Event');
+
+                    _e.initEvent(eventName, true, true);
+                }
+
+                return _e;
+            }
+
+            function athenaEvent() {
+                var _event = createEvent('athena-to-odin-webpage-patch');
+
+                setTimeout(function() {
+                    _body.dispatchEvent(_event);
+                }, 100);
+            }
+
+            function athenaEventListener(fn) {
+                var _handle = function _handle() {
+                    _body.removeEventListener('athena-to-odin-webpage-patch', _handle);
+
+                    fn();
+                };
+
+                _body.addEventListener('athena-to-odin-webpage-patch', _handle, {
+                    once: true
+                });
+            }
+
+            return {
+                loadrs: loadrs,
+                createEvent: createEvent,
+                athenaEvent: athenaEvent,
+                athenaEventListener: athenaEventListener
+            };
+        }();
+
+        var isActiveMobileMenu = false;
+
+        function _getOfficalProductMenuHeight() {
+            var officalProdcutMenu = document.getElementsByClassName('asusOfficialProductMenu');
+            if (officalProdcutMenu.length !== 1) {
+                return;
+            }
+            return officalProdcutMenu[0].clientHeight;
+        }
+
+        function _checkIfHamberStatus() {
+            var collaseDom = document.querySelectorAll('.cmd-sidenav .container-collapse');
+            if (collaseDom.length !== 1) { return 'empty'; }
+
+            return window.getComputedStyle(collaseDom[0]).display;
+        }
+
+        function _updateSidenavPosition(menuHeight) {
+            var cmdSidenav = document.querySelectorAll('.cmd-sidenav.mobile-show');
+            var cmdSidenavDesktop = document.querySelectorAll('.cmd-sidenav');
+
+            if (cmdSidenavDesktop.length === 1) {
+                var hamberStatus = _checkIfHamberStatus();
+                // console.log('[hamberStatus]: hamberStatus', hamberStatus);
+                switch (hamberStatus) {
+                case 'none':
+                    cmdSidenavDesktop[0].style.transform = "translateY(-50%)";
+                    cmdSidenavDesktop[0].style.top = '50%';
+
+                    break;
+
+                case 'block':
+                    isActiveMobileMenu = true;
+                    cmdSidenavDesktop[0].style.transform = "none";
+                    var offsetTop = 48 + menuHeight + 16;
+                    var offsetVal = offsetTop + 'px';
+                    var currentOffsetTop = cmdSidenav[0].style.top;
+
+                    if (currentOffsetTop !== offsetVal) {
+                        cmdSidenav[0].style.top = offsetVal;
+                    }
+
+                    break;
+
+                default:
+                    if (cmdSidenav.length !== 1 && !isActiveMobileMenu) {
+                        cmdSidenavDesktop[0].style.transform = "translateY(-50%)";
+                        cmdSidenavDesktop[0].style.top = '50%';
+                    } else {
+                        isActiveMobileMenu = true;
+                        cmdSidenavDesktop[0].style.transform = "none";
+                        var offsetTop = 48 + menuHeight + 16;
+                        var offsetVal = offsetTop + 'px';
+                        var currentOffsetTop = cmdSidenav[0].style.top;
+
+                        if (currentOffsetTop !== offsetVal) {
+                            cmdSidenav[0].style.top = offsetVal;
+                        }
+                    }
+                }
+            }
+        }
+
+        function _calculateSidenavPosition() {
+            var menuHeight = _getOfficalProductMenuHeight();
+            if (!menuHeight) {
+                return;
+            }
+
+            _updateSidenavPosition(menuHeight);
+        }
+
+
+        function dynamicChangeSidenavPosition() {
+            setInterval(function() {
+                _calculateSidenavPosition();
+            }, 5000);
+        }
+
+        dynamicChangeSidenavPosition();
+
+    }, {}]
+}, {}, [1]);

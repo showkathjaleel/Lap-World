@@ -1,0 +1,81 @@
+.ieOld.ieOld #CMD .wd__feature__list .wd__feature .img__icon {
+  margin-top: 0; }
+
+@media (min-width: 1280px) {
+  .ieOld.ieOld #CMD .cmd-sidenav .sidenav-container .container-items .item .item-dot::after {
+    margin-left: 15px; }
+  .ieOld.ieOld #CMD .chart-content .content-row .row-item .item-info.colorful .info-name {
+    -webkit-text-fill-color: initial !important;
+    background-image: none !important;
+    color: #dad693; }
+  .ieOld.ieOld #CMD .kv__table .table-container .table-item.item-main .item-title {
+    -webkit-text-fill-color: initial !important;
+    background-image: none !important;
+    color: #cdab82 !important; }
+    .ieOld.ieOld #CMD .kv__table .table-container .table-item.item-main .item-title::after {
+      background: none;
+      background-color: #cdab82 !important; } }
+
+@media (min-width: 1280px) {
+  .ieOld #CMD .large_use {
+    display: inline; }
+  .ieOld #CMD .wd__innerbtn .inner__btn .toggleSlide {
+    -webkit-transform: translateY(0) rotate(0deg) !important;
+    -ms-transform: translateY(0) rotate(0deg) !important;
+    transform: translateY(0) rotate(0deg) !important; } }
+
+.ieOld #CMD .wd__section .grid__layout.ksp__layout {
+  display: flex;
+  justify-content: center;
+  padding-right: 0;
+  padding-left: 0;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-content: stretch; }
+  .ieOld #CMD .wd__section .grid__layout.ksp__layout .grid-item {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; }
+    .ieOld #CMD .wd__section .grid__layout.ksp__layout .grid-item[class*='large-span'] {
+      right: auto;
+      left: auto;
+      margin-left: 0;
+      margin-left: 0;
+      grid-column: none; }
+    .ieOld #CMD .wd__section .grid__layout.ksp__layout .grid-item.large-span-3 {
+      width: 24.3%; }
+    .ieOld #CMD .wd__section .grid__layout.ksp__layout .grid-item.large-span-4 {
+      width: 32.4%; }
+    .ieOld #CMD .wd__section .grid__layout.ksp__layout .grid-item.large-span-6 {
+      width: 48.5%; }
+    .ieOld #CMD .wd__section .grid__layout.ksp__layout .grid-item.large-span-8 {
+      width: 65%; }
+    .ieOld #CMD .wd__section .grid__layout.ksp__layout .grid-item.large-span-12 {
+      width: 97%; }
+  .ieOld #CMD .wd__section .grid__layout.ksp__layout .grid-item {
+    display: inline-block;
+    padding: 8px;
+    background: none;
+    background-color: transparent; }
+    .ieOld #CMD .wd__section .grid__layout.ksp__layout .grid-item .grid-item-ie {
+      display: flex;
+      overflow: hidden;
+      align-items: center;
+      justify-content: center;
+      box-sizing: border-box;
+      border-radius: 10px;
+      background: linear-gradient(to top, #011722 0%, #1c2939 100%);
+      min-height: 200px;
+      align-content: center; }
+  .ieOld #CMD .wd__section .grid__layout.ksp__layout .grid-item-wdContent .grid-item-ie {
+    padding: 0; }
+  .ieOld #CMD .wd__section .grid__layout.ksp__layout .grid-item-wdFeatureTopIcon .grid-item-ie {
+    padding: 37px 20px; }
+  .ieOld #CMD .wd__section .grid__layout.ksp__layout .grid-item-wdFeature .grid-item-ie {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 37px 20px; }
+    .ieOld #CMD .wd__section .grid__layout.ksp__layout .grid-item-wdFeature .grid-item-ie .wd__feature__list {
+      display: inline-block;
+      height: auto; }

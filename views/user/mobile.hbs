@@ -1,0 +1,61 @@
+<div class="login-page bg-image pt-8 pb-8 pt-md-12 pb-md-12 pt-lg-17 pb-lg-17"
+	style="background-image: url('assets/images/backgrounds/login-bg.jpg')">
+	<div class="container">
+		<div class="form-box">
+			<div class="form-tab">
+
+
+				<form action="/mobile" method="post">
+					<div class="form-group">
+						<label>Otp Code</label>
+						<input type="tel" class="form-control"  name="otp" >
+					</div>
+					<div class="form-footer">
+						<button type="submit" class="btn btn-outline-primary-2 mx-auto">
+							<span>submit</span>						
+						</button>
+
+						
+				</form>
+
+			
+							<span class="btn  mx-auto" id="timer"> </span>				
+						
+					
+
+					<button type="submit" class="btn btn-outline-primary-2 mx-auto">
+						<span id="resendCode"><a href="/resend" >Resend OTP</a> </span>					
+						</button>
+
+			
+				
+
+				
+
+				
+			</div><!-- End .form-footer -->
+		</div>
+	</div>
+</div>
+</div>
+
+
+
+<script>
+		let timer = document.getElementById('timer')
+		let countDown =20		
+		let myTimer =function () {			
+			if(countDown==0){
+				clearInterval(myInterval)
+				timer.style.display='none'
+				document.getElementById('resendCode').style.display='block'
+			}else{
+				timer.innerHTML = countDown
+				countDown=countDown-1
+			}			
+		}
+		let myInterval = setInterval(myTimer,1000)
+		setTimeout(()=>{
+					document.getElementById('msg').style.display='none'
+				},3000)	
+	</script>

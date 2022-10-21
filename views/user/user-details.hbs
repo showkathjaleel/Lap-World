@@ -1,0 +1,44 @@
+	                <div class="row">
+	                		<div class="col-12">
+								
+
+		            			<div class="cta-wrapper text-center">
+									<h4>User Profile</h4>
+
+                                    {{#if errMessage}}
+                                    <div class="text-center">
+                                    <p style="color: #FCB941 ;">{{errMessage}}</p>
+                                    </div>
+                                    {{/if}}
+
+							
+									<form action="/profile" method="post" onsubmit="return checkDetails()">
+                                    <label for="">Name</label>
+										<input type="text" class="form-control form-control-rounded" id="name" name="name" value="{{userdetails.name}}" >
+                                        <span id="" class="text-danger"  required/></span>
+				                	
+									    <label for="">Email id</label>
+										<input type="email" class="form-control form-control-rounded" id="email" name="email" value="{{userdetails.email}}" >
+                                        <span id="" class="text-danger"></span>
+
+                                        <label for="">Mobile Number</label>
+										<input type="tel" class="form-control form-control-rounded"  id="number" name="number" value="{{userdetails.number}}">
+                                        <span id="" class="text-danger"></span>
+                                        <div>
+
+
+
+
+
+
+
+										<button class="btn btn-primary" type="submit"><span>Submit</span><i class="icon-long-arrow-right"></i></button>
+                                        </div>
+				                	</form>
+
+		            			</div><!-- End .cta-wrapper -->
+	                		</div><!-- End .col-lg-6 -->
+
+
+	                	</div><!-- End .row -->
+                	</div><!-- End .cta -->

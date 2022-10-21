@@ -1,0 +1,36 @@
+<div class="login-page bg-image pt-8 pb-8 pt-md-12 pb-md-12 pt-lg-17 pb-lg-17"
+	style="background-image: url('assets/images/backgrounds/login-bg.jpg')">
+	<div class="container">
+		<div class="form-box">
+			<div class="form-tab">
+				<ul class="nav nav-pills nav-fill" role="tablist">
+					<li class="nav-item">
+						<a class="nav-link" id="signin-tab-2" data-toggle="tab" href="#signin-2" role="tab"
+							aria-controls="signin-2" aria-selected="false"> OTP Login</a>
+					</li>
+				</ul>
+
+				{{#if valid}}
+				<div>
+					<p class="text-danger">enter valid otp</p>
+				</div>
+				{{/if}}
+
+
+				<form action="/loginotp" method="post">
+					<div class="form-group">
+						<label>Phone Number</label>
+						<input type="tel" name="number" id="number" placeholder="enter mobile number"
+							class="form-control">
+					</div><!-- End .form-group -->
+					<div class="form-footer">
+						<button type="submit" class="btn btn-outline-primary-2 mx-auto">
+							<span>submit</span>
+						</button>
+
+					</div><!-- End .form-footer -->
+				</form>
+			</div>
+		</div>
+	</div>
+</div>

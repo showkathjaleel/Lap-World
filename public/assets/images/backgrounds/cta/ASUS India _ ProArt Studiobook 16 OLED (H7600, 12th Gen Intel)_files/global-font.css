@@ -1,0 +1,338 @@
+/*** Global ***/
+.helveticaNowDispW05Hairline {
+  font-family: 'Helvetica Now Disp W05 Hairline'; }
+
+.helveticaNowDispW05HairlineIt {
+  font-family: 'Helvetica Now DispW05HairlineIt'; }
+
+.helveticaNowDisplayW05Thin {
+  font-family: 'Helvetica Now Display W05 Thin'; }
+
+.helveticaNowDisplayW05ThIt {
+  font-family: 'Helvetica Now Display W05 Th It'; }
+
+.helveticaNowDisplayW05XLt {
+  font-family: 'Helvetica Now Display W05 XLt'; }
+
+.helveticaNowDispW05XLtIt {
+  font-family: 'Helvetica Now Disp W05 XLt It'; }
+
+.helveticaNowDisplayW05Light {
+  font-family: 'Helvetica Now Display W05 Light'; }
+
+.helveticaNowDisplayW05LtIt {
+  font-family: 'Helvetica Now Display W05 Lt It'; }
+
+.helveticaNowDisplayW05Rg {
+  font-family: 'Helvetica Now Display W05 Rg'; }
+
+.helveticaNowDisplayW05It {
+  font-family: 'Helvetica Now Display W05 It'; }
+
+.helveticaNowDisplayW05Md {
+  font-family: 'Helvetica Now Display W05 Md'; }
+
+.helveticaNowDisplayW05MdIt {
+  font-family: 'Helvetica Now Display W05 Md It'; }
+
+.helveticaNowDisplayW05Bold {
+  font-family: 'Helvetica Now Display W05 Bold'; }
+
+.helveticaNowDisplayW05BdIt {
+  font-family: 'Helvetica Now Display W05 Bd It'; }
+
+.helveticaNowDisplayW05XBold {
+  font-family: 'Helvetica Now Display W05 XBold'; }
+
+.helveticaNowDispW05XBdIt {
+  font-family: 'Helvetica Now Disp W05 XBd It'; }
+
+.helveticaNowDisplayW05Black {
+  font-family: 'Helvetica Now Display W05 Black'; }
+
+.helveticaNowDispW05BlkIt {
+  font-family: 'Helvetica Now Disp W05 Blk It'; }
+
+.helveticaNowDisplayW05XBlk {
+  font-family: 'Helvetica Now Display W05 XBlk'; }
+
+.helveticaNowDispW05XBlkIt {
+  font-family: 'Helvetica Now Disp W05 XBlk It'; }
+
+.text__light,
+.text__light * {
+  font-family: "Helvetica Now Display W05 Light" !important;
+  font-style: normal !important; }
+
+.text__Xlight,
+.text__Xlight * {
+  font-family: "Helvetica Now Display W05 XLt" !important;
+  font-style: normal !important; }
+
+.text__regular,
+.text__regular * {
+  font-family: "Helvetica Now Display W05 Rg", "Segoe UI", sans-serif !important;
+  font-style: normal !important; }
+
+.text__medium,
+.text__medium * {
+  font-family: "Helvetica Now Display W05 Md" !important;
+  font-style: normal !important; }
+
+.text__bold,
+.text__bold * {
+  font-family: "Helvetica Now Display W05 Bold" !important;
+  font-style: normal !important; }
+
+.text__semibold,
+.text__semibold * {
+  font-family: "Helvetica Now Display W05 XBold" !important;
+  font-style: normal !important; }
+
+.wd__content .content__slogan,
+.wd__content .content__slogan * {
+  font-family: "Helvetica Now Display W05 Bold" !important;
+  font-style: normal !important; }
+
+.wd__content .content__title,
+.wd__content .content__title * {
+  font-family: "Helvetica Now Display W05 Md" !important;
+  font-style: normal !important; }
+
+.wd__content .content__comment,
+.wd__content .content__comment *,
+.wd__content .content__comment span,
+.wd__content .content__comment sup,
+.wd__content .content__comment div,
+.wd__content .content__info,
+.wd__content .content__info *,
+.wd__content .content__info span,
+.wd__content .content__info sup,
+.wd__content .content__info div {
+  font-family: "Helvetica Now Display W05 Light" !important;
+  font-style: normal !important; }
+
+.wd__content .content__link,
+.wd__content .content__link *,
+.wd__content .content__link span,
+.wd__content .content__link sup,
+.wd__content .content__link div {
+  font-family: "Helvetica Now Display W05 Rg", "Segoe UI", sans-serif !important;
+  font-style: normal !important; }
+
+.wd__link__arrow::after {
+  font-family: "Helvetica Now Display W05 Rg", "Segoe UI", sans-serif !important;
+  font-style: normal !important; }
+
+.wd__feature__list * {
+  font-family: "Helvetica Now Display W05 Light";
+  font-style: normal; }
+
+.wd__feature__list .wd__feature .wd__feature__data,
+.wd__feature__list .wd__feature .wd__feature__data span,
+.wd__feature__list .wd__feature .wd__feature__data sup,
+.wd__feature__list .wd__feature .wd__feature__data div {
+  font-family: "Helvetica Now Display W05 Rg", "Segoe UI", sans-serif;
+  font-style: normal; }
+
+.wd__feature__list .wd__feature .wd__feature__describe__top,
+.wd__feature__list .wd__feature .wd__feature__describe__top span,
+.wd__feature__list .wd__feature .wd__feature__describe__top sup,
+.wd__feature__list .wd__feature .wd__feature__describe__top div,
+.wd__feature__list .wd__feature .wd__feature__describe,
+.wd__feature__list .wd__feature .wd__feature__describe span,
+.wd__feature__list .wd__feature .wd__feature__describe sup,
+.wd__feature__list .wd__feature .wd__feature__describe div {
+  font-family: "Helvetica Now Display W05 Rg", "Segoe UI", sans-serif;
+  font-style: normal; }
+
+.wd__feature__list.wd__feature__list-icon * {
+  font-family: "Helvetica Now Display W05 Light";
+  font-style: normal; }
+
+.wd__feature__list.wd__feature__list-icon .wd__feature .wd__feature__data,
+.wd__feature__list.wd__feature__list-icon .wd__feature .wd__feature__data span,
+.wd__feature__list.wd__feature__list-icon .wd__feature .wd__feature__data sup,
+.wd__feature__list.wd__feature__list-icon .wd__feature .wd__feature__data div {
+  font-family: "Helvetica Now Display W05 Md";
+  font-style: normal; }
+
+.wd__feature__list.wd__feature__list-icon .wd__feature .wd__feature__describe__top,
+.wd__feature__list.wd__feature__list-icon .wd__feature .wd__feature__describe__top span,
+.wd__feature__list.wd__feature__list-icon .wd__feature .wd__feature__describe__top sup,
+.wd__feature__list.wd__feature__list-icon .wd__feature .wd__feature__describe__top div,
+.wd__feature__list.wd__feature__list-icon .wd__feature .wd__feature__describe,
+.wd__feature__list.wd__feature__list-icon .wd__feature .wd__feature__describe span,
+.wd__feature__list.wd__feature__list-icon .wd__feature .wd__feature__describe sup,
+.wd__feature__list.wd__feature__list-icon .wd__feature .wd__feature__describe div {
+  font-family: "Helvetica Now Display W05 Light";
+  font-style: normal; }
+
+.modal-button-container .modal-button-text,
+.modal-button-container .modal-inner-text {
+  font-family: "Helvetica Now Display W05 Md" !important;
+  font-style: normal !important; }
+
+.footnote {
+  font-family: 'Segoe UI', sans-serif !important; }
+
+.footnote .footnote-item,
+.footnote .footnote-item *,
+.comment,
+.comment * {
+  font-family: "Helvetica Now Display W05 Rg", "Segoe UI", sans-serif !important;
+  font-style: normal !important; }
+
+.footnote .footnote-item::marker,
+.comment::marker {
+  font-variant-numeric: diagonal-fractions; }
+
+.section__oled .products__title {
+  font-family: "Helvetica Now Display W05 Md" !important;
+  font-style: normal !important; }
+
+.section__corningGlass .item__content {
+  font-family: "Helvetica Now Display W05 Rg", "Segoe UI", sans-serif !important;
+  font-style: normal !important; }
+
+@media all and (max-width: 730.5px) {
+  .text__light-small,
+  .text__light-small * {
+    font-family: "Helvetica Now Display W05 Light" !important;
+    font-style: normal !important; }
+  .text__Xlight-small,
+  .text__Xlight-small * {
+    font-family: "Helvetica Now Display W05 XLt" !important;
+    font-style: normal !important; }
+  .text__regular-small,
+  .text__regular-small * {
+    font-family: "Helvetica Now Display W05 Rg", "Segoe UI", sans-serif !important;
+    font-style: normal !important; }
+  .text__medium-small {
+    font-family: "Helvetica Now Display W05 Md" !important;
+    font-style: normal !important; }
+  .text__bold-small {
+    font-family: "Helvetica Now Display W05 Bold" !important;
+    font-style: normal !important; }
+  .wd__content .content__comment,
+  .wd__content .content__comment *,
+  .wd__content .content__comment span,
+  .wd__content .content__comment sup,
+  .wd__content .content__comment div,
+  .wd__content .content__info,
+  .wd__content .content__info *,
+  .wd__content .content__info span,
+  .wd__content .content__info sup,
+  .wd__content .content__info div {
+    font-family: "Helvetica Now Display W05 Rg", "Segoe UI", sans-serif !important;
+    font-style: normal !important; }
+  .wd__content .content__link,
+  .wd__content .content__link *,
+  .wd__content .content__link span,
+  .wd__content .content__link sup,
+  .wd__content .content__link div {
+    font-family: "Helvetica Now Display W05 Bold" !important;
+    font-style: normal !important; }
+  .wd__link__arrow::after {
+    font-family: "Helvetica Now Display W05 Bold" !important;
+    font-style: normal !important; }
+  .wd__feature__list * {
+    font-family: "Helvetica Now Display W05 Light" !important;
+    font-style: normal !important; }
+  .wd__feature__list .wd__feature .wd__feature__data,
+  .wd__feature__list .wd__feature .wd__feature__data span,
+  .wd__feature__list .wd__feature .wd__feature__data sup,
+  .wd__feature__list .wd__feature .wd__feature__data div {
+    font-family: "Helvetica Now Display W05 Rg", "Segoe UI", sans-serif !important;
+    font-style: normal !important; }
+  .wd__feature__list .wd__feature .wd__feature__describe__top,
+  .wd__feature__list .wd__feature .wd__feature__describe__top span,
+  .wd__feature__list .wd__feature .wd__feature__describe__top sup,
+  .wd__feature__list .wd__feature .wd__feature__describe__top div,
+  .wd__feature__list .wd__feature .wd__feature__describe,
+  .wd__feature__list .wd__feature .wd__feature__describe span,
+  .wd__feature__list .wd__feature .wd__feature__describe sup,
+  .wd__feature__list .wd__feature .wd__feature__describe div {
+    font-family: "Helvetica Now Display W05 Md" !important;
+    font-style: normal !important; } }
+
+@media all and (min-width: 731px) and (max-width: 1279.5px) {
+  .text__light-medium,
+  .text__light-medium * {
+    font-family: "Helvetica Now Display W05 Light" !important;
+    font-style: normal !important; }
+  .text__Xlight-medium,
+  .text__Xlight-medium * {
+    font-family: "Helvetica Now Display W05 XLt" !important;
+    font-style: normal !important; }
+  .text__regular-medium,
+  .text__regular-medium * {
+    font-family: "Helvetica Now Display W05 Md" !important;
+    font-style: normal !important; }
+  .text__medium-medium,
+  .text__medium-medium * {
+    font-family: "Helvetica Now Display W05 Md" !important;
+    font-style: normal !important; }
+  .text__bold-medium,
+  .text__bold-medium * {
+    font-family: "Helvetica Now Display W05 Bold" !important;
+    font-style: normal !important; } }
+
+@media all and (max-width: 730.5px) {
+  .text__light-small,
+  .text__light-small * {
+    font-family: "Helvetica Now Display W05 Light" !important;
+    font-style: normal !important; }
+  .text__Xlight-small,
+  .text__Xlight-small * {
+    font-family: "Helvetica Now Display W05 XLt" !important;
+    font-style: normal !important; }
+  .text__regular-small,
+  .text__regular-small * {
+    font-family: "Helvetica Now Display W05 Md" !important;
+    font-style: normal !important; }
+  .text__medium-small,
+  .text__medium-small * {
+    font-family: "Helvetica Now Display W05 Md" !important;
+    font-style: normal !important; }
+  .text__bold-small,
+  .text__bold-small * {
+    font-family: "Helvetica Now Display W05 Bold" !important;
+    font-style: normal !important; }
+  .footnote .footnote-item,
+  .footnote .footnote-item * {
+    font-family: "Helvetica Now Display W05 Rg", "Segoe UI", sans-serif !important;
+    font-style: normal !important; } }
+
+.section__kv .wd__content .content__title {
+  font-family: "Helvetica Now Display W05 Rg", "Segoe UI", sans-serif !important;
+  font-style: normal !important; }
+
+.wd__section .ksp__layout .wd__content .content__title,
+.wd__section .ksp__layout .wd__content .content__title * {
+  font-family: "Helvetica Now Display W05 Rg", "Segoe UI", sans-serif !important;
+  font-style: normal !important; }
+
+.wd__section .ksp__layout .wd__content .content__info,
+.wd__section .ksp__layout .wd__content .content__info * {
+  font-family: "Helvetica Now Display W05 Rg", "Segoe UI", sans-serif !important;
+  font-style: normal !important; }
+
+.wd__section .ksp__layout .wd__feature__list .wd__feature .wd__feature__data,
+.wd__section .ksp__layout .wd__feature__list .wd__feature .wd__feature__data * {
+  font-family: "Helvetica Now Display W05 Rg", "Segoe UI", sans-serif !important;
+  font-style: normal !important; }
+
+.wd__section .ksp__layout .wd__feature__list .wd__feature__describe,
+.wd__section .ksp__layout .wd__feature__list .wd__feature__describe *,
+.wd__section .ksp__layout .wd__feature__list .wd__feature__describe span,
+.wd__section .ksp__layout .wd__feature__list .wd__feature__describe__top,
+.wd__section .ksp__layout .wd__feature__list .wd__feature__describe__top *,
+.wd__section .ksp__layout .wd__feature__list .wd__feature__describe__top span {
+  font-family: "Helvetica Now Display W05 Rg", "Segoe UI", sans-serif !important;
+  font-style: normal !important; }
+
+.wd__section .modal-button-container .modal-button .modal-inner-text,
+.wd__section .modal-button-container .modal-button .modal-inner-text * {
+  font-family: "Helvetica Now Display W05 Bold" !important;
+  font-style: normal !important; }

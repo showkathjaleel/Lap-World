@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<!-- molla/wishlist.html  22 Nov 2019 09:55:05 GMT -->
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Molla - Bootstrap eCommerce Template</title>
+    <meta name="keywords" content="HTML5 Template">
+    <meta name="description" content="Molla - Bootstrap eCommerce Template">
+    <meta name="author" content="p-themes">
+    <!-- Favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/icons/favicon-16x16.png">
+    <link rel="manifest" href="/assets/images/icons/site.html">
+    <link rel="mask-icon" href="/assets/images/icons/safari-pinned-tab.svg" color="#666666">
+    <link rel="shortcut icon" href="/assets/images/icons/favicon.ico">
+    <meta name="apple-mobile-web-app-title" content="Molla">
+    <meta name="application-name" content="Molla">
+    <meta name="msapplication-TileColor" content="#cc9966">
+    <meta name="msapplication-config" content="/assets/images/icons/browserconfig.xml">
+    <meta name="theme-color" content="#ffffff">
+    <!-- Plugins CSS File -->
+    <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
+    <!-- Main CSS File -->
+    <link rel="stylesheet" href="/assets/css/style.css">
+</head>
+
+<body>
+    <div class="page-wrapper">
+
+
+        <main class="main">
+            <div class="page-header text-center" style="background-image: url('//assets/images/page-header-bg.jpg')">
+                <div class="container">
+                    <h1 class="page-title">Returns<span></span></h1>
+                </div><!-- End .container -->
+            </div><!-- End .page-header -->
+            {{!-- --------------------------------------------------------------------------------------------------------------------------------------------- --}}
+           {{#each returnedProduct}}
+          <div class="modal-body">
+                                                <div class="card mb-3">
+                                                    <div class="row g-0">
+                                                    <div class="col-md-4">
+                                                        <img src="/images/product/{{this.product.img.[0]}}" height="80px" width="70px" class="img-fluid rounded-start m-5"  alt="...">
+                                                        
+                                                    </div>
+                                                    <div class="col-md-6 mt-3">
+                                                        
+                                                        
+                                                            <h6>  {{this.product.laptops}}</h6>
+                                                            <h7>TOTAL:$</h7><h6> {{this.totalAmount}}</h6>
+                                                             <h7>colour:</h7><h6>{{this.product.color}}</h6>
+                                                             <h7>SHIP TO:</h7><h6>{{this.deliverydetails.name}}</h6>
+                                                            <h7> ORDER PLACED:</h7> <h6>{{this.date}}</h6>
+                                                            
+
+
+
+                                                            <hr size="8" width="100%" color="black">  
+
+                                                            <h5 class="mt-5">Select you complaint</h5>
+
+                                                            <form action="/return-product" method="post" id="return-order" >
+
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="radio" name="complaint" id="flexRadioDefault1" value=" Any damage on the product">
+                                                                    <label class="form-check-label" for="flexRadioDefault1">
+                                                                        Any damage on the product
+                                                                    </label>
+                                                                </div>
+
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="radio" name="complaint" id="flexRadioDefault2" value="Packing is not proper" checked>
+                                                                    <label class="form-check-label" for="flexRadioDefault2">
+                                                                       Packing is not proper
+                                                                    </label>
+                                                                </div>
+
+                                                                 <div class="form-check">
+                                                                    <input class="form-check-input" type="radio" name="complaint" value=" Not like the product" id="flexRadioDefault2" checked>
+                                                                    <label class="form-check-label" for="flexRadioDefault2">
+                                                                         Not like the product
+                                                                    </label>
+                                                                </div>
+
+                                                                 <div class="form-check">
+                                                                    <input class="form-check-input" type="radio" name="complaint" value=" Other reasons" id="flexRadioDefault2" checked>
+                                                                    <label class="form-check-label" for="flexRadioDefault2">
+                                                                        Other reasons
+                                                                    </label>
+                                                                </div>
+
+                                                                <input type="text" name="orderStatus" value="Return-requested" hidden>
+                                                                 <input type="text" name="orderId" value="{{this._id}}" hidden>
+                                                                  <input type="text" name="productId" value="{{this.product._id}}" hidden>
+                                                               
+
+
+                                                                <div class="form-group mt-3" >
+                                                                    <label for="description" ><h6>Description</h6></label>
+                                                                    <textarea class="form-control validate" rows="3" name="Discription" id="Discription"   onkeyup="validateProductDescription()"></textarea>
+                                                                    <span id="productdescription" class="text-danger"></span>
+                                                                </div> 
+
+                                                                 <div class="form-group mt-3" >
+                                                                    <p>
+  <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+   Refund Request
+  </a>
+
+</p>
+<div class="collapse" id="collapseExample">
+  <div class="card card-body" name="refund">
+   <h4>Refund Guidelines</h4> 
+   <ul>
+   <li>  Product will be crosschecked by shop owner</li>
+  <li> Refund item within 30 days</li>
+  <li> Product should not be damaged</li>
+  <li> Shipping cost should not be refundable</li>
+   <li>Refund amount will be sent to customer within 2 working days</li>
+   </ul>
+
+  Reason for Refund
+  <input type="text" name="refund">
+  </div>
+</div>
+                                                                 </div>
+
+
+
+                                                                
+
+
+
+                                                                 <button type="submit" class="btn btn-secondary" >Submit</button>
+                                                            </form>
+                                                            
+                                                         {{/each}}
+                                                    </div>
+                                                    </div>
+                                                </div><!-- End Card with an image on left -->
+                                            </div>
+        </div><!-- End .page-content -->
+        </main><!-- End .main -->
+
+    
+    </div><!-- End .page-wrapper -->
+    <button id="scroll-top" title="Back to Top"><i class="icon-arrow-up"></i></button>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu-overlay"></div><!-- End .mobil-menu-overlay -->
+
+    <div class="mobile-menu-container">
+        <div class="mobile-menu-wrapper">
+            <span class="mobile-menu-close"><i class="icon-close"></i></span>
+
+            <form action="#" method="get" class="mobile-search">
+                <label for="mobile-search" class="sr-only">Search</label>
+                <input type="search" class="form-control" name="mobile-search" id="mobile-search"
+                    placeholder="Search in..." required>
+                <button class="btn btn-primary" type="submit"><i class="icon-search"></i></button>
+            </form>
+
+
+
+           
+        </div><!-- End .mobile-menu-wrapper -->
+    </div><!-- End .mobile-menu-container -->
+
+
+
+
+
+
+
+    {{!-- <script>
+
+
+
+
+        function CancelProduct(cartId, proId, quantity) {
+
+            console.log('entheda')
+            $.ajax({
+                url: '/cancelOrder',
+                data: {
+                    cart: cartId,
+                    product: proId,
+                    qty: quantity,
+                },
+                method: 'post',
+                success: (obj) => {
+                    console.log(obj + 'PPPPPPPPP')
+
+                    alert("Do you want to cancel the order")
+                    location.reload()
+
+                }
+            })
+        }
+
+
+    </script>
+
+ --}}
+
+
+    <!-- Plugins JS File -->
+    <script src="//assets/js/jquery.min.js"></script>
+    <script src="//assets/js/bootstrap.bundle.min.js"></script>
+    <script src="//assets/js/jquery.hoverIntent.min.js"></script>
+    <script src="//assets/js/jquery.waypoints.min.js"></script>
+    <script src="//assets/js/superfish.min.js"></script>
+    <script src="//assets/js/owl.carousel.min.js"></script>
+    <!-- Main JS File -->
+    <script src="//assets/js/main.js"></script>
+
+
+
+
+</body>
+
+
+<!-- molla/wishlist.html  22 Nov 2019 09:55:06 GMT -->
+
+</html>

@@ -1,0 +1,148 @@
+/*** Global ***/
+.usePatch ol,
+.usePatch ul,
+.usePatch li,
+.usePatch figure {
+  -webkit-margin-before: 0;
+  margin-block-start: 0;
+  -webkit-margin-after: 0;
+  margin-block-end: 0;
+  -webkit-margin-start: 0;
+  margin-inline-start: 0;
+  -webkit-margin-end: 0;
+  margin-inline-end: 0;
+}
+
+.usePatch ol,
+.usePatch ul,
+.usePatch li {
+  margin: 0;
+  padding: 0;
+}
+
+#overview-top-nav.popHide+#__nuxt section[class*=KvSummary__KvSummaryOP] {
+  display: none;
+}
+
+#overview-top-nav.popHide+#__nuxt div[class*=GalleryShow__galleryShow] {
+  display: none;
+}
+
+#overview-top-nav.popHide+#__nuxt section[class*=Accessories__wrapper__] {
+  display: none;
+}
+
+#overview-top-nav.popHide+#__nuxt section[class*=RecommandForYou__section] {
+  display: none;
+}
+
+#overview-top-nav.popHide+#__nuxt section[class*=RelatedProducts__section] {
+  display: none;
+}
+
+#overview-top-nav.popHide+#__nuxt div[class*=FloatingComparison__overview] {
+  display: none;
+}
+
+#overview-top-nav.popHide+#__nuxt div[class*=Disclaimer__wrapper] {
+  display: none;
+}
+
+#overview-top-nav.popHide+#__nuxt div[class*=FooterBreadcrumb__wrapper] {
+  display: none;
+}
+
+#overview-top-nav.popHide+#__nuxt div[class*=asusOfficialFooter] {
+  display: none;
+}
+
+#overview-top-nav.popHide+#__nuxt div[class*=asusOfficialECommerceFooter] {
+  display: none;
+}
+
+#overview-top-nav.popHide+#__nuxt #overviewContentInsertWrapper {
+  margin-top: 0;
+}
+
+#overview-top-nav.popHide+#__nuxt .asusOfficialProductMenu {
+  display: block !important;
+  opacity: 0;
+  visibility: hidden;
+  height: 0;
+}
+
+#pdc.odin {
+  font-size: 0;
+  line-height: 0;
+}
+
+#pdc.odin .seeall_arrow {
+  line-height: 0;
+  font-size: 0;
+}
+
+.disclaimerWrapper {
+  margin-top: 0;
+  padding-top: 45px;
+}
+
+@media all and (max-width: 731px) {
+  .disclaimerWrapper {
+    margin-top: 0;
+    padding-top: 24px;
+  }
+}
+
+/* vrLink */
+@media all and (min-width: 1280px) {
+
+  /*  */
+  html #CMD .section__kv .vr__screen #vr__screen__icon {
+    width: 76px;
+    height: 48px;
+  }
+}
+
+@media all and (max-width: 1280px) {
+
+  html #CMD .section__kv .vr__screen #vr__screen__icon .vr__border,
+  html #CMD .section__kv .vr__screen:hover #vr__screen__icon .vr__border {
+    animation: none !important;
+  }
+}
+
+/* footnote */
+#CMD .footnote .footnote-item::marker,
+.comment::marker {
+  font-variant-numeric: diagonal-fractions;
+  font-family: inherit;
+}
+
+/* sidanva position */
+@media all and (min-width: 1280px) {
+  #CMD .cmd-sidenav {
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+  }
+}
+
+@media (min-width: 1024px) and (max-width: 1279.5px) {
+  #CMD .cmd-sidenav {
+    top: 160px;
+  }
+}
+
+
+@media (min-width: 731px) and (max-width: 1023.5px) {
+  #CMD .cmd-sidenav {
+    top: 138px;
+    right: 16px;
+  }
+}
+
+@media (max-width: 730.5px) {
+  #CMD .cmd-sidenav {
+    top: 138px;
+    right: 16px;
+  }
+}

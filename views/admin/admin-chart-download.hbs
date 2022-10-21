@@ -1,0 +1,654 @@
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Portal - Bootstrap 5 Admin Dashboard Template For Developers</title>
+
+    <!-- Meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description" content="Portal - Bootstrap 5 Admin Dashboard Template For Developers">
+    <meta name="author" content="Xiaoying Riley at 3rd Wave Media">
+    <link rel="shortcut icon" href="favicon.ico">
+
+    <!-- FontAwesome JS-->
+    <script defer src="assets/plugins/fontawesome/js/all.min.js"></script>
+
+    <!-- App CSS -->
+    <link id="theme-style" rel="stylesheet" href="assets/css/portal.css">
+
+
+
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+
+
+
+
+
+    <script type="text/javascript" charset="utf8"
+        src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.1.min.js"></script>
+    <script type="text/javascript" charset="utf8"
+        src="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.0/jquery.dataTables.min.js"></script>
+
+
+</head>
+
+<body class="app">
+
+
+    <div class="app-wrapper">
+
+        <div class="app-content pt-3 p-md-3 p-lg-4">
+            <div class="container-xl">
+
+                <div class="row g-3 mb-4 align-items-center justify-content-between">
+                    <div class="col-auto">
+                        <h1 class="app-page-title mb-0">Sales Report</h1>
+                    </div>
+                    <div class="col-auto">
+                        <div class="page-utilities">
+                            <div class="row g-2 justify-content-start justify-content-md-end align-items-center">
+                                <div class="col-auto">
+                                    <form class="table-search-form row gx-1 align-items-center">
+                                        <div class="col-auto">
+                                            <input type="text" id="search-orders" name="searchorders"
+                                                class="form-control search-orders" placeholder="Search">
+                                        </div>
+                                        <div class="col-auto">
+                                             <button class="btn btn-primary" style="" onclick="weeklyReportPDF()">weekly</button>
+                            <button class="btn btn-primary"  onclick="monthlyReportPDF()">monthly</button>
+                            <button class="btn btn-primary" onclick="yearlyReportPDF()">yearly</button>
+                                            {{!-- <button type="submit" class="btn app-btn-secondary">Search</button> --}}
+                                        </div>
+                                    </form>
+
+                                </div>
+                                <!--//col-->
+
+
+                                <div class="col-2">
+                             {{!-- <button class="btn btn-primary" style="" onclick="weeklyReportPDF()">weekly</button>
+                            <button class="btn btn-primary"  onclick="monthlyReportPDF()">monthly</button>
+                            <button class="btn btn-primary" onclick="yearlyReportPDF()">yearly</button> --}}
+
+
+
+                                    {{!-- <div class="dropdown">
+                                        <a class="btn btn-primary dropdown-toggle" href="#" role="button"
+                                            id="dropdownMenuLink" data-mdb-toggle="dropdown" aria-expanded="false">
+                                            Sales PDF Report
+                                        </a>
+
+
+                                    </div> --}}
+                                </div>
+                                
+
+
+                                <div class="col-auto">
+                                     
+                                    <a class="btn app-btn-success" onclick="dailyData()" href="#">
+                                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-download me-1"
+                                            fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                            <path fill-rule="evenodd"
+                                                d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z" />
+                                            <path fill-rule="evenodd"
+                                                d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z" />
+                                        </svg>
+                                        Download in Excel daily
+                                    </a>
+
+                                                                        <a class="btn app-btn-success" onclick="monthlyData()" href="#">
+                                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-download me-1"
+                                            fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                            <path fill-rule="evenodd"
+                                                d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z" />
+                                            <path fill-rule="evenodd"
+                                                d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z" />
+                                        </svg>
+                                        Download in Excel monthly
+                                    </a>
+                                                                        <a class="btn app-btn-success" onclick="yearlyData()" href="#">
+                                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-download me-1"
+                                            fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                            <path fill-rule="evenodd"
+                                                d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z" />
+                                            <path fill-rule="evenodd"
+                                                d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z" />
+                                        </svg>
+                                        Download in Excel yearly
+                                    </a>
+                                </div>
+                            </div>
+                            <!--//row-->
+                        </div>
+                        <!--//table-utilities-->
+                    </div>
+                    <!--//col-auto-->
+                </div>
+                <!--//row-->
+
+
+
+                <div class="tab-content" id="orders-table-tab-content">
+                    <div class="tab-pane fade show active" id="orders-all" role="tabpanel"
+                        aria-labelledby="orders-all-tab">
+                        <div class="app-card app-card-orders-table shadow-sm mb-5">
+                            <div class="app-card-body">
+                                <div class="table-responsive">
+                                   
+                                   
+                              
+                                   
+                                   
+                                   
+                                   
+                                   
+                                        <table  class="table mt-5" id="weekly-table">
+                                        <thead>
+                                       <tr>
+
+                            <th>Date</th>
+                            <th>Total</th>
+                            <th>Count</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{#each weeklySale}}
+                        <tr>
+
+                           
+                            <td>{{this._id}}</td>
+                            <td>{{this.totalAmount}}</td>
+                            <td>{{this.count}}</td>
+                        </tr>
+                        {{/each}}
+                    </tbody>
+                </table>
+                <br/>
+
+                <table  class="table mt-5" id="monthly-table">
+                    <thead>
+                        <tr>
+
+                           
+                            <th>Date</th>
+                            <th>Total</th>
+                            <th>Count</th>
+                            
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{#each monthlySales}}
+                        <tr>
+
+                          
+                            <td>{{this._id}}</td>
+                            <td>{{this.totalAmount}}</td>
+                            <td>{{this.count}}</td>
+                        </tr>
+                        {{/each}}
+                    </tbody>
+                </table>
+                
+                <br>
+
+                <table  class="table mt-5" id="yearly-table">
+                    <thead>
+                        <tr>
+                            
+                            <th>Date</th>
+                            <th>Total</th>
+                            <th>Count</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{#each yearlySales}}
+                        <tr>
+
+                            <td>{{this._id}}</td>
+                            <td>{{this.totalAmount}}</td>
+                            <td>{{this.count}}</td>
+                        </tr>
+                        {{/each}}
+                    </tbody>
+                </table>           
+                                   
+                                   
+                                   
+                                   
+                                   
+                                   
+                                   
+
+                                    {{!--
+                                    ----------------------------------------------------------------------------------------------------------------------------------------------
+                                    --}}
+
+
+                                </div>
+                                <!--//table-responsive-->
+                            </div>
+                            <!--//app-card-body-->
+                        </div>
+                        <!--//app-card-->
+                        <nav class="app-pagination">
+                            <ul class="pagination justify-content-center">
+                                <li class="page-item disabled">
+                                    <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+                                </li>
+                                <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                <li class="page-item">
+                                    <a class="page-link" href="#">Next</a>
+                                </li>
+                            </ul>
+                        </nav>
+                        <!--//app-pagination-->
+                    </div>
+                    <!--//tab-pane-->
+
+
+                    <!--//tab-pane-->
+                </div>
+                <!--//tab-content-->
+            </div>
+            <!--//container-fluid-->
+        </div>
+        <!--//app-content-->
+
+        <footer class="app-footer">
+            <div class="container text-center py-3">
+                <!--/* This template is free as long as you keep the footer attribution link. If you'd like to use the template without the attribution link, you can buy the commercial license via our website: themes.3rdwavemedia.com Thank you for your support. :) */-->
+
+            </div>
+        </footer>
+        <!--//app-footer-->
+
+    </div>
+    <!--//app-wrapper-->
+
+
+
+               <script>
+                function dailyData() {
+                    const data = `
+     date, Total, count
+    {{#each weeklySale}}
+    '{{_id}}'',{{totalAmount}}',{{count}}
+    {{/each}}`
+
+                    const blob = new Blob([data], { type: 'octet-stream' })
+
+                    const href = URL.createObjectURL(blob)
+
+                    const a = Object.assign(document.createElement('a'), {
+                        href,
+                        style: 'display:none',
+                        download: 'data.csv'
+                    })
+
+                    document.body.appendChild(a)
+
+                    a.click()
+
+                    URL.revokeObjectURL(href)
+
+                    a.remove()
+                }
+
+                function monthlyData() {
+                    const data = `
+    date, Total, count
+    {{#each monthlySales}}
+    '{{this._id}}'',{{this.totalAmount}}',{{count}}
+    {{/each}}`
+
+                    const blob = new Blob([data], { type: 'octet-stream' })
+
+                    const href = URL.createObjectURL(blob)
+
+                    const a = Object.assign(document.createElement('a'), {
+                        href,
+                        style: 'display:none',
+                        download: 'data.csv'
+                    })
+
+                    document.body.appendChild(a)
+
+                    a.click()
+
+                    URL.revokeObjectURL(href)
+
+                    a.remove()
+                }
+
+                function yearlyData() {
+                    const data = `
+   date, Total, count
+    {{#each yearlySale}}
+    '{{_id}}'',{{totalAmount}}',{{count}}
+    {{/each}}`
+                    const blob = new Blob([data], { type: 'octet-stream' })
+
+                    const href = URL.createObjectURL(blob)
+
+                    const a = Object.assign(document.createElement('a'), {
+                        href,
+                        style: 'display:none',
+                        download: 'data.csv'
+                    })
+
+                    document.body.appendChild(a)
+
+                    a.click()
+
+                    URL.revokeObjectURL(href)
+
+                    a.remove()
+                }
+            </script>
+
+
+
+
+
+
+    <script>
+        function updateReturnStatus(orderId,productId){
+            console.log(orderId+'&&&&&&&&&&&&')
+            console.log(productId+'&&&&&&&&&&&&')
+
+
+            let status=document.getElementById('returnstatuschange'+productId).value
+            $.ajax({
+                url:'/updateOrderStatus',
+                data:{
+
+                }
+            })
+
+        }
+    </script>
+
+    {{!-- <script>
+        $(document).ready(function () {
+            $('#myTable').DataTable();
+        });
+
+    </script> --}}
+
+
+    <script src="assets/plugins/popper.min.js"></script>
+    <script src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+
+
+    <!-- Page Specific JS -->
+    <script src="assets/js/app.js"></script>
+
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{{!--
+-------------------------------------------------------------------------------------------------------------------------------------------------
+--}}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js"></script>
+            <script
+                src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.6/jspdf.plugin.autotable.min.js"></script>
+            <style>
+                th,
+                td {
+                    text - align: center;
+                    border: 1 px solid black;
+                    border - collapse: collapse;
+                }
+            </style>
+            <center>
+
+
+
+            </center>
+            <script type="text/javascript">
+                
+                function weeklyReportPDF() {
+                    var doc = new jsPDF('p', 'pt', 'letter');
+                    var htmlstring = '';
+                    var tempVarToCheckPageHeight = 0;
+                    var pageHeight = 0;
+                    pageHeight = doc.internal.pageSize.height;
+                    specialElementHandlers = {
+                        // element with id of "bypass" - jQuery style selector  
+                        '#bypassme': function (element, renderer) {
+                            // true = "handled elsewhere, bypass text extraction"  
+                            return true
+                        }
+                    };
+                    margins = {
+                        top: 150,
+                        bottom: 60,
+                        left: 40,
+                        right: 40,
+                        width: 600
+                    };
+                    var y = 20;
+                    doc.setLineWidth(2);
+                    doc.text(200, y = y + 30, "Weekly Sales Report");
+                    doc.autoTable({
+                        html: '#weekly-table',
+                        startY: 70,
+                        theme: 'grid',
+                        columnStyles: {
+                            0: {
+                                cellWidth: 180,
+                            },
+                            1: {
+                                cellWidth: 80,
+                            },
+                            2: {
+                                cellWidth: 80,
+                            },
+                            {{!-- 3: {
+                                cellWidth: 80,
+                            } --}}
+                        },
+                        styles: {
+                            minCellHeight: 40
+                        }
+                    })
+                    doc.save('sales-weekly-report.pdf');
+                } 
+
+
+                function monthlyReportPDF() {
+                    var doc = new jsPDF('p', 'pt', 'letter');
+                    var htmlstring = '';
+                    var tempVarToCheckPageHeight = 0;
+                    var pageHeight = 0;
+                    pageHeight = doc.internal.pageSize.height;
+                    specialElementHandlers = {
+                        // element with id of "bypass" - jQuery style selector  
+                        '#bypassme': function (element, renderer) {
+                            // true = "handled elsewhere, bypass text extraction"  
+                            return true
+                        }
+                    };
+                    margins = {
+                        top: 150,
+                        bottom: 60,
+                        left: 40,
+                        right: 40,
+                        width: 600
+                    };
+                    var y = 20;
+                    doc.setLineWidth(2);
+                    doc.text(200, y = y + 30, "Monthly Sales Report");
+                    doc.autoTable({
+                        html: '#monthly-table',
+                        startY: 70,
+                        theme: 'grid',
+                        columnStyles: {
+                            0: {
+                                cellWidth: 180,
+                            },
+                            1: {
+                                cellWidth: 80,
+                            },
+                            2: {
+                                cellWidth: 80,
+                            },
+                            {{!-- 3: {
+                                cellWidth: 80,
+                            } --}}
+                        },
+                        styles: {
+                            minCellHeight: 40
+                        }
+                    })
+                    doc.save('sales-monthly-report.pdf');
+                } 
+
+
+                function yearlyReportPDF() {
+                    var doc = new jsPDF('p', 'pt', 'letter');
+                    var htmlstring = '';
+                    var tempVarToCheckPageHeight = 0;
+                    var pageHeight = 0;
+                    pageHeight = doc.internal.pageSize.height;
+                    specialElementHandlers = {
+                        // element with id of "bypass" - jQuery style selector  
+                        '#bypassme': function (element, renderer) {
+                            // true = "handled elsewhere, bypass text extraction"  
+                            return true
+                        }
+                    };
+                    margins = {
+                        top: 150,
+                        bottom: 60,
+                        left: 40,
+                        right: 40,
+                        width: 600
+                    };
+                    var y = 20;
+                    doc.setLineWidth(2);
+                    doc.text(200, y = y + 30, "Yearly Sales Report");
+                    doc.autoTable({
+                        html: '#yearly-table',
+                        startY: 70,
+                        theme: 'grid',
+                        columnStyles: {
+                            0: {
+                                cellWidth: 180,
+                            },
+                            1: {
+                                cellWidth: 80,
+                            },
+                            2: {
+                                cellWidth: 80,
+                            },
+                            {{!-- 3: {
+                                cellWidth: 80,
+                            } --}}
+                        },
+                        styles: {
+                            minCellHeight: 40
+                        }
+                    })
+                    doc.save('sales-yearly-report.pdf');
+                } 
+            </script>

@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Add Product - Dashboard HTML Template</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,700" />
+    <!-- https://fonts.google.com/specimen/Roboto -->
+    <link rel="stylesheet" href="/css/fontawesome.min.css" />
+    <!-- https://fontawesome.com/ -->
+    <link rel="stylesheet" href="jquery-ui-datepicker/jquery-ui.min.css" type="text/css" />
+    <!-- http://api.jqueryui.com/datepicker/ -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css" />
+    <!-- https://getbootstrap.com/ -->
+    <link rel="stylesheet" href="/css/templatemo-style.css">
+    <!--
+	Product Admin CSS Template
+	https://templatemo.com/tm-524-product-admin
+	-->
+</head>
+
+
+
+
+
+<style>
+    .form-group label {
+        color: black !important;
+    }
+
+    .form-control {
+        background-color: white;
+    }
+</style>
+
+<body>
+
+
+
+
+    <main style="background-color: white">
+
+
+
+        <div class="container tm-mt-big tm-mb-big">
+            <div class="col">
+
+                <div class="col-xl-9 col-lg-10 col-md-12 col-sm-12 mx-auto">
+
+                    <div class="bg-light tm-block tm-block-h-auto">
+                        {{!-- // style="background-color: white"// --}}
+
+                        <div class="row">
+                            <div class="col-12">
+                                <h2 class="d-inline-block text-dark">Add Coupon</h2>
+                            </div>
+                        </div>
+
+
+
+                        <div>
+                            <div>
+                                <form action="/admin/generateCoupon" method="post" onsubmit="return validation()"
+                                    >
+
+
+                                    <div class="form-group mb-3">
+                                        <label for="name">Coupon Code</label>
+                                        <input id="Name" name="couponcode" type="text" class="form-control validate"
+                                            required onkeyup="validateProductName()" />
+                                        <span id="name" class="text-danger"></span>
+                                    </div>
+
+
+                                    <div class="form-group mb-3">
+                                        <label for="name">Description </label>
+                                        <input id="price" name="desc" type="text" class="form-control" required
+                                            onkeyup="validPrice()" />
+                                        <span id="Price" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label >Coupon type</label>
+                                        <select name="coupontype" class="form-control" id="">
+                                            <option value="percentage discount">percentage discount</option>
+                                             <option value="Amount discount">Amount discount</option>
+                                            {{!-- {{#each cat.category}} --}}
+                                            {{!-- <option>{{this}}</option> --}}
+                                            {{!-- {{/each}} --}}
+                                        </select>
+                                        <labelfor="name">Coupon Value </label>
+                                            <div class="form-group mb-3">
+
+                                                <input id="" name="couponvalue" type="text"
+                                                    class="form-control validate" required />
+                                                <span id="Offers" class="text-danger"></span>
+                                            </div>
+                                            <div class="row">
+                                                 <label for="stock">COUPON VALID BETWEEN </label>
+                                                <div class="form-group mb-3 col-xs-12 col-sm-6">
+                                                   
+                                                    <input id="stock" name="fromdate" type="date"
+                                                        class="form-control validate" required onkeyup="validStock()" />
+                                                    <span id="Stock" class="text-danger"></span>
+                                                </div>
+                                                <div class="form-group mb-3 col-xs-12 col-sm-6">
+                                                    <input id="stock" name="todate" type="date"
+                                                        class="form-control validate" required onkeyup="validStock()" />
+                                                    <span id="Stock" class="text-danger"></span>
+                                                </div>
+                                            </div>
+
+                                                							    {{!-- <div class="col-auto">						    
+								    <a class="btn app-btn-primary" href="/admin/generateCoupon">
+
+									Save
+									</a>
+							    </div> --}}
+                              <input type="submit" class="btn app-btn-primary">
+
+                                           
+                                    </div>
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+    </main>
+
+
+
+    {{!-- --------------------------------------------------------CROP
+    LINK---------------------------------------------------------------------------- --}}
+    <script defer src="https://cdn.crop.guide/loader/l.js?c=LJWGWC"></script>
+    {{!-- --------------------------------------------------------CROP
+    LINK---------------------------------------------------------------------------- --}}
+    <script>
+        var errorName = document.getElementById('name')
+        var errordescription = document.getElementById('productdescription')
+        var errorCategory = document.getElementById('category')
+        var errorColor = document.getElementById('Color')
+        var errorPrice = document.getElementById('Price')
+        var errorStock = document.getElementById('Stock')
+        var errorSpec = document.getElementById('Specifications')
+        var errorOffers = document.getElementById('Offers')
+        function validateProductName() {
+            const name = document.getElementById('Name').value;
+            if (name == "") {
+                errorName.innerHTML = 'Enter product name'
+                return false
+            }
+            if (!name.match(/^[a-zA-Z0-9 ]*$/)) {
+                errorName.innerHTML = 'Enter valid Product name'
+                return false
+            }
+            if (name.match(/^[ ]*$/)) {
+                errorName.innerHTML = 'Enter product name'
+                return false
+            }
+            errorName.innerHTML = null
+            return true
+        }
+
+        {
+            {
+                !-- function validateProductDescription() {
+                    const name = document.getElementById('Discription').value;
+                    if (name == "") {
+                        errordescription.innerHTML = 'Enter description'
+                        return false
+                    }
+                    if (!name.match(/^[a-zA-Z ]*$/)) {
+                        errordescription.innerHTML = 'Enter valid description'
+                        return false
+                    }
+                    if (name.match(/^[ ]*$/)) {
+                        errordescription.innerHTML = 'Enter valid description'
+                        return false
+                    } if (name.length < 10) {
+
+                        errordescription.innerHTML = "enter valid description "
+                        return false
+                    }
+                    errordescription.innerHTML = null
+                    return true
+                }
+                function validCategory() {
+                    const category = document.getElementById('Category').value
+                    if (category == "") {
+                        errorCategory.innerHTML = "Enter category"
+                        return false
+                    }
+                    errorCategory.innerHTML = null
+                    return true
+                } --}
+        }
+
+        function validOffers() {
+            const offers = document.getElementById('offers').value
+            if (offers == "") {
+                errorOffers.innerHTML = "Enter offers"
+                return false
+            }
+            errorOffers.innerHTML = null
+            return true
+        }
+        function validColor() {
+            const color = document.getElementById('color').value
+            if (color == "") {
+                errorColor.innerHTML = "Enter color"
+                return false
+            }
+            if (!color.match(/^[a-zA-Z ]*$/)) {
+                errorColor.innerHTML = "Enter valid color"
+                return false
+            }
+            errorColor.innerHTML = null
+            return true
+        }
+        function validPrice() {
+            const price = document.getElementById('price').value
+            if (price == "") {
+                errorPrice.innerHTML = "Enter the price"
+                return false
+            }
+            errorPrice.innerHTML = null
+            return true
+        }
+        function validStock() {
+            const stock = document.getElementById('stock').value
+            if (stock == "") {
+                errorStock.innerHTML = "Enter the stock"
+                return false
+            }
+            errorStock.innerHTML = null
+            return true
+        }
+
+        function validateSpecs() {
+            const name = document.getElementById('specs').value;
+            if (name == "") {
+                errorSpec.innerHTML = 'Enter specifications'
+                return false
+            }
+            if (!name.match(/^[a-zA-Z0-9 ]*$/)) {
+                errorSpec.innerHTML = 'Enter valid specifications'
+                return false
+            }
+            if (name.match(/^[ ]*$/)) {
+                errorSpec.innerHTML = 'Enter valid specifications'
+                return false
+            }
+            errorSpec.innerHTML = null
+            return true
+        }
+
+
+        function validation() {
+            if (!validateProductName() || !validateProductDescription() || !validCategory() || !validColor() || !validPrice() || !validStock() || !validateSpecs() || !validOffers()) {
+                return false
+            }
+            return true
+        }
+    </script>
+
+    <script src="/assets2/js/main.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<!-- molla/elements-cta.html  22 Nov 2019 10:05:32 GMT -->
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Molla - Bootstrap eCommerce Template</title>
+    <meta name="keywords" content="HTML5 Template">
+    <meta name="description" content="Molla - Bootstrap eCommerce Template">
+    <meta name="author" content="p-themes">
+    <!-- Favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/images/icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/images/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/images/icons/favicon-16x16.png">
+    <link rel="manifest" href="assets/images/icons/site.html">
+    <link rel="mask-icon" href="assets/images/icons/safari-pinned-tab.svg" color="#666666">
+    <link rel="shortcut icon" href="assets/images/icons/favicon.ico">
+    <meta name="apple-mobile-web-app-title" content="Molla">
+    <meta name="application-name" content="Molla">
+    <meta name="msapplication-TileColor" content="#cc9966">
+    <meta name="msapplication-config" content="assets/images/icons/browserconfig.xml">
+    <meta name="theme-color" content="#ffffff">
+    <!-- Plugins CSS File -->
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <!-- Main CSS File -->
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+
+<body>
+   
+
+
+
+
+
+
+
+
+
+            <div class="container starter-template" style="display: block;" id="adrsLess">
+                <h5>Already Booked Address</h5>
+                <div class="row">
+                   {{#each allAddress}} 
+                    {{!-- {{#each Address}} --}}
+                    <div class="col-6 col-md-4 col-lg-4 col-xl-3">
+                        <a>
+                            <div class="product-body hover-div"
+                                onclick="Addressfill ('{{this._id.CustomerName}}','{{this._id.Address.Housename}}')">
+                               
+                                <h6>{{this.address.name }}<span>{{this.address.lastname}}</span>   </h6>
+                                <h6>{{this.address.email}}</h6>
+                                <h6>{{this.address.mobile}}</h6>
+                                <h6>{{this.address.houseAddress.streetaddress}}
+                                <h6>{{this.address.houseAddress.city}}</h6>
+                                <h6>{{this.address.houseAddress.pincode}}</h6>
+                                <h6>{{this.address .houseAddress.state}}</h6>
+
+
+                                {{!-- <h6>{{this._id.name}}</h6>
+                                <h6>{{this._id.mobile}}</h6>
+                                <h6>{{this._id.email}}</h6>
+                                <h6>{{this._id.houseAddress.streetaddress}}</h6>
+                                <h6>{{this._id.houseAddress.city}}</h6>
+                                <h6>{{this._id.houseAddress.pincode}}</h6>
+                                <h6>{{this._id.houseAddress.state}}</h6> --}}
+                                <span><button class="btn btn-danger"
+                                    onclick="deleteAddress('{{this._id.name}}','{{this._id.houseAddress.streetaddress}}')">delete</button>
+                                    {{!-- <a class="btn btn-primary"
+                                    href="/editAddress/?name=('{{this._id.name}}&address={{this._id.houseAddress.streetaddress}}')">Edit</a></span> --}}
+                                    <a href="/editAddress/{{this._id}}" class="btn btn-primary">Edit</a>
+                            </div>
+
+                        </a>
+
+                    </div><!-- End .col-sm-6 col-lg-4 col-xl-3 -->
+
+                    {{/each}}
+                    <span style="margin-top: 80px;" id="more">
+                        <a onclick="getmoreaddress()" class="btn btn-primary btn-round btn-shadow"><span>show
+                                more</span><i class="icon-long-arrow-right"></i></a>
+                    </span>
+
+                </div>
+
+
+            </div>
+
+        <script>
+            function deleteAddress(name, address) {
+                console.log('##########################')
+                $.ajax({
+                    url: '/delete-address',
+                    data: {
+                        customerName: name,
+                        customeraddress: address,
+                    },
+                    method: 'post',
+                    success: (deletedAddress) => {
+                        console.log('llllllllllllll')
+                        console.log(deletedAddress)
+                        location.reload()
+
+
+                    }
+                })
+
+            }
+        </script>
+        <!-- Plugins JS File -->
+        <script src="assets/js/jquery.min.js"></script>
+        <script src="assets/js/bootstrap.bundle.min.js"></script>
+        <script src="assets/js/jquery.hoverIntent.min.js"></script>
+        <script src="assets/js/jquery.waypoints.min.js"></script>
+        <script src="assets/js/superfish.min.js"></script>
+        <script src="assets/js/owl.carousel.min.js"></script>
+        <!-- Main JS File -->
+        <script src="assets/js/main.js"></script>
+</body>
+</html>

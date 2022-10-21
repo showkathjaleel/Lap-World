@@ -1,0 +1,543 @@
+
+<!DOCTYPE html>
+<html lang="en"> 
+<head>
+    <title>Portal - Bootstrap 5 Admin Dashboard Template For Developers</title>
+    
+    <!-- Meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="description" content="Portal - Bootstrap 5 Admin Dashboard Template For Developers">
+    <meta name="author" content="Xiaoying Riley at 3rd Wave Media">    
+    <link rel="shortcut icon" href="favicon.ico"> 
+    
+    <!-- FontAwesome JS-->
+    <script defer src="assets/plugins/fontawesome/js/all.min.js"></script>
+    
+    <!-- App CSS -->  
+    <link id="theme-style" rel="stylesheet" href="assets/css/portal.css">
+
+</head> 
+
+<body class="app">   	
+  
+    
+    <div class="app-wrapper">
+	    
+	    <div class="app-content pt-3 p-md-3 p-lg-4">
+		    <div class="container-xl">
+			    
+			    <div class="row g-3 mb-4 align-items-center justify-content-between">
+				    <div class="col-auto">
+			            <h1 class="app-page-title mb-0">Coupon List</h1>
+				    </div>
+				    <div class="col-auto">
+					     <div class="page-utilities">
+						    <div class="row g-2 justify-content-start justify-content-md-end align-items-center">
+							    <div class="col-auto">
+								    <form class="table-search-form row gx-1 align-items-center">
+					                    <div class="col-auto">
+					                        <input type="text" id="search-orders" name="searchorders" class="form-control search-orders" placeholder="Search">
+					                    </div>
+					                    <div class="col-auto">
+					                        <button type="submit" class="btn app-btn-secondary">Search</button>
+					                    </div>
+					                </form>
+					                
+							    </div><!--//col-->
+							    <div class="col-auto">
+								    
+								    <select class="form-select w-auto" >
+										  <option selected value="option-1">All</option>
+										  <option value="option-2">This week</option>
+										  <option value="option-3">This month</option>
+										  <option value="option-4">Last 3 months</option>
+										  
+									</select>
+							    </div>
+							    <div class="col-auto">						    
+								    <a class="btn app-btn-secondary" href="/admin/generateCoupon">
+
+									    ADD COUPON
+									</a>
+							    </div>
+						    </div><!--//row-->
+					    </div><!--//table-utilities-->
+				    </div><!--//col-auto-->
+			    </div><!--//row-->
+			   
+			    
+
+				
+				
+				<div class="tab-content" id="orders-table-tab-content">
+			        <div class="tab-pane fade show active" id="orders-all" role="tabpanel" aria-labelledby="orders-all-tab">
+					    <div class="app-card app-card-orders-table shadow-sm mb-5">
+						    <div class="app-card-body">
+							    <div class="table-responsive">
+							        <table class="table app-table-hover mb-0 text-left" id="myTable" >
+										<thead>
+											<tr>
+												<th class="cell">Coupon Name</th>
+												<th class="cell">Discount Value</th>
+												<th class="cell">Start Date</th>
+												<th class="cell">End Date</th>
+												{{!-- <th class="cell">Date Left</th>
+												<th class="cell">Orders</th> --}}
+												{{!-- <th class="cell">Actions</th> --}}
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+
+{{!-- ---------------------------------------------------------------------------------------------------------------------------------------- --}}
+
+
+          {{#each fullCoupon}}
+          <tr>
+
+
+            <td>{{this.couponcode}}<P>
+                {{this.desc}}</td></P>
+            <td>{{this.couponvalue}}</td>
+             <td class="tm-product-name">{{this.fromdate}}</td>
+            <td>{{this.todate}}</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>
+		
+				
+				<a href="/admin/updatecoupon/{{this._id}}" class="tm-product-delete-link">
+                <i class="bi bi-pen"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                    class="bi bi-pen" viewBox="0 0 16 16">
+                    <path
+                      d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001zm-.644.766a.5.5 0 0 0-.707 0L1.95 11.756l-.764 3.057 3.057-.764L14.44 3.854a.5.5 0 0 0 0-.708l-1.585-1.585z" />
+                  </svg></i>"</a></td>
+            <td><a href="/admin/delete-coupon/{{this._id}}" class="tm-product-delete-link"
+                onclick="return confirm('Are you sure you want to delete {{this.name}}')">
+                <i class="bi bi-trash"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                    fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                    <path
+                      d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z" />
+                    <path fill-rule="evenodd"
+                      d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z" />
+                  </svg></i></a></td>
+
+          
+          </tr>
+
+          {{/each}}
+
+
+
+
+
+
+
+		{{!-- ---------------------------------------------------------------------------------------------------------------------------------------- --}}
+										</tbody>
+									</table>
+						        </div><!--//table-responsive-->
+						       
+						    </div><!--//app-card-body-->		
+						</div><!--//app-card-->
+						<nav class="app-pagination">
+							<ul class="pagination justify-content-center">
+								<li class="page-item disabled">
+									<a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+							    </li>
+{{!-- ----------------------------------------------------------------------------------------------------------------------------------------------------- --}}
+
+								<li class="page-item active"><a class="page-link" href="/admin/adminviewpfirstPage/?pages=1">1</a></li>
+								<li class="page-item"><a class="page-link" href="/admin/adminviewpfirstPage/?pages=2">2</a></li>
+								<li class="page-item"><a class="page-link" href="/admin/adminviewpfirstPage/?pages=3">3</a></li>
+
+
+
+
+								<li class="page-item">
+								    <a class="page-link" href="#">Next</a>
+								</li>
+							</ul>
+						</nav><!--//app-pagination-->
+						
+			        </div><!--//tab-pane-->
+			        
+			        <div class="tab-pane fade" id="orders-paid" role="tabpanel" aria-labelledby="orders-paid-tab">
+					    <div class="app-card app-card-orders-table mb-5">
+						    <div class="app-card-body">
+							    <div class="table-responsive">
+								    
+							        <table class="table mb-0 text-left">
+										<thead>
+											<tr>
+												<th class="cell">Order</th>
+												<th class="cell">Product</th>
+												<th class="cell">Customer</th>
+												<th class="cell">Date</th>
+												<th class="cell">Status</th>
+												<th class="cell">Total</th>
+												<th class="cell"></th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td class="cell">#15346</td>
+												<td class="cell"><span class="truncate">Lorem ipsum dolor sit amet eget volutpat erat</span></td>
+												<td class="cell">John Sanders</td>
+												<td class="cell"><span>17 Oct</span><span class="note">2:16 PM</span></td>
+												<td class="cell"><span class="badge bg-success">Paid</span></td>
+												<td class="cell">$259.35</td>
+												<td class="cell"><a class="btn-sm app-btn-secondary" href="#">View</a></td>
+											</tr>
+											
+											<tr>
+												<td class="cell">#15344</td>
+												<td class="cell"><span class="truncate">Pellentesque diam imperdiet</span></td>
+												<td class="cell">Teresa Holland</td>
+												<td class="cell"><span class="cell-data">16 Oct</span><span class="note">01:16 AM</span></td>
+												<td class="cell"><span class="badge bg-success">Paid</span></td>
+												<td class="cell">$123.00</td>
+												<td class="cell"><a class="btn-sm app-btn-secondary" href="#">View</a></td>
+											</tr>
+											
+											<tr>
+												<td class="cell">#15343</td>
+												<td class="cell"><span class="truncate">Vestibulum a accumsan lectus sed mollis ipsum</span></td>
+												<td class="cell">Jayden Massey</td>
+												<td class="cell"><span class="cell-data">15 Oct</span><span class="note">8:07 PM</span></td>
+												<td class="cell"><span class="badge bg-success">Paid</span></td>
+												<td class="cell">$199.00</td>
+												<td class="cell"><a class="btn-sm app-btn-secondary" href="#">View</a></td>
+											</tr>
+										
+											
+											<tr>
+												<td class="cell">#15341</td>
+												<td class="cell"><span class="truncate">Morbi vulputate lacinia neque et sollicitudin</span></td>
+												<td class="cell">Raymond Atkins</td>
+												<td class="cell"><span class="cell-data">11 Oct</span><span class="note">11:18 AM</span></td>
+												<td class="cell"><span class="badge bg-success">Paid</span></td>
+												<td class="cell">$678.26</td>
+												<td class="cell"><a class="btn-sm app-btn-secondary" href="#">View</a></td>
+											</tr>
+		{{!-- ------------------------------------------------------------------------------------------------------------------------------------------ --}}
+										</tbody>
+									</table>
+						        </div><!--//table-responsive-->
+						    </div><!--//app-card-body-->		
+						</div><!--//app-card-->
+			        </div><!--//tab-pane-->
+			        
+			        <div class="tab-pane fade" id="orders-pending" role="tabpanel" aria-labelledby="orders-pending-tab">
+					    <div class="app-card app-card-orders-table mb-5">
+						    <div class="app-card-body">
+							    <div class="table-responsive">
+							        <table class="table mb-0 text-left">
+										<thead>
+											<tr>
+												<th class="cell">Order</th>
+												<th class="cell">Product</th>
+												<th class="cell">Customer</th>
+												<th class="cell">Date</th>
+												<th class="cell">Status</th>
+												<th class="cell">Total</th>
+												<th class="cell"></th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td class="cell">#15345</td>
+												<td class="cell"><span class="truncate">Consectetur adipiscing elit</span></td>
+												<td class="cell">Dylan Ambrose</td>
+												<td class="cell"><span class="cell-data">16 Oct</span><span class="note">03:16 AM</span></td>
+												<td class="cell"><span class="badge bg-warning">Pending</span></td>
+												<td class="cell">$96.20</td>
+												<td class="cell"><a class="btn-sm app-btn-secondary" href="#">View</a></td>
+											</tr>
+										</tbody>
+									</table>
+						        </div><!--//table-responsive-->
+						    </div><!--//app-card-body-->		
+						</div><!--//app-card-->
+			        </div><!--//tab-pane-->
+			        <div class="tab-pane fade" id="orders-cancelled" role="tabpanel" aria-labelledby="orders-cancelled-tab">
+					    <div class="app-card app-card-orders-table mb-5">
+						    <div class="app-card-body">
+							    <div class="table-responsive">
+							        <table class="table mb-0 text-left">
+										<thead>
+											<tr>
+												<th class="cell">Order</th>
+												<th class="cell">Product</th>
+												<th class="cell">Customer</th>
+												<th class="cell">Date</th>
+												<th class="cell">Status</th>
+												<th class="cell">Total</th>
+												<th class="cell"></th>
+											</tr>
+										</thead>
+										<tbody>
+											
+											<tr>
+												<td class="cell">#15342</td>
+												<td class="cell"><span class="truncate">Justo feugiat neque</span></td>
+												<td class="cell">Reina Brooks</td>
+												<td class="cell"><span class="cell-data">12 Oct</span><span class="note">04:23 PM</span></td>
+												<td class="cell"><span class="badge bg-danger">Cancelled</span></td>
+												<td class="cell">$59.00</td>
+												<td class="cell"><a class="btn-sm app-btn-secondary" href="#">View</a></td>
+											</tr>
+											
+										</tbody>
+									</table>
+						        </div><!--//table-responsive-->
+						    </div><!--//app-card-body-->		
+						</div><!--//app-card-->
+			        </div><!--//tab-pane-->
+				</div><!--//tab-content-->
+				
+				
+			    
+		    </div><!--//container-fluid-->
+	    </div><!--//app-content-->
+	    
+	    <footer class="app-footer">
+		    <div class="container text-center py-3">
+		         <!--/* This template is free as long as you keep the footer attribution link. If you'd like to use the template without the attribution link, you can buy the commercial license via our website: themes.3rdwavemedia.com Thank you for your support. :) */-->
+            <small class="copyright">Designed with <span class="sr-only">love</span><i class="fas fa-heart" style="color: #fb866a;"></i> by <a class="app-link" href="http://themes.3rdwavemedia.com" target="_blank">Xiaoying Riley</a> for developers</small>
+		       
+		    </div>
+	    </footer><!--//app-footer-->
+	    
+    </div><!--//app-wrapper-->    					
+
+ 
+    <!-- Javascript -->          
+    <script src="assets/plugins/popper.min.js"></script>
+    <script src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>  
+    
+    
+    <!-- Page Specific JS -->
+    <script src="assets/js/app.js"></script> 
+<script>
+
+
+
+    $(document).ready(function () {
+        $('#myTable').DataTable();
+    });
+
+</script>
+</body>
+</html> 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{{!-- 
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,700" />
+  <!-- https://fonts.google.com/specimen/Roboto -->
+  <link rel="stylesheet" href="/css/fontawesome.min.css" />
+  <!-- https://fontawesome.com/ -->
+  <link rel="stylesheet" href="/css/bootstrap.min.css" />
+  <!-- https://getbootstrap.com/ -->
+  <link rel="stylesheet" href="/css/templatemo-style.css">
+
+
+
+</head>
+
+
+
+
+<link rel="stylesheet" href="/stylesheets/style.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+  integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+
+
+
+
+
+<script type="text/javascript" charset="utf8" src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.1.min.js"></script>
+<script type="text/javascript" charset="utf8"
+  src="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.0/jquery.dataTables.min.js"></script>
+
+
+
+
+
+<div class="container mt-5" >
+
+
+
+  <div >
+    <div >
+
+
+
+      <table  id="myTable" style="color: black !important;">
+
+
+        <thead>
+          <tr>
+            <th scope="col">PRODUCT NAME</th>
+            <th scope="col">Price</th>
+            <th scope="col">Description</th>
+            <th scope="col">Edit</th>
+            <th scope="col">Delete</th>
+            <th scope="col">Image</th>
+
+          </tr>
+        </thead>
+        <tbody>
+
+
+
+
+
+          {{#each products}}
+          <tr>
+
+
+            <td class="tm-product-name">{{this.laptops}}</td>
+            <td>{{this.Price}}</td>
+            <td>{{this.description}}</td>
+            <td><a href="/admin/edit-product/{{this._id}}" class="tm-product-delete-link">
+                <i class="bi bi-pen"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                    class="bi bi-pen" viewBox="0 0 16 16">
+                    <path
+                      d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001zm-.644.766a.5.5 0 0 0-.707 0L1.95 11.756l-.764 3.057 3.057-.764L14.44 3.854a.5.5 0 0 0 0-.708l-1.585-1.585z" />
+                  </svg></i>"</a></td>
+            <td><a href="/admin/delete-product/{{this._id}}" class="tm-product-delete-link"
+                onclick="return confirm('Are you sure you want to delete {{this.name}}')">
+                <i class="bi bi-trash"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                    fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                    <path
+                      d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z" />
+                    <path fill-rule="evenodd"
+                      d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z" />
+                  </svg></i></a></td>
+
+            <td><img style="width: 120px; height:80px" src="/product-images/{{this._id}}.jpg" alt=""></td>
+          </tr>
+
+          {{/each}}
+        </tbody>
+        
+            
+      </table>
+  <a href="/admin/add-products" class="btn btn-primary btn-block text-uppercase mb-3">Add new product</a>
+
+    </div>
+     </div>
+      </div>
+    
+
+    <script>
+
+
+
+      $(document).ready(function () {
+        $('#myTable').DataTable();
+      });
+
+    </script>
+ --}}
+
+
+
+
+
+    {{!--
+    -------------------------------------------------------------------------------------------------------------------------------------------------
+    --}}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

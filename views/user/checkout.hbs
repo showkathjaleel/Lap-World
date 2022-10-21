@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<!-- molla/checkout.html  22 Nov 2019 09:55:06 GMT -->
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Molla - Bootstrap eCommerce Template</title>
+    <meta name="keywords" content="HTML5 Template">
+    <meta name="description" content="Molla - Bootstrap eCommerce Template">
+    <meta name="author" content="p-themes">
+    <!-- Favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/images/icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/images/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/images/icons/favicon-16x16.png">
+    <link rel="manifest" href="assets/images/icons/site.html">
+    <link rel="mask-icon" href="assets/images/icons/safari-pinned-tab.svg" color="#666666">
+    <link rel="shortcut icon" href="assets/images/icons/favicon.ico">
+    <meta name="apple-mobile-web-app-title" content="Molla">
+    <meta name="application-name" content="Molla">
+    <meta name="msapplication-TileColor" content="#cc9966">
+    <meta name="msapplication-config" content="assets/images/icons/browserconfig.xml">
+    <meta name="theme-color" content="#ffffff">
+    <!-- Plugins CSS File -->
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <!-- Main CSS File -->
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+
+<body>
+    <div class="page-wrapper">
+
+
+        <main class="main">
+            <div class="page-header text-center" style="background-image: url('assets/images/page-header-bg.jpg')">
+                <div class="container">
+                    <h1 class="page-title">Checkout</h1>
+                </div><!-- End .container -->
+            </div><!-- End .page-header -->
+            <nav aria-label="breadcrumb" class="breadcrumb-nav">
+                <div class="container">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                        <li class="breadcrumb-item"><a href="#">Shop</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Checkout</li>
+                    </ol>
+                </div><!-- End .container -->
+            </nav><!-- End .breadcrumb-nav -->
+
+            <div class="page-content">
+                <div class="checkout">
+                    <div class="container">
+                        <div>
+
+
+                            {{!--
+                            --------------------------------------------------------------------------------------------------------------------------------------------------------------
+                            --}}
+
+                            <div class="page-content">
+
+
+                                <div class="container">
+
+
+
+
+                                    <div class="row">
+
+                                        <div class="col-lg-12">
+                                            <div class="accordion" id="accordion-1">
+                                                <div class="card">
+                                                    <div class="card-header" id="heading-1">
+                                                        <h2 class="card-title">
+                                                            <a role="button" data-toggle="collapse" href="#collapse-1"
+                                                                aria-expanded="true" aria-controls="collapse-1">
+
+                                                                {{!-- {{this.address.name}} --}}
+                                                            </a>
+                                                        </h2>
+                                                    </div><!-- End .card-header -->
+                                                    <div id="collapse-1" class="collapse show"
+                                                        aria-labelledby="heading-1" data-parent="#accordion-1">
+                                                        <div class="card-body">
+
+                                                        </div><!-- End .card-body -->
+                                                    </div><!-- End .collapse -->
+                                                </div><!-- End .card -->
+
+                                                <div class="card">
+                                                    <div class="card-header" id="heading-2">
+                                                        <h2 class="card-title">
+                                                            <a class="collapsed" role="button" data-toggle="collapse"
+                                                                href="#collapse-2" aria-expanded="false"
+                                                                aria-controls="collapse-2">
+                                                                Select Address
+                                                            </a>
+                                                        </h2>
+                                                    </div><!-- End .card-header -->
+                                                    <div id="collapse-2" class="collapse" aria-labelledby="heading-2"
+                                                        data-parent="#accordion-1">
+
+                                                        <div class="row">
+                                                            <div class="container">
+                                                                {{#each Address}}
+                                                                <div class="card-body col-lg-9"
+                                                                 >
+                                                                    <div><span>
+                                                                            <button type="button" class="btn btn-primary"
+                                                                                onclick="settingAddress('{{this._id.name}}','{{this._id.houseAddress.streetaddress}}')"><input
+                                                                                    type="radio"
+                                                                                    name="selectaAddress">Choose
+                                                                                this</button>
+                                                                            {{!-- <button class="btn-danger"
+                                                                                onclick="deleteAddress('{{this._id.name}}','{{this._id.houseAddress.streetaddress}}')">delete</button>
+                                                                            --}}
+                                                                        </span>
+                                                                        <p class="card-text text-black">
+                                                                           <h6> {{this._id.name}} </h6></p>
+                                                                        <p class="card-text text-black">
+                                                                            {{this._id.mobile}}</p>
+                                                                        <p class="card-text text-black">
+                                                                          {{this._id.email}}</p>
+                                                                        <p class="card-text text-black">
+                                                                            {{this._id.houseAddress.streetaddress}}</p>
+                                                                        <p class="card-text text-black">
+                                                                            {{this._id.houseAddress.city}}</p>
+                                                                        <p class="card-text text-black">
+                                                                            {{this._id.houseAddress.pincode}}</p>
+                                                                        <p class="card-text text-black">
+                                                                            {{this._id.houseAddress.state}}</p>
+
+                                                                        <p class="card-text text-black">
+                                                                            {{this._id.houseAddress.city}},{{this._id.houseAddress.state}}
+                                                                        </p>
+                                                                        {{!-- <button class=""
+                                                                            onclick="changeAddress('{{this._id.name}}','{{this._id.address.streetAddress}}')"></button>
+                                                                        --}}
+                                                                    </div>
+
+                                                                </div>
+                                                                {{/each }}
+
+                                                            </div><!-- End .card-body -->
+                                                        </div><!-- End .collapse -->
+                                                    </div><!-- End .card -->
+
+                                                </div><!-- End .accordion -->
+                                            </div><!-- End .col-md-6 -->
+                                        </div><!-- End .row -->
+
+
+
+
+
+                                    </div><!-- End .container -->
+                                </div><!-- End .page-content -->
+
+                                {{!--
+    -----------------------------------------------------------------------------------------------------------------------------------------------------
+                                --}}
+                            </div>
+                            <div class="checkout-discount">
+                                <form action="#">
+                                    <input type="text" class="form-control" required id="checkout-discount-input">
+                                    <label for="checkout-discount-input" class="text-truncate">Have a coupon?
+                                        <span>Click
+                                            here to enter your code</span></label>
+                                </form>
+                            </div><!-- End .checkout-discount -->
+
+
+                            {{!--
+                            ===========================================================================================================================================
+                            --}}
+                            <form action="/place-order" method="post" id="checkout-form">
+                                <div class="row">
+                                    <div class="col-lg-9">
+                                        <h2 class="checkout-title">Billing Details</h2><!-- End .checkout-title -->
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <label>First Name *</label>
+                                                <input type="text" class="form-control" name="firstname" id="firstname"
+                                                    required>
+                                            </div><!-- End .col-sm-6 -->
+
+                                            <div class="col-sm-6">
+                                                <label>Last Name *</label>
+                                                <input type="text" class="form-control" name="lastname" id="lastname"
+                                                    required>
+                                            </div><!-- End .col-sm-6 -->
+                                        </div><!-- End .row -->
+
+
+
+                                        <label>Country *</label>
+                                        <input type="text" class="form-control" name="country" id="country" required>
+
+                                        <label>Street address *</label>
+                                        <input type="text" class="form-control"
+                                            placeholder="House number and Street name" name="streetaddress"
+                                            id="streetaddress" required>
+                                        {{!-- <input type="text" class="form-control"
+                                            placeholder="Appartments, suite, unit etc ..." name="landmark" id="landmark"
+                                            required> --}}
+
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <label> City *</label>
+                                                <input type="text" class="form-control" name="city" id="city" required>
+                                            </div><!-- End .col-sm-6 -->
+
+                                            <div class="col-sm-6">
+                                                <label>State *</label>
+                                                <input type="text" class="form-control" name="state" id="state"
+                                                    required>
+                                            </div><!-- End .col-sm-6 -->
+                                        </div><!-- End .row -->
+
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <label>Pincode *</label>
+                                                <input type="text" class="form-control" name="postcode" id="postcode"
+                                                    required>
+                                            </div><!-- End .col-sm-6 -->
+
+                                            <div class="col-sm-6">
+                                                <label>Phone *</label>
+                                                <input type="tel" class="form-control" name="phone" id="phone" required>
+                                            </div><!-- End .col-sm-6 -->
+                                        </div><!-- End .row -->
+
+                                        <label>Email address *</label>
+                                        <input type="email" class="form-control" name="email" id="email" required>
+
+                                        <input type="name" class="form-control" name="status" hidden value="confirmed">
+
+                                       <button type="reset" class="btn btn-primary">RESET</button>
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input"
+                                                id="checkout-create-acc">
+                                            <label class="custom-control-label" for="checkout-create-acc">Create an
+                                                account?</label>
+                                        </div><!-- End .custom-checkbox -->
+
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input"
+                                                id="checkout-diff-address">
+                                            <label class="custom-control-label" for="checkout-diff-address">Ship to a
+                                                different address?</label>
+                                        </div><!-- End .custom-checkbox -->
+
+                                        <label>Order notes (optional)</label>
+                                        <textarea class="form-control" cols="30" rows="4"
+                                            placeholder="Notes about your order, e.g. special notes for delivery"></textarea>
+                                    </div><!-- End .col-lg-9 -->
+                                    <aside class="col-lg-3">
+                                        <div class="summary">
+                                            <h3 class="summary-title">Your Order</h3><!-- End .summary-title -->
+
+                                            <table class="table table-summary">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Product</th>
+                                                        <th>Total</th>
+                                                    </tr>
+                                                </thead>
+
+                                                <tbody>
+                                                    {{#each products}}
+                                                    <tr>
+                                                        <td><a href="#">{{this.product.laptops}}</a></td>
+                                                        <td>{{this.product.Price}}</td>
+                                                    </tr>
+
+
+
+                                                    {{/each}}
+                                                    <tr class="summary-subtotal">
+                                                        <td>Subtotal:</td>
+                                                        <td>{{grandTotal}}</td>
+                                                    </tr><!-- End .summary-subtotal -->
+                                                    <tr>
+                                                        <td>Shipping:</td>
+                                                        <td>Free shipping</td>
+                                                    </tr>
+                                                    <tr class="summary-total">
+
+                                                        {{#if discounts.[0].TotalAfterDiscount}}
+                                                          <td>Total:</td>
+                                                        <td id="totalwithdiscount">{{discounts.[0].TotalAfterDiscount}}</td>
+                                                        {{else}}
+                                                       <td>Total:</td>
+                                                        <td id="totalwithdelivery">{{grandTotal}}</td>
+                                                        {{/if}}
+
+                                                    </tr><!-- End .summary-total -->
+                                                </tbody>
+                                            </table><!-- End .table table-summary -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                            <div class="accordion-summary" id="accordion-payment">
+                                                <div class="card">
+                                                    <div class="card-header" id="heading-1">
+                                                        <h2 class="card-title">
+
+
+                                                            {{!-- <form> --}}
+                                                                Select Payment method:<br>
+
+                                                                <label>
+                                                                    <input type="radio" name="paymentMethod" value="COD"
+                                                                        required>
+                                                                    COD
+                                                                </label><br>
+
+                                                                <label>
+                                                                    <input type="radio" name="paymentMethod"
+                                                                        value="Direct-Bank-Transfer">
+                                                                    Direct-Bank-Transfer
+                                                                </label><br>
+
+                                                                <label>
+                                                                    <input type="radio" name="paymentMethod"
+                                                                        value="Paypal">
+                                                                    Paypal
+                                                                </label><br>
+
+                                                                <label>
+                                                                    <input type="radio" name="paymentMethod"
+                                                                        id="paymentMethod" value="credit-card">
+                                                                    credit-card
+                                                                </label><br>
+
+
+                                                                {{!-- <input type="submit">
+                                                            </form> --}}
+
+
+
+
+                                                            {{!--
+                                                            ---------------------------------------------------------------------------------------------------------------------------------
+                                                            --}}
+
+                                            </div>
+                                            {{#if total}}
+                                            <button type="submit" class="btn btn-success btn-block">
+                                                <span class="btn btn-success">Place Order</span>
+                                                {{!-- <span class="btn-hover-text">Proceed to Checkout</span> --}}
+                                            </button>
+                                            {{else}}
+                                             
+                                            {{/if}}
+                                        </div><!-- End .summary -->
+                                    </aside><!-- End .col-lg-3 -->
+                                </div><!-- End .row -->
+                            </form>
+                        </div><!-- End .container -->
+                    </div><!-- End .checkout -->
+                </div><!-- End .page-content -->
+        </main><!-- End .main -->
+
+
+    </div><!-- End .page-wrapper -->
+    <button id="scroll-top" title="Back to Top"><i class="icon-arrow-up"></i></button>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu-overlay"></div><!-- End .mobil-menu-overlay -->
+
+    <div class="mobile-menu-container">
+        <div class="mobile-menu-wrapper">
+            <span class="mobile-menu-close"><i class="icon-close"></i></span>
+
+            <form action="#" method="get" class="mobile-search">
+                <label for="mobile-search" class="sr-only">Search</label>
+                <input type="search" class="form-control" name="mobile-search" id="mobile-search"
+                    placeholder="Search in..." required>
+                <button class="btn btn-primary" type="submit"><i class="icon-search"></i></button>
+            </form>
+
+
+
+            <div class="social-icons">
+                <a href="#" class="social-icon" target="_blank" title="Facebook"><i class="icon-facebook-f"></i></a>
+                <a href="#" class="social-icon" target="_blank" title="Twitter"><i class="icon-twitter"></i></a>
+                <a href="#" class="social-icon" target="_blank" title="Instagram"><i class="icon-instagram"></i></a>
+                <a href="#" class="social-icon" target="_blank" title="Youtube"><i class="icon-youtube"></i></a>
+            </div><!-- End .social-icons -->
+        </div><!-- End .mobile-menu-wrapper -->
+    </div><!-- End .mobile-menu-container -->
+
+    <!-- Sign in / Register Modal -->
+    <div class="modal fade" id="signin-modal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true"><i class="icon-close"></i></span>
+                    </button>
+
+
+                </div><!-- End .modal-body -->
+            </div><!-- End .modal-content -->
+        </div><!-- End .modal-dialog -->
+    </div><!-- End .modal -->
+
+
+
+    <script>
+        $("#checkout-form").submit((e) => {
+            e.preventDefault()
+            $.ajax({
+                url: '/place-order', //  order place ckeyyunnath
+                method: 'post',
+                data: $("#checkout-form").serialize(),
+                success: (response) => {
+                    alert("ajax entered")
+                    if (response.codsuccess) {
+                        alert('its cod')
+                        location.href = '/order-success'                    //  order place aayi
+                    } else if (response.paypal) {
+                        alert('its paypal')
+                        console.log(response)
+                        paypal(response.orderId)
+
+                    } else {
+                        alert('its razor')
+                        razorpayPayment(response)
+                    }
+
+
+
+
+
+
+
+
+
+
+                }
+            })
+        })
+
+        function razorpayPayment(order) {
+
+            alert('its entered to the funtion ')
+
+            var options = {
+                "key": "rzp_test_NBKIQegHCsjMos", // Enter the Key ID generated from the Dashboard
+                "amount": order.amount, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+                "currency": "INR",
+                "name": "Lap World",
+                "description": "Test Transaction",
+                "image": "https://example.com/your_logo",
+                "order_id": order.id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+
+                "handler": function (response) {
+                    alert(response.razorpay_payment_id);
+                    alert(response.razorpay_order_id);
+                    alert(response.razorpay_signature);
+
+                    console.log('vannu mone2')
+                    console.log(response, order)
+
+
+                    verifyPayment(response, order)
+
+
+                },
+
+                "prefill": {
+                    "name": "Gaurav Kumar",
+                    "email": "gaurav.kumar@example.com",
+                    "contact": "9999999999"
+                },
+                "notes": {
+                    "address": "Razorpay Corporate Office"
+                },
+                "theme": {
+                    "color": "#3399cc"
+                }
+            };
+            var rzp1 = new Razorpay(options);
+            rzp1.open();
+
+        }
+
+        function verifyPayment(payment, order) {
+
+            console.log('vannu mone3')
+            console.log(payment)
+            console.log(order)
+
+            $.ajax({
+                url: '/verify-payment',
+                data: {
+                    payment,
+                    order,
+                },
+                method: 'post',
+                success: (response) => {
+                    location.href = '/order-success'
+                }
+            })
+        }
+
+
+
+        function paypal(orderId) {
+
+            $.ajax({
+                url: '/pay',
+
+                method: 'post',
+
+
+                success: (response) => {
+                    location.href = response
+                }
+            })
+
+
+
+        }
+    </script>
+
+    {{!--
+    <script>
+        function deleteAddres(name, address) {           //ivide oru s kalanju
+            $.ajax({
+                url: '/delete-address',
+                data: {
+                    customerName: name,
+                    customeraddress: address,
+                },
+                method: 'post',
+                success: (deletedAddress) => {
+                    console.log('llllllllllllll')
+                    console.log(deletedAddress)
+                    location.reload()
+
+
+                }
+            })
+
+        }
+    </script> --}}
+
+    <script>
+        function settingAddress(name, address) {
+            $.ajax({
+                url: '/selected-address',
+                data: {
+                    customerName: name,
+                    customeraddress: address,
+                },
+                method: 'post',
+                success: (selectedAddress) => {
+                    console.log('llllllllllllll')
+                    console.log(selectedAddress)
+
+                    document.getElementById('firstname').value = selectedAddress[0]._id.name
+                    document.getElementById('lastname').value = selectedAddress[0]._id.lastname
+                    document.getElementById('phone').value = selectedAddress[0]._id.mobile
+                    document.getElementById('email').value = selectedAddress[0]._id.email
+                    document.getElementById('streetaddress').value = selectedAddress[0]._id.houseAddress.streetaddress
+
+                    document.getElementById('country').value = selectedAddress[0]._id.houseAddress.country
+                    document.getElementById('city').value = selectedAddress[0]._id.houseAddress.city
+                    document.getElementById('state').value = selectedAddress[0]._id.houseAddress.state
+                    document.getElementById('postcode').value = selectedAddress[0]._id.houseAddress.pincode
+                }
+            })
+
+        }
+
+    </script>
+
+
+    <!-- Plugins JS File -->
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/jquery.hoverIntent.min.js"></script>
+    <script src="assets/js/jquery.waypoints.min.js"></script>
+    <script src="assets/js/superfish.min.js"></script>
+    <script src="assets/js/owl.carousel.min.js"></script>
+    <!-- Main JS File -->
+    <script src="assets/js/main.js"></script>
+</body>
+
+
+<!-- molla/checkout.html  22 Nov 2019 09:55:06 GMT -->
+
+</html>
