@@ -17,12 +17,6 @@ paypal.configure({
 
 
 
-// const paypal = require('paypal-rest-sdk');
-// paypal.configure({
-//   'mode': 'sandbox',
-//   'client_id': 'AZ3e2zEb3B57FUmytcI_0qAUFbSO8_dfF5E-ZqXIc6gNJnwpM_5fPDkxNIprf_kL_yetfjs_nvSvH5d1',
-//   'client_secret': 'EHp4SxrwA099mECVN95-4pJcOAzbHWMIEm29ijpRL2AAGB0gC8ZjNw4KkqWNVvglsVCy9E1x9cotD1a3'
-// });
 
 
 
@@ -45,11 +39,6 @@ const accountSSid = process.env.accountSSid
 const authId = process.env.authId
 const client = require('twilio')(accountSSid, authId)
 
-
-// const serviceSId = "VA777203db5a802479addfbcaaf0cafdcc";
-// const accountSSid = "ACf3f5cfe72a97cb1eeb2bc55c38b971c8"
-// const authId = "cafdd58b35b79c0f246c5607b1ee6a3f"
-// const client = require('twilio')(accountSSid, authId)
 
 //----------------------------------------------------------------------Twilio --------------------------------------------------------------------------\\
 
@@ -92,7 +81,7 @@ const client = require('twilio')(accountSSid, authId)
 
 
 let mob;
-let user;
+// let user;
 
 
 const verifyLogin = async (req, res, next) => { 
@@ -116,7 +105,7 @@ const sessionHandle = (req, res, next) => {
 router.use('/', async function (req, res, next) {
   if (req.session.user){
   
-    res.locals.userName = req.session.user.name
+    res.locals.user = req.session.user
     cartCount = await userHelpers.getCartCount(req.session.user._id)
     wishlistCount = await userHelpers.wishlistCount(req.session.user._id)
     res.locals.wishlistCount = wishlistCount
@@ -171,7 +160,7 @@ router.get('/', async function (req, res, next) {
 
 // ------------------------------------------------------------LOGIN PAGE---------------------------------------------------------------//
 router.get('/login', sessionHandle, (req, res) => {
-  res.render('user/login', { loginerror })
+  res.render('user/login', { loginerror ,noheader:true})
   loginerror = ""
 })
 

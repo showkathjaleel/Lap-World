@@ -350,10 +350,10 @@
                             </div><!-- End .product-action -->
 
                             <div class="product-action product-action-dark">
-                                 <div class="product-action product-action-dark">
-                                            <a href="/add-to-cart/{{this._id}}">ADD TO CART</a>
-                                <a href="popup/quickView.html" class="btn-product btn-quickview"
-                                    title="Quick view"><span>quick view</span></a>
+                                 <div class="product-action product-action-dark text-center">
+                                            <a href="/add-to-cart/{{this._id}}">ADD TO CART  </a>
+                                {{!-- <a href="popup/quickView.html" class="btn-product btn-quickview"
+                                    title="Quick view"><span>quick view</span></a> --}}
                             </div><!-- End .product-action -->
                         </figure><!-- End .product-media -->
                         <div class="product-body">
@@ -1934,6 +1934,8 @@
                 <button class="btn btn-primary" type="submit"><i class="icon-search"></i></button>
             </form>
 
+
+
             <ul class="nav nav-pills-mobile nav-border-anim" role="tablist">
                 <li class="nav-item">
                     <a class="nav-link active" id="mobile-menu-link" data-toggle="tab" href="#mobile-menu-tab"
@@ -1951,9 +1953,9 @@
                     <nav class="mobile-nav">
                         <ul class="mobile-menu">
                             <li class="active">
-                                <a href="index.html">Home</a>
+                                <a href="/">Home</a>
 
-                                <ul>
+                                {{!-- <ul>
                                     <li><a href="index-1.html">01 - furniture store</a></li>
                                     <li><a href="index-2.html">02 - furniture store</a></li>
                                     <li><a href="index-3.html">03 - electronic store</a></li>
@@ -1978,11 +1980,11 @@
                                     <li><a href="index-22.html">22 - tools store</a></li>
                                     <li><a href="index-23.html">23 - fashion left navigation store</a></li>
                                     <li><a href="index-24.html">24 - extreme sport store</a></li>
-                                </ul>
+                                </ul> --}}
                             </li>
-                            <li>
-                                <a href="category.html">Shop</a>
-                                <ul>
+                            {{!-- <li>
+                                <a href="category.html">Shop</a> --}}
+                                {{!-- <ul>
                                     <li><a href="category-list.html">Shop List</a></li>
                                     <li><a href="category-2cols.html">Shop Grid 2 Columns</a></li>
                                     <li><a href="category.html">Shop Grid 3 Columns</a></li>
@@ -1997,11 +1999,11 @@
                                     <li><a href="checkout.html">Checkout</a></li>
                                     <li><a href="wishlist.html">Wishlist</a></li>
                                     <li><a href="#">Lookbook</a></li>
-                                </ul>
-                            </li>
+                                </ul> --}}
+                            {{!-- </li> --}}
                             <li>
-                                <a href="product.html" class="sf-with-ul">Product</a>
-                                <ul>
+                                <a href="/product-page" class="sf-with-ul">Product</a>
+                                {{!-- <ul>
                                     <li><a href="product.html">Default</a></li>
                                     <li><a href="product-centered.html">Centered</a></li>
                                     <li><a href="product-extended.html"><span>Extended Info<span
@@ -2011,34 +2013,34 @@
                                     <li><a href="product-sidebar.html">Boxed With Sidebar</a></li>
                                     <li><a href="product-fullwidth.html">Full Width</a></li>
                                     <li><a href="product-masonry.html">Masonry Sticky Info</a></li>
-                                </ul>
+                                </ul> --}}
                             </li>
                             <li>
-                                <a href="#">Pages</a>
+                                <a href="#">Account</a>
                                 <ul>
                                     <li>
                                         <a href="about.html">About</a>
 
-                                        <ul>
+                                        {{!-- <ul>
                                             <li><a href="about.html">About 01</a></li>
                                             <li><a href="about-2.html">About 02</a></li>
-                                        </ul>
+                                        </ul> --}}
                                     </li>
                                     <li>
-                                        <a href="contact.html">Contact</a>
+                                        <a href="contact.html">Profile</a>
 
-                                        <ul>
+                                        {{!-- <ul>
                                             <li><a href="contact.html">Contact 01</a></li>
                                             <li><a href="contact-2.html">Contact 02</a></li>
-                                        </ul>
+                                        </ul> --}}
                                     </li>
-                                    <li><a href="login.html">Login</a></li>
-                                    <li><a href="faq.html">FAQs</a></li>
-                                    <li><a href="404.html">Error 404</a></li>
-                                    <li><a href="coming-soon.html">Coming Soon</a></li>
+                                    <li><a href="/address">Address</a></li>
+                                    <li><a href="/wishlist-page">Wishlist</a></li>
+                                    <li><a href="/order-page">Orders</a></li>
+                                    
                                 </ul>
                             </li>
-                            <li>
+                            {{!-- <li>
                                 <a href="blog.html">Blog</a>
 
                                 <ul>
@@ -2078,8 +2080,8 @@
                                         </ul>
                                     </li>
                                 </ul>
-                            </li>
-                            <li>
+                            </li> --}}
+                            {{!-- <li>
                                 <a href="elements-list.html">Elements</a>
                                 <ul>
                                     <li><a href="elements-products.html">Products</a></li>
@@ -2097,13 +2099,13 @@
                                     <li><a href="elements-cta.html">Call to Action</a></li>
                                     <li><a href="elements-icon-boxes.html">Icon Boxes</a></li>
                                 </ul>
-                            </li>
+                            </li> --}}
                         </ul>
                     </nav><!-- End .mobile-nav -->
                 </div><!-- .End .tab-pane -->
                 <div class="tab-pane fade" id="mobile-cats-tab" role="tabpanel" aria-labelledby="mobile-cats-link">
                     <nav class="mobile-cats-nav">
-                        <ul class="mobile-cats-menu">
+                        {{!-- <ul class="mobile-cats-menu">
                             <li><a class="mobile-cats-lead" href="#">Daily offers</a></li>
                             <li><a class="mobile-cats-lead" href="#">Gift Ideas</a></li>
                             <li><a href="#">Beds</a></li>
@@ -2115,7 +2117,7 @@
                             <li><a href="#">Kitchen Cabinets</a></li>
                             <li><a href="#">Coffee & Tables</a></li>
                             <li><a href="#">Outdoor Furniture </a></li>
-                        </ul><!-- End .mobile-cats-menu -->
+                        </ul><!-- End .mobile-cats-menu --> --}}
                     </nav><!-- End .mobile-cats-nav -->
                 </div><!-- .End .tab-pane -->
             </div><!-- End .tab-content -->

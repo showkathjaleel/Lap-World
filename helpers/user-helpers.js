@@ -5,6 +5,7 @@ const collection = require('../configuration/collection');
 
 var objectId = require('mongodb').ObjectId
 const Razorpay = require('razorpay');
+const { log } = require('console');
 
 
 require('dotenv').config()
@@ -1109,7 +1110,11 @@ module.exports = {
     // -----------------------------------------------------ORDER COLLECTION CREATION--------------------------------------------------------------//
 
     placeOrder: (order, userId, cartItems, total,discount) => {
+        console.log('cartItems')
+        console.log(order)
+        console.log('cartItems')
       
+
 
 
 
