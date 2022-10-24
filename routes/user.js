@@ -118,6 +118,7 @@ router.use('/', async function (req, res, next) {
 });
 
 
+
 // ---------------------------------------------------------------------NAVBAR SEARCH-------------------------------------------------------//
 
 router.post('/searchProducts',(req,res)=>{ 
