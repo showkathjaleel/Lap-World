@@ -9,7 +9,7 @@ const { log } = require('console');
 
 
 require('dotenv').config()
-console.log(process.env.key_id)
+
 
 
 // ---------------------------------------RAZORPAY-------------------------------------

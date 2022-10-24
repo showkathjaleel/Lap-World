@@ -161,7 +161,7 @@ router.get('/', async function (req, res, next) {
 
 // ------------------------------------------------------------LOGIN PAGE---------------------------------------------------------------//
 router.get('/login', sessionHandle, (req, res) => {
-  res.render('user/login', { loginerror ,noheader:true})
+  res.render('user/login', { loginerror})
   loginerror = ""
 })
 
