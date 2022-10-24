@@ -365,22 +365,27 @@
                             <div class="product-price">
 
                             
-
-                                                                               {{#if this.originalPrice}}
+                                                   {{#if productOfferPrice}}
+                                                                               {{!-- {{#if this.originalPrice}} --}}
                                                 <div class="product-price text-danger">
-                                                    
-                                                      ₹<s>{{this.originalPrice}}</s><br>
+                                                      ₹<s>{{this.Price}}</s><br>
+                                                      {{!-- ₹<s>{{this.originalPrice}}</s><br> --}}
                                                        </div>
                                                        <div class="product-price">
-                                                       Price:₹{{checkGreater this.Price this.productOfferPrice}}
+                                                         Price:₹{{ this.productOfferPrice}}
+                                                       {{!-- Price:₹{{checkGreater this.Price this.productOfferPrice}} --}}
                                                       </div>
                                                          {{else}}
-                                                          {{#if this.productOfferPrice}}
+                                                         
+                                                         {{#if this.productOffer}}
+                                                          {{!-- {{#if this.productOfferPrice}} --}}
                                                            <div class="product-price text-success">
                                                             {{this.Offers}}%off
                                                            </div>
                                                            <div class="product-price">
-                                                             Price:₹{{this.productOfferPrice}}                                                                                                                                                                                              
+                                                           <s class="text-danger"> {{this.Price}}</s>  
+                                                            Price:₹{{this.productOffer}}    
+                                                             {{!-- Price:₹{{this.productOfferPrice}}                                                                                                                                                                                               --}}
                                                            </div><!-- End .product-price -->
                                                           {{else}}
                                                             <div class="product-price">
