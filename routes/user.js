@@ -142,13 +142,13 @@ router.get('/', async function (req, res, next) {
     cartCount = await userHelpers.getCartCount(user._id)
     let category=await categoryHelpers.getCategory()
     productHelpers.getAllproducts().then((products) => {
-      res.render('user/indextwo', { loginaano: req.session.loggedIn, products, cartCount, noheader: true ,category,wishlistCount})
+      res.render('user/indextwo', { loginaano: req.session.loggedIn, products, cartCount ,category,wishlistCount})
     })
   }
   else{
   let category=await categoryHelpers.getCategory()
   productHelpers.getAllproducts().then((products) => {
-    res.render('user/indextwo', { loginaano: req.session.loggedIn, products,noheader: true ,category})
+    res.render('user/indextwo', { loginaano: req.session.loggedIn, products ,category})
   })
 }
 }catch(e){
