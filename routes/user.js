@@ -81,7 +81,7 @@ const client = require('twilio')(accountSSid, authId)
 
 
 let mob;
-// let user;
+let user;
 
 
 const verifyLogin = async (req, res, next) => { 
@@ -105,7 +105,7 @@ const sessionHandle = (req, res, next) => {
 router.use('/', async function (req, res, next) {
   if (req.session.user){
   
-    res.locals.user = req.session.user
+    res.locals.userName = req.session.user.name
     cartCount = await userHelpers.getCartCount(req.session.user._id)
     wishlistCount = await userHelpers.wishlistCount(req.session.user._id)
     res.locals.wishlistCount = wishlistCount
@@ -117,7 +117,7 @@ router.use('/', async function (req, res, next) {
   next();
 });
 
-
+// ------------------------------------------------set-----------------------------------------------------------//
 
 // ---------------------------------------------------------------------NAVBAR SEARCH-------------------------------------------------------//
 
