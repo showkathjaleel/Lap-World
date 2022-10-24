@@ -918,8 +918,12 @@ router.get('/account', verifyLogin, (req, res) => {
 })
 
 // --------------------------------------------------------CHANGE PASSWORD--------------------------------------------------------------------
-router.get('/changepassword',verifyLogin, (req, res) => {
-  res.render('user/changepassword', { loginaano: req.session.loggedIn })
+router.get('/changepassword',verifyLogin, (req, res) => { 
+  try{
+  res.render('user/changePassword', { loginaano: req.session.loggedIn })
+  }catch(e){
+    console.log(e);
+  }
 })
 
 router.post('/changepassword', (req, res) => {
