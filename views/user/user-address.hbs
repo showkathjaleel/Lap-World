@@ -67,10 +67,11 @@
                                 <h6>{{this._id.houseAddress.city}}</h6>
                                 <h6>{{this._id.houseAddress.pincode}}</h6>
                                 <h6>{{this._id.houseAddress.state}}</h6> --}}
-                                <span><button class="btn btn-danger"
-                                    onclick="deleteAddress('{{this._id.name}}','{{this._id.houseAddress.streetaddress}}')">delete</button>
+                                {{!-- <span><button class="btn btn-danger"
+                                    onclick="deleteAddress('{{this._id.name}}','{{this._id.houseAddress.streetaddress}}')">delete</button> --}}
                                     {{!-- <a class="btn btn-primary"
                                     href="/editAddress/?name=('{{this._id.name}}&address={{this._id.houseAddress.streetaddress}}')">Edit</a></span> --}}
+                                     <a href="/delete-address/{{this._id}}" class="btn btn-danger">Delete</a>
                                     <a href="/editAddress/{{this._id}}" class="btn btn-primary">Edit</a>
                             </div>
 

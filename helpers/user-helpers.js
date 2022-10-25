@@ -1456,31 +1456,47 @@ module.exports = {
 
     },
 
-    deleteSelectedAddress: (customerName, customeraddress, userid) => {
+    deleteSelectedAddress: (addressid) => {
+        console.log('addressid');
+        console.log(addressid);
+        console.log('addressid');
+
+
        
-        // customerName = customerdetails.customerName
-        // customeraddress = customerdetails.customeraddress
-
-
         return new Promise((resolve, reject) => {
-            db.get().collection(collection.ADDRESS_COLLECTION).deleteMany(
-                {
+            db.get().collection(collection.ADDRESS_COLLECTION).deleteOne({_id:(objectId(addressid))}
 
-                    $and: [
-                        { userId: objectId(userid) },
-                        { 'address.name': customerName },
-                        { 'address.houseAddress.streetaddress': customeraddress }
-                    ]
+            ).then(() => {
 
-                }
-
-            ).then((response) => {
-
-                resolve(response)
+                resolve()
 
             })
         })
     },
+
+
+    //     return new Promise((resolve, reject) => {
+    //         db.get().collection(collection.ADDRESS_COLLECTION).deleteMany(
+    //             {
+
+    //                 $and: [
+    //                     { userId: objectId(userid) },
+    //                     { 'address.name': customerName },
+    //                     { 'address.houseAddress.streetaddress': customeraddress }
+    //                 ]
+
+    //             }
+
+    //         ).then((response) => {
+
+    //             resolve(response)
+
+    //         })
+    //     })
+    // },
+
+
+
     getUserDetails: (userId) => {
         return new Promise((resolve, reject) => {
             db.get().collection('user').findOne({ _id: objectId(userId) }).then((user) => {

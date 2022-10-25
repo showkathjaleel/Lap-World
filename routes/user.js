@@ -652,14 +652,15 @@ router.post('/selected-address', (req, res) => {
 })
 
 
-router.post('/delete-address', (req, res) => {
+router.get('/delete-address/:id', (req, res) => {
   try{
-  let user=req.session.user
+  // let user=req.session.user
+  let {id}=req.params
 
-  let customerName = req.body.customerName;
-  let customeraddress = req.body.customeraddress;
-  userHelpers.deleteSelectedAddress(customerName, customeraddress, user._id).then((deletedAddress) => {
-    res.json(deletedAddress)
+  // let customerName = req.body.customerName;
+  // let customeraddress = req.body.customeraddress;
+  userHelpers.deleteSelectedAddress(id).then(() => {
+   res.redirect('/show-address')
   })
 }catch(e){
   console.log(e);
