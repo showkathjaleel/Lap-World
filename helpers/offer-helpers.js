@@ -7,9 +7,6 @@ module.exports={
     categoryOffer:({offerpercent,categoryid})=>{
         offerpercent=parseInt(offerpercent)
        
-
-       
-
         return new Promise(async(resolve,reject)=>{
             let response = await db.get().collection(collection.CATEGORY_COLLECTION).updateOne({_id:objectId(categoryid)},{
                 $set:{
@@ -17,35 +14,33 @@ module.exports={
                     offerStatus:true,
                 }
              })
-             console.log(response);
+            
         
-               
-       console.log('((((((((((');
-       console.log(categoryid);
-       console.log('((((((((((');
 
          let fullproductincat=await db.get().collection(collection.PRODUCT_COLLECTION).find({brandname:objectId(categoryid)}).toArray()
-         console.log('fullproductincat');
+         console.log('oneproduct');
          console.log(fullproductincat);
-         console.log('fullproductincat');
-
+         console.log('oneproduct');
           resolve(fullproductincat)
             })
     },
 
     offerApplying:(catfullproducts)=>{
-        console.log('---------------');
+      catfullproducts.Price=parseInt(catfullproducts.Price)
+        console.log('@@@@@@@@@@@@@@');
         console.log(catfullproducts);
-        console.log('---------------');
+        console.log('@@@@@@@@@@@@@@');
         return new Promise(async(resolve,reject)=>{
           let category=await db.get().collection(collection.CATEGORY_COLLECTION).findOne({_id:objectId(catfullproducts.brandname)})
           console.log('&&&&&&&&&&&&');
           console.log(category);
+          console.log('&&&&&&&&&&&&');
           if(category.offerStatus){
 
          let offerPercentage=category.offerpercentage
          console.log('-------------------');
          console.log(offerPercentage);
+         console.log(typeof(catfullproducts.Price));
          console.log(catfullproducts.Price);
          console.log('-------------------');
          

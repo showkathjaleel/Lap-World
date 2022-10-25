@@ -572,7 +572,7 @@ router.get('/generate-offer',(req,res)=>{
 router.post('/add-categoryOffer',async(req,res)=>{
   try{
  let catfullproduct=await offerHelpers.categoryOffer(req.body)
-  console.log(catfullproduct);
+  
   catfullproduct.forEach(element=>{
     console.log(',,,,,,,,,,,,,,,');
     console.log(element);
