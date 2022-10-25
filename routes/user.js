@@ -137,9 +137,13 @@ router.post('/searchProducts',(req,res)=>{
 /* ---------------------------------------------------GET home page----------------------------------------------------------------------. */
 router.get('/', async function (req, res, next) {
   try{
+    let user = req.session.user
+    console.log('req.session.user');
+    console.log(req.session.user);
+    console.log('req.session.user');
 
   if (req.session.loggedIn) {
-    let user = req.session.user
+   
     cartCount = await userHelpers.getCartCount(user._id)
     let category=await categoryHelpers.getCategory()
     productHelpers.getAllproducts().then((products) => {

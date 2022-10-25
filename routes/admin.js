@@ -541,8 +541,7 @@ router.get('/chartdownload',async(req,res)=>{
   try{
   let response=await productHelpers.getTotalSalesReport()
   let {weeklySale,monthlySales,yearlySales}=response
-  console.log('[[[[[[[[[[[[[[[[[[[');
-  console.log(monthlySales);
+ 
   res.render('admin/admin-chart-download',{admin:true,weeklySale,monthlySales,yearlySales})
   }catch(e){
     console.log(e);
