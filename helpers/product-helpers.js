@@ -19,15 +19,15 @@ module.exports={
         
         console.log(product);
         console.log(product.Offers);
-        if(product.Offers){
-           product.productOfferdeductdPrice=Math.ceil((product.Price*product.Offers)/100)
-           product.productOfferPrice=product.Price-product.productOfferdeductdPrice
-           console.log(';;;;;;;;;;;;;');
-           console.log(product.productOfferPrice);
-           console.log(';;;;;;;;;;;;;');
+        // if(product.Offers){
+        //    product.productOfferdeductdPrice=Math.ceil((product.Price*product.Offers)/100)
+        //    product.productOfferPrice=product.Price-product.productOfferdeductdPrice
+        //    console.log(';;;;;;;;;;;;;');
+        //    console.log(product.productOfferPrice);
+        //    console.log(';;;;;;;;;;;;;');
 
 
-        }
+        // }
         
     
         return new Promise(async(resolve,reject)=>{    
@@ -78,15 +78,15 @@ getProductDetails:(id)=>{
    let stock=ProDetails.stock
    ProDetails.stock=parseInt(stock)
 
-   if(ProDetails.Offers){
-    ProDetails.productOfferdeductdPrice=(ProDetails.Price*ProDetails.Offers)/100
-    ProDetails.productOfferPrice=ProDetails.Price-ProDetails.productOfferdeductdPrice
-    console.log(';;;;;;;;;;;;;');
-    console.log(ProDetails.productOfferPrice);
-    console.log(';;;;;;;;;;;;;');
+//    if(ProDetails.Offers){
+//     ProDetails.productOfferdeductdPrice=(ProDetails.Price*ProDetails.Offers)/100
+//     ProDetails.productOfferPrice=ProDetails.Price-ProDetails.productOfferdeductdPrice
+//     console.log(';;;;;;;;;;;;;');
+//     console.log(ProDetails.productOfferPrice);
+//     console.log(';;;;;;;;;;;;;');
 
 
- }
+//  }
  
     return new Promise((resolve,reject)=>{
         db.get().collection('product').updateOne({_id:objectId(id)},{$set:{
@@ -97,7 +97,7 @@ getProductDetails:(id)=>{
            Specs:ProDetails.Specs,
            brandname:ProDetails.category, 
            stock:ProDetails.stock,
-           productOffer:ProDetails.productOfferPrice,
+        //    productOffer:ProDetails.productOfferPrice,
            img:ProDetails.img
 
           
