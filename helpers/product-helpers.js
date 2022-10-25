@@ -120,8 +120,7 @@ getOrderCount:()=>{
 
 getPaginatedOrderResult:(limit,startIndex)=>{
     
-        console.log(limit);
-        console.log(startIndex);
+       
         return new Promise(async (resolve, reject) => {
          let order = await db.get().collection(collection.ORDER_COLLECTION).find().limit(limit).skip(startIndex).toArray()               
             resolve(order)

@@ -111,7 +111,9 @@
                                 <th>Customer Name</th>
                                 <th>Address</th>&nbsp;&nbsp;
                                 <th>Payment Method</th>
+                                 <th>discountedPrice</th> 
                                 <th>Total Amount</th>
+
                                 <th> Status</th>
                                             </tr>
                                         </thead>
@@ -123,6 +125,7 @@
                                                 <td class="price-col">{{this.deliverydetails.name}}</td>
                                                 <td class="price-col">{{this.deliverydetails.houseAddress.streetaddress}}</td>
                                                 <td class="price-col">{{this.paymentMethod}}</td>
+                                                <td class="price-col">{{discountedPrice}}</td>
                                                 <td class="price-col">{{this.totalAmount}}</td>
                                                 <td>
                                                     <a href="/admin/product-details/{{this._id}}"

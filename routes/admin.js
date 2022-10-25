@@ -396,6 +396,9 @@ router.get('/orders',verifyAdmin, async (req, res) => {
     }
   } 
   order = await productHelpers.getPaginatedOrderResult(limit,startIndex) 
+  console.log('order');
+  console.log(order);
+  console.log('order');
   results.pageCount =Math.ceil(parseInt(productsCount)/parseInt(limit)).toString() 
   results.pages =Array.from({length: results.pageCount}, (_, i) => i + 1)    
   results.currentPage =page.toString()
