@@ -139,6 +139,7 @@ router.get('/', async function (req, res, next) {
   try{
 
   if (req.session.loggedIn) {
+    let user = req.session.user
     cartCount = await userHelpers.getCartCount(user._id)
     let category=await categoryHelpers.getCategory()
     productHelpers.getAllproducts().then((products) => {
@@ -153,7 +154,7 @@ router.get('/', async function (req, res, next) {
 }
 }catch(e){
   console.log(e);
-  res.status(404).send(error)
+  res.status(404).send(e)
 }
 })
 /*--------- GET home page. */
@@ -173,7 +174,7 @@ router.post('/login', (req, res) => {
 
     if (response.status) {
       req.session.user = response.user             // user ivide assign cheyyunnu 
-      user = req.session.user
+      // user = req.session.user
       req.session.loggedIn = true
       res.redirect('/')
     } else {
@@ -368,6 +369,7 @@ router.get('/product/:id', verifyLogin, (req, res) => {
   let currentPage =res.paginatedResults.currentPage
 
   let category=await categoryHelpers.getCategory()
+     
   let wishlistCount = await userHelpers.wishlistCount(req.session.user._id)
     res.render('user/products', { products,next,previous,pages,pageCount,currentPage,cartCount, loginaano: req.session.loggedIn,category,wishlistCount })
   }else{
@@ -425,6 +427,7 @@ router.get('/logout', (req, res) => {
 // --------------------------------------------------------SHOWING CART PAGE----------------------------------------------------------------------
 router.get('/cart', verifyLogin, async (req, res) => {
   try{
+    let user=req.session.user
   let products = await userHelpers.getCartProductsinCart(user._id)       //GETTING PRODUCTS
   products.forEach(element => {
     if (element.product.stock == 0) {
@@ -433,7 +436,6 @@ router.get('/cart', verifyLogin, async (req, res) => {
       element.stockFinishedStatus = false
     }
   })
-
   userHelpers.getGrandtotal(user._id).then(async(grandtotal) => {       //GETTING GRAND TOTAL
     if (grandtotal[0]) {
       grandTotal = grandtotal[0].grandtotal
@@ -454,6 +456,7 @@ router.get('/cart', verifyLogin, async (req, res) => {
 
 router.post('/couponincart', (req, res) => {
   try{
+    let user=req.session.user
   
   userHelpers.getGrandtotal(user._id).then((grandtotal) => {       //GETTING GRAND TOTAL
     if (grandtotal[0]) {
@@ -474,6 +477,8 @@ router.post('/couponincart', (req, res) => {
 
 router.get('/deletecoupon',(req,res)=>{
   try{
+  let user=req.session.user
+
   userHelpers.deleteCoupon(user._id).then(()=>{
     res.redirect('/cart')
   })
@@ -495,6 +500,8 @@ router.post('/remove-cart', (req, res) => {
 // ------------------------------------------------------ADD TO CART---------------------------------------------------------------------//
 router.get('/add-to-cart/:id', verifyLogin, (req, res) => {
   try{
+  let user=req.session.user
+
   userHelpers.addtocart(req.params.id, user._id).then(() => {
     res.redirect('/cart')
   })
@@ -517,6 +524,8 @@ router.get('/add-to-cart/:id', verifyLogin, (req, res) => {
 // ----------------------------------------------------CHECKOUT------------------------------------------------------------------------
 router.get("/place-order", verifyLogin, async (req, res) => {
   try{
+  let user=req.session.user
+
 
   if(cartCount>0){
     let total = await userHelpers.getTotalAmount(user._id)
@@ -539,7 +548,8 @@ router.get("/place-order", verifyLogin, async (req, res) => {
 
 router.post('/place-order',async (req, res) => {
   try{
- 
+  let user=req.session.user
+
   if (cartCount){
   let cartItems = await userHelpers.cartDetails(user._id)
   let discounts=await userHelpers.ViewCartDiscount(user._id,grandTotal)
@@ -627,6 +637,8 @@ router.get('/cancel', (req, res) => res.send('Cancelled'));
 
 router.post('/selected-address', (req, res) => {
   try{
+  let user=req.session.user
+
   userHelpers.gettingSelectedAddress(req.body, user._id).then((selectedAddress) => {
     res.json(selectedAddress)
   })
@@ -638,6 +650,8 @@ router.post('/selected-address', (req, res) => {
 
 router.post('/delete-address', (req, res) => {
   try{
+  let user=req.session.user
+
   let customerName = req.body.customerName;
   let customeraddress = req.body.customeraddress;
   userHelpers.deleteSelectedAddress(customerName, customeraddress, user._id).then((deletedAddress) => {
@@ -666,11 +680,14 @@ router.get('/success', (req, res) => {
   };
 
   paypal.payment.execute(paymentId, execute_payment_json, function (error, payment) {
+    
     if (error) {
       console.log(error.response);
       throw error;
     } else {
       console.log(JSON.stringify(payment));
+  let user=req.session.user
+
       userHelpers.DeleteOrder(user._id).then(() => {
         res.redirect('/order-success');
       })
@@ -687,6 +704,7 @@ router.post('/verify-payment', (req, res) => {
 try{
   let { payment } = req.body
   let { order } = req.body
+  let user=req.session.user
   
   userHelpers.verifyPayment(payment, order).then(() => { 
     userHelpers.changePaymentStatus(order.receipt).then(async () => {
@@ -756,6 +774,9 @@ router.get('/order-success', (req, res) => {
 // -------------------------------------------------------------ORDER PAGE-------------------------------------------------------------------//
 
 router.get('/order-history',verifyLogin,async(req,res)=>{
+
+  let user=req.session.user
+
  let orderHistory=await userHelpers.getUserOrders(user._id)
   res.render('user/order-history',{orderHistory,loginaano: req.session.loggedIn})
 })
@@ -763,6 +784,8 @@ router.get('/order-history',verifyLogin,async(req,res)=>{
 
 router.get('/orderDetails/:id',verifyLogin,async(req,res)=>{
   let {id}=req.params
+  let user=req.session.user
+
   let orders=await userHelpers.getUserOrderDetail(user._id,id)
   orders.forEach(element => {
     if (element.status == "cancelled") {
@@ -823,6 +846,8 @@ router.get('/orderDetails/:id',verifyLogin,async(req,res)=>{
 router.get('/wishlist/:id', verifyLogin, (req, res) => {
   try{
   let { id } = req.params
+  let user=req.session.user
+
   userHelpers.addTowishlist(id, user._id).then(() => {
     res.redirect('/wishlist-page')
   })
@@ -833,6 +858,8 @@ router.get('/wishlist/:id', verifyLogin, (req, res) => {
 
 router.get('/wishlist-page', verifyLogin, async (req, res) => {
   try{
+  let user=req.session.user
+
   let wishList = await userHelpers.getwishListProducts(user._id)
   res.render('user/wishlist', { wishList, loginaano: req.session.loggedIn })
   }catch(e){
@@ -861,6 +888,7 @@ router.delete('/remove-wishlist', (req, res) => {
 // ----------------------------------------- product quantity change---------------------------------------------------------
 router.post('/change-product-quantity',(req,res) => {
   try{
+    let user=req.session.user
  
   let object = {}
   userHelpers.changeProductQuantity(req.body).then((response) => {
@@ -928,6 +956,8 @@ router.get('/changepassword',verifyLogin, (req, res) => {
 })
 
 router.post('/changepassword', (req, res) => {
+  let user=req.session.user
+
   userHelpers.changePassword(req.body, user._id)
   res.redirect('/acccount')
 })
@@ -935,6 +965,8 @@ router.post('/changepassword', (req, res) => {
 // -------------------------------------------------------------ADDRESS---------------------------------------------------------------------//
 
 router.get('/show-address',verifyLogin, (req, res) => {
+  let user=req.session.user
+
   userHelpers.getAddresscoll(user._id).then((allAddress)=>{
     res.render('user/user-address', { allAddress })
   })
@@ -955,12 +987,16 @@ router.post("/edit-address/:id", (req, res) => {
 })
 // -----------------------------------------------------USER PROFILE-----------------------------------------------------------------------//
 router.get('/profile', (req, res) => {
+  let user=req.session.user
+
   userHelpers.getUserDetails(user._id).then((userdetails) => {
     res.render('user/user-details',{userdetails})
   })
 })
 
 router.post('/profile', (req, res) => {
+  let user=req.session.user
+
   userHelpers.updateUserDetails(user._id, req.body).then(() => {
     res.redirect('/profile')
   })
