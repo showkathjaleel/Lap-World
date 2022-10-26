@@ -653,7 +653,7 @@ router.post('/selected-address', (req, res) => {
 
 
 router.get('/delete-address/:id',(req, res) => {
-  try{
+  // try{
   // let user=req.session.user
   let {id}=req.params
 
@@ -662,9 +662,9 @@ router.get('/delete-address/:id',(req, res) => {
   userHelpers.deleteSelectedAddress(id).then(() => {
    res.redirect('/show-address')
   })
-}catch(e){
-  console.log(e);
-}
+// }catch(e){
+//   console.log(e);
+// }
 })
 
 
