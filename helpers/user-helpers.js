@@ -1456,15 +1456,13 @@ module.exports = {
 
     },
 
-    deleteSelectedAddress: (addressid) => {
+    deleteSelectedAddress:(id) => {
         console.log('addressid');
-        console.log(addressid);
+        console.log(id);
         console.log('addressid');
-
-
        
         return new Promise((resolve, reject) => {
-            db.get().collection(collection.ADDRESS_COLLECTION).deleteOne({_id:(objectId(addressid))}).then(() => {
+            db.get().collection(collection.ADDRESS_COLLECTION).deleteOne({_id:(objectId(id))}).then(() => {
                 resolve()
 
             })

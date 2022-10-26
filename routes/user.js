@@ -652,20 +652,7 @@ router.post('/selected-address', (req, res) => {
 })
 
 
-router.get('/delete-address/:id',(req, res) => {
-  // try{
-  // let user=req.session.user
-  let {id}=req.params
 
-  // let customerName = req.body.customerName;
-  // let customeraddress = req.body.customeraddress;
-  userHelpers.deleteSelectedAddress(id).then(() => {
-   res.redirect('/show-address')
-  })
-// }catch(e){
-//   console.log(e);
-// }
-})
 
 
 
@@ -973,7 +960,7 @@ router.get('/show-address',verifyLogin, (req, res) => {
   let user=req.session.user
 
   userHelpers.getAddresscoll(user._id).then((allAddress)=>{
-    res.render('user/user-address', { allAddress })
+    res.render('user/user-address', { allAddress,loginaano: req.session.loggedIn})
   })
 })
 
@@ -986,9 +973,23 @@ router.get('/editAddress/:id', (req, res) => {
 
 router.post("/edit-address/:id", (req, res) => {
   let {id}=req.params
+  
   userHelpers.editedAddress(id,req.body).then(() => {
     res.redirect('/show-address')   
   })
+})
+
+
+
+router.get('/deleteAddress/:id',(req, res) => {
+  let {id}=req.params
+
+  userHelpers.deleteSelectedAddress(id).then(() => {
+   res.redirect('/show-address')
+  })
+// }catch(e){
+//   console.log(e);
+// }
 })
 // -----------------------------------------------------USER PROFILE-----------------------------------------------------------------------//
 router.get('/profile', (req, res) => {
