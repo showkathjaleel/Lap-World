@@ -1465,7 +1465,6 @@ module.exports = {
        
         return new Promise((resolve, reject) => {
             db.get().collection(collection.ADDRESS_COLLECTION).deleteOne({_id:(objectId(addressid))}).then(() => {
-
                 resolve()
 
             })

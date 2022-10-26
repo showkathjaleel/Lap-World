@@ -131,8 +131,8 @@
                                                                 <option value="Delivered">Delivered</option>
                                                                 <option value="Cancelled">Cancelled</option>
                                                             </select>
-                                                            <input type="number" name="orderId" value="{{this._id}}"
-                                                                hidden>
+                                                            <input type="hidden" name="orderId" value="{{this._id}}"
+                                                                >
                                                             <button class="btn-btn-outline-secondary" type="button"
                                                                 onclick="updateStatus('{{this._id}}','{{this.product._id}}')">Submit</button>
                                                         </div>

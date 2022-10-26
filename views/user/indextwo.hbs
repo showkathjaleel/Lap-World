@@ -592,7 +592,32 @@
                             <h3 class="product-title"><a href="product.html">{{this.laptops}}</a></h3>
                             <!-- End .product-title -->
                             <div class="product-price">
-                                {{this.Price}}
+                                                                                   {{#if this.originalPrice}}
+                                                <div class="product-price text-danger">
+                                                    
+                                                      ₹<s>{{this.originalPrice}}</s><br>
+                                                       </div>
+                                                       <div class="product-price">
+                                                       Price:₹{{this.Price }}
+                                                      </div>
+                                                         {{!-- {{else}}
+                                                          {{#if this.productOfferPrice}}
+                                                           <div class="product-price text-success">
+                                                            {{this.Offers}}%off
+                                                           </div>
+                                                           <div class="product-price">
+                                                             Price:₹{{this.productOfferPrice}}                                                                                                                                                                                               --}}
+                                                           {{!-- </div><!-- End .product-price --> --}}
+                                                          {{else}}
+                                                            <div class="product-price">
+                                                             Price:₹{{this.Price}}                                                                                                                                                                                              
+                                                           </div><!-- End .product-price -->
+                                                           {{/if}}
+                               
+                               
+                               
+                               
+                                {{!-- {{this.Price}} --}}
                             </div><!-- End .product-price -->
                             <div class="ratings-container">
                                 <div class="ratings">
