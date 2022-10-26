@@ -146,7 +146,7 @@ module.exports = {
     // -----------------------------------------------------------------CHECKING MOBILE NUMBER EXISTS---------------------------------------------------
 
     mobileOtp: (userData) => {
-        
+
         let response = {}
         return new Promise(async (resolve, reject) => {
             let mob = userData.number
@@ -321,7 +321,7 @@ module.exports = {
 
 
 
-// ---------------------------------------------------------------------CART PAGE-------------------------------------------------------------//
+    // ---------------------------------------------------------------------CART PAGE-------------------------------------------------------------//
 
 
     getCartProductsinCart: (userId) => {
@@ -376,67 +376,69 @@ module.exports = {
 
 
 
-            ViewCartDiscount:(userId,total)=>{
-                let tot = parseInt(total)
-                
-                 return new Promise ((resolve,reject)=>{
-                   db.get().collection(collection.CART_COLLECTION).aggregate(
-                        [
-                            {$match:{user:objectId(userId)}},
-        
-                        
-                              {$lookup:
-                                {
-                                    from:collection.USER_COLLECTION,
-                                    localField:"user",
-                                    foreignField:"_id",
-                                    as:"usrdetails"
-                                 }
-                         },
-                         {
-                            $project:{userdetails: { $arrayElemAt: [ "$usrdetails", 0 ] }}
-                         },
-                         {$lookup:
-                            {
-                                from: collection.COUPON_COLLECTION,
-                                localField:"userdetails.couponid",
-                                foreignField:"_id",
-                                as:"Coupondetails"
-                             }
-                     },
-                     {
-                        $project:{Coupondetail:{$arrayElemAt: [ "$Coupondetails", 0]},userdetails:1}
-                     },
-                     {
-                        $project:{
-                           discountedPrice: {$round:[{ $multiply: [ {$divide: [  "$Coupondetail.couponvalue", 100 ]},tot] },0]},
-                           userdetails:1,
-                           Coupondetails:1
+    ViewCartDiscount: (userId, total) => {
+        let tot = parseInt(total)
+
+        return new Promise((resolve, reject) => {
+            db.get().collection(collection.CART_COLLECTION).aggregate(
+                [
+                    { $match: { user: objectId(userId) } },
+
+
+                    {
+                        $lookup:
+                        {
+                            from: collection.USER_COLLECTION,
+                            localField: "user",
+                            foreignField: "_id",
+                            as: "usrdetails"
                         }
-                      },
-                      {
-                        $project:{
-                           TotalAfterDiscount: { $subtract: [tot,'$discountedPrice' ] },
-                           discountedPrice:1,
-                           Coupondetails:1
+                    },
+                    {
+                        $project: { userdetails: { $arrayElemAt: ["$usrdetails", 0] } }
+                    },
+                    {
+                        $lookup:
+                        {
+                            from: collection.COUPON_COLLECTION,
+                            localField: "userdetails.couponid",
+                            foreignField: "_id",
+                            as: "Coupondetails"
                         }
-                      },
-                      ]).toArray().then((find)=>{
-                       
-                       
-                        resolve(find) 
-                    })
-                    
-                 })       
-            },
+                    },
+                    {
+                        $project: { Coupondetail: { $arrayElemAt: ["$Coupondetails", 0] }, userdetails: 1 }
+                    },
+                    {
+                        $project: {
+                            discountedPrice: { $round: [{ $multiply: [{ $divide: ["$Coupondetail.couponvalue", 100] }, tot] }, 0] },
+                            userdetails: 1,
+                            Coupondetails: 1
+                        }
+                    },
+                    {
+                        $project: {
+                            TotalAfterDiscount: { $subtract: [tot, '$discountedPrice'] },
+                            discountedPrice: 1,
+                            Coupondetails: 1
+                        }
+                    },
+                ]).toArray().then((find) => {
+
+
+                    resolve(find)
+                })
+
+        })
+    },
 
 
 
-// -------------------------------------------------------COUPON USING--------------------------------------------------------------
+    // -------------------------------------------------------COUPON USING--------------------------------------------------------------
 
 
     couponUsing: (userId) => {
-       
+
 
         return new Promise(async (resolve, reject) => {
 
@@ -473,27 +475,27 @@ module.exports = {
 
 
             ]).toArray()
-            
+
             resolve(offerPrice)
         })
 
     },
 
-// ----------------------------------------------------------CHECKING COUPON IS VALID OR NOT------------------------------------------------
+    // ----------------------------------------------------------CHECKING COUPON IS VALID OR NOT------------------------------------------------
     couponCheck: ({ couponcode }, grandTotal, userid) => {
         let response = {}
-      
+
         return new Promise(async (resolve, reject) => {
             let discount = await db.get().collection(collection.COUPON_COLLECTION).findOne({ couponcode: couponcode })
             couponValue = discount.couponvalue
             couponValue = parseInt(couponValue)
             discount.couponvalue = couponValue
 
-            
+
             if (discount) {
                 response.findCoupon = true
                 const nowDate = new Date();
-                
+
 
                 if (nowDate > discount.todate) {
                     response.expired = true
@@ -506,9 +508,9 @@ module.exports = {
                 else {
 
                     response.expired = false
-                   
-                    let isCouponused = await db.get().collection(collection.USED_COUPON_COLLECTION).findOne({ userId:userid, couponId: discount._id })
-                   
+
+                    let isCouponused = await db.get().collection(collection.USED_COUPON_COLLECTION).findOne({ userId: userid, couponId: discount._id })
+
                     if (isCouponused) {
                         response.alreadyUsed = true
                         response.errMessage = 'Coupon Already Used'
@@ -520,7 +522,7 @@ module.exports = {
                         response.alreadyUsed = false
                         discountPrice = (grandTotal * discount.couponvalue) / 100;
                         let couponPrice = grandTotal - discountPrice                       //subtotal aan couponPrice
-                       
+
                         let usedCouponObj = {
                             userId: userid,
                             couponcode: couponcode,
@@ -533,7 +535,7 @@ module.exports = {
                             response.couponPrice = couponPrice
                             response.discountPrice = discountPrice
 
-                            db.get().collection(collection.USER_COLLECTION).updateOne({_id:objectId(userid)},{$set:{couponid:discount._id}},{upsert:true})
+                            db.get().collection(collection.USER_COLLECTION).updateOne({ _id: objectId(userid) }, { $set: { couponid: discount._id } }, { upsert: true })
                             resolve(response)
                         })
                     }
@@ -554,16 +556,16 @@ module.exports = {
 
     // ------------------------------------------DELETE COUPON IN CART---------------------------------------------------------------
 
-    deleteCoupon:(userid)=>{
-        return new Promise((resolve,reject)=>{
-            db.get().collection(collection.USER_COLLECTION).findOne({_id:objectId(userid)}).then((user)=>{
-               let couponId=user.couponid
-                db.get().collection(collection.USER_COLLECTION).updateOne({_id: objectId(userid)},{ $unset: {couponid:couponId } })
-                    db.get().collection(collection.USED_COUPON_COLLECTION).findOne({couponId:couponId}).then((deletingcoupon)=>{
-                        db.get().collection(collection.USED_COUPON_COLLECTION).deleteOne({_id:deletingcoupon._id}).then((data)=>{
+    deleteCoupon: (userid) => {
+        return new Promise((resolve, reject) => {
+            db.get().collection(collection.USER_COLLECTION).findOne({ _id: objectId(userid) }).then((user) => {
+                let couponId = user.couponid
+                db.get().collection(collection.USER_COLLECTION).updateOne({ _id: objectId(userid) }, { $unset: { couponid: couponId } })
+                db.get().collection(collection.USED_COUPON_COLLECTION).findOne({ couponId: couponId }).then((deletingcoupon) => {
+                    db.get().collection(collection.USED_COUPON_COLLECTION).deleteOne({ _id: deletingcoupon._id }).then((data) => {
 
-                        })
                     })
+                })
             })
         })
     },
@@ -598,7 +600,7 @@ module.exports = {
 
     },
 
- 
+
     // ---------------------------------------------------------------------------------------------------------------------------------
     // changeProductQuantity: (details) => {
     //     let response = {}
@@ -634,7 +636,7 @@ module.exports = {
         details.count = parseInt(details.count)
         details.qty = parseInt(details.qty)
 
-        return new Promise(async(resolve, reject) => {
+        return new Promise(async (resolve, reject) => {
 
             if (details.count == -1 && details.qty == 1) {
                 db.get().collection(collection.CART_COLLECTION).updateOne({ _id: objectId(details.cart) },
@@ -645,87 +647,86 @@ module.exports = {
                     resolve(false)
                 })
             }
-             else
-             {
-            //    let stockChecking=await
+            else {
+                //    let stockChecking=await
                 db.get().collection(collection.CART_COLLECTION).aggregate([
-                {   
-                    $match:{
-                        _id:objectId(details.cart) 
+                    {
+                        $match: {
+                            _id: objectId(details.cart)
 
 
-                  }                   
-                },
-                {
-                    $unwind:'$products'
-                },
-                {   
-                    $match:{
-                        'products.item':objectId(details.product) 
+                        }
+                    },
+                    {
+                        $unwind: '$products'
+                    },
+                    {
+                        $match: {
+                            'products.item': objectId(details.product)
 
-                  }                   
-                },
+                        }
+                    },
 
-                {
-                    $project:{
-                        item:'$products.item',
-                        quantity:'$products.quantity'
+                    {
+                        $project: {
+                            item: '$products.item',
+                            quantity: '$products.quantity'
 
+                        }
+                    },
+                    {
+                        $lookup: {
+                            from: collection.PRODUCT_COLLECTION,
+                            localField: 'item',
+                            foreignField: '_id',
+                            as: 'product'
+                        }
+                    },
+                    {
+                        $project: {
+                            item: 1,
+                            quantity: 1,
+                            product: { $arrayElemAt: ['$product', 0] }
+
+                        }
+                    },
+                    {
+                        $project: {
+                            quantity: 1,
+                            stock: '$product.stock'
+                        }
                     }
-                },
-                {
-                    $lookup:{
-                        from:collection.PRODUCT_COLLECTION,
-                        localField:'item',
-                        foreignField:'_id',
-                        as:'product'
-                    }
-                },
-                {
-                    $project:{
-                        item:1,
-                        quantity:1,
-                        product: { $arrayElemAt: ['$product', 0]}
-                        
-                    }
-                },
-                {
-                    $project:{
-                        quantity:1,
-                        stock:'$product.stock'
-                    }
-                }                 
-                ]).toArray().then((data)=>{
-                    let signOfCount=Math.sign(details.count)
-                    if(data[0].stock>data[0].quantity){
+                ]).toArray().then((data) => {
+                    let signOfCount = Math.sign(details.count)
+                    if (data[0].stock > data[0].quantity) {
 
                         db.get().collection(collection.CART_COLLECTION).updateOne({ _id: objectId(details.cart), 'products.item': objectId(details.product) },
-                        {
-                            $inc: { 'products.$.quantity': details.count }
-                        }
-                    ).then((response) => {
-                        
-                        resolve(true)
-                    })
+                            {
+                                $inc: { 'products.$.quantity': details.count }
+                            }
+                        ).then((response) => {
 
-                    }else if(signOfCount==-1&&data[0].stock==data[0].quantity){
+                            resolve(true)
+                        })
+
+                    } else if (signOfCount == -1 && data[0].stock == data[0].quantity) {
 
                         db.get().collection(collection.CART_COLLECTION).updateOne({ _id: objectId(details.cart), 'products.item': objectId(details.product) },
-                        {
-                            $inc: { 'products.$.quantity': details.count }
-                        }
-                    ).then((response) => {
-                       
-                        resolve(true)
-                    })
+                            {
+                                $inc: { 'products.$.quantity': details.count }
+                            }
+                        ).then((response) => {
 
-                    }else{
+                            resolve(true)
+                        })
+
+                    } else {
                         resolve(false)
 
                     }
                 })
-           }
-           
+            }
+
         })
     },
 
@@ -789,7 +790,7 @@ module.exports = {
     //                     item:1,
     //                     quantity:1,
     //                     product: { $arrayElemAt: ['$product', 0]}
-                        
+
     //                 }
     //             },
     //             {
@@ -808,7 +809,7 @@ module.exports = {
     //                         $inc: { 'products.$.quantity': details.count }
     //                     }
     //                 ).then((response) => {
-                        
+
     //                     resolve(true)
     //                 })
 
@@ -819,7 +820,7 @@ module.exports = {
     //                         $inc: { 'products.$.quantity': details.count }
     //                     }
     //                 ).then((response) => {
-                       
+
     //                     resolve(true)
     //                 })
 
@@ -829,7 +830,7 @@ module.exports = {
     //                 }
     //             })
     //        }
-           
+
     //     })
     // },
 
@@ -963,29 +964,29 @@ module.exports = {
     // -----------------------------------order page il orders okke kittan vendi---------------------
     getUserOrders: (userId) => {
         return new Promise(async (resolve, reject) => {
-            let order = await db.get().collection(collection.ORDER_COLLECTION).find({ user: objectId(userId) }).sort({_id:-1}).toArray()
+            let order = await db.get().collection(collection.ORDER_COLLECTION).find({ user: objectId(userId) }).sort({ _id: -1 }).toArray()
             resolve(order)
         })
     },
 
-    getUserOrderDetail:(userid,orderId)=>{
-        return new Promise(async(resolve,reject)=>{
-       let orderdetail=await db.get().collection(collection.ORDER_COLLECTION).aggregate([
+    getUserOrderDetail: (userid, orderId) => {
+        return new Promise(async (resolve, reject) => {
+            let orderdetail = await db.get().collection(collection.ORDER_COLLECTION).aggregate([
                 {
-                    $match:{_id:objectId(orderId) }
+                    $match: { _id: objectId(orderId) }
                 },
-                {                  
-                        $unwind: '$products'                  
+                {
+                    $unwind: '$products'
                 },
                 {
                     $project: {
                         item: '$products.item',
                         quantity: '$products.quantity',
                         status: '$products.status',
-                        discountedPrice:1,
-                        totalAmount:1
+                        discountedPrice: 1,
+                        totalAmount: 1
 
-                        }
+                    }
                 },
                 {
                     $lookup: {
@@ -997,7 +998,7 @@ module.exports = {
                 },
                 {
                     $project: {
-                        discountedPrice:1, totalAmount:1, status: 1, item: 1, quantity: 1, product: { $arrayElemAt: ['$product', 0] }
+                        discountedPrice: 1, totalAmount: 1, status: 1, item: 1, quantity: 1, product: { $arrayElemAt: ['$product', 0] }
                     }
                 },
             ]).toArray()
@@ -1026,7 +1027,7 @@ module.exports = {
                         item: '$products.item',
                         quantity: '$products.quantity',
                         status: '$products.status',
-                        }
+                    }
                 },
                 {
                     $lookup: {
@@ -1040,7 +1041,7 @@ module.exports = {
                     $project: {
                         status: 1, item: 1, quantity: 1, product: { $arrayElemAt: ['$product', 0] }
                     }
-                }, 
+                },
                 {
                     $addFields: {
                         convertPrice: { $toInt: "$product.Price" }
@@ -1054,8 +1055,8 @@ module.exports = {
                 }
             ]).toArray().then((response) => {
                 console.log('------------------------');
-               console.log(response);
-               console.log('------------------------');
+                console.log(response);
+                console.log('------------------------');
                 resolve(response)
             })
         })
@@ -1109,14 +1110,7 @@ module.exports = {
 
     // -----------------------------------------------------ORDER COLLECTION CREATION--------------------------------------------------------------//
 
-    placeOrder: (order, userId, cartItems, total,discount) => {
-        console.log('cartItems')
-        console.log(order)
-        console.log('cartItems')
-      
-
-
-
+    placeOrder: (order, userId, cartItems, total, discount) => {
 
         let orderObj;
         let addressObj;
@@ -1128,158 +1122,151 @@ module.exports = {
         newdate = year + "/" + month + "/" + day;
         orderMonth = month + "/" + year
 
-
         return new Promise(async (resolve, reject) => {
             let status = order.paymentMethod === 'COD' ? 'placed' : 'pending'
 
-            if (discount.discountedPrice){
-                console.log('$$$$$$$$$$$$$$$$$$$');
-                console.log(discount.discountedPrice);
-                console.log('$$$$$$$$$$$$$$$$$$$');
+            if (discount.discountedPrice) {
 
-             orderObj = {
-                deliverydetails: {
-                    // --------------------------ippol add cheyyunnath--------------------------------------------
+                orderObj = {
+                    deliverydetails: {
+                       
 
-                    name: order.firstname,
-                    lastname: order.lastname,
-                    email: order.email,
-                    mobile: order.phone,
+                        name: order.firstname,
+                        lastname: order.lastname,
+                        email: order.email,
+                        mobile: order.phone,
 
 
-                    houseAddress: {
-                        streetaddress: order.streetaddress,
-                        landmark: order.landmark,
-                        city: order.city,
-                        pincode: order.postcode,
-                        state: order.state,
-                        country: order.country,
-                    }
-                },
+                        houseAddress: {
+                            streetaddress: order.streetaddress,
+                            landmark: order.landmark,
+                            city: order.city,
+                            pincode: order.postcode,
+                            state: order.state,
+                            country: order.country,
+                        }
+                    },
 
-                cartEach: cartItems.products.forEach(cartProd => {            //this status is for knowing product shipped  or not
-                    cartProd.status = order.status
-                }),
+                    cartEach: cartItems.products.forEach(cartProd => {            //this status is for knowing product shipped  or not
+                        cartProd.status = order.status
+                    }),
 
-                user: objectId(userId),
-                paymentMethod: order.paymentMethod,
-                products: cartItems.products,
-                discountedPrice:discount.discountedPrice,
-                totalAmount:discount.TotalAfterDiscount,
-                status: status,            //this status is for knowing money payed or not
-                date: newdate,
-                orderMonth: orderMonth,
-                orderYear: year
+                    user: objectId(userId),
+                    paymentMethod: order.paymentMethod,
+                    products: cartItems.products,
+                    discountedPrice: discount.discountedPrice,
+                    totalAmount: discount.TotalAfterDiscount,
+                    status: status,            //this status is for knowing money payed or not
+                    date: newdate,
+                    orderMonth: orderMonth,
+                    orderYear: year
 
-            }
-
-           addressObj = {}
-            addressObj.address = orderObj.deliverydetails
-            addressObj.userId = objectId(userId)
-
-            // let obj={}
-        }else{
-            orderObj = {
-                deliverydetails: {
-                    // --------------------------ippol add cheyyunnath--------------------------------------------
-
-                    name: order.firstname,
-                    lastname: order.lastname,
-                    email: order.email,
-                    mobile: order.phone,
-
-
-                    houseAddress: {
-                        streetaddress: order.streetaddress,
-                        landmark: order.landmark,
-                        city: order.city,
-                        pincode: order.postcode,
-                        state: order.state,
-                        country: order.country,
-                    }
-                },
-
-                cartEach: cartItems.products.forEach(cartProd => {            //this status is for knowing product shipped  or not
-                    cartProd.status = order.status
-                }),
-
-                user: objectId(userId),
-                paymentMethod: order.paymentMethod,
-                products: cartItems.products,
-                totalAmount: total,
-                discountedPrice:'0',
-                status: status,            //this status is for knowing money payed or not
-                date: newdate,
-                orderMonth: orderMonth,
-                orderYear: year
-
-            }
-
-           addressObj = {}
-            addressObj.address = orderObj.deliverydetails
-            addressObj.userId = objectId(userId)
-
-
-        }
-            db.get().collection(collection.ORDER_COLLECTION).insertOne(orderObj).then((response) => {
-                // obj.orderId=response.insertedId
-
-                // -----------------------------------------------------------now added----
-                db.get().collection(collection.ADDRESS_COLLECTION).insertOne(addressObj)
-                
-
-                if (orderObj.paymentMethod == 'COD') {
-                    db.get().collection(collection.CART_COLLECTION).deleteOne({ user: objectId(userId) })
                 }
 
+                addressObj = {}
+                addressObj.address = orderObj.deliverydetails
+                addressObj.userId = objectId(userId)
 
-
-                db.get().collection(collection.USER_COLLECTION).findOne({_id: objectId(userId) }).then((user)=>{
-                   
-
-                db.get().collection(collection.USER_COLLECTION).updateOne({_id: objectId(userId)},{ $unset: {couponid:user.couponid } })
-              
-               
                 
-                    
-                
+            } else {
+                orderObj = {
+                    deliverydetails: {
 
+                        name: order.firstname,
+                        lastname: order.lastname,
+                        email: order.email,
+                        mobile: order.phone,
+
+
+                        houseAddress: {
+                            streetaddress: order.streetaddress,
+                            landmark: order.landmark,
+                            city: order.city,
+                            pincode: order.postcode,
+                            state: order.state,
+                            country: order.country,
+                        }
+                    },
+
+                    cartEach: cartItems.products.forEach(cartProd => {            //this status is for knowing product shipped  or not
+                        cartProd.status = order.status
+                    }),
+
+                    user: objectId(userId),
+                    paymentMethod: order.paymentMethod,
+                    products: cartItems.products,
+                    totalAmount: total,
+                    discountedPrice: '0',
+                    status: status,            //this status is for knowing money payed or not
+                    date: newdate,
+                    orderMonth: orderMonth,
+                    orderYear: year
+
+                }
+
+                addressObj = {}
+                addressObj.address = orderObj.deliverydetails
+                addressObj.userId = objectId(userId)
+
+
+            }
            
+                db.get().collection(collection.ORDER_COLLECTION).insertOne(orderObj).then((response) => {
+                    // obj.orderId=response.insertedId
 
-                db.get().collection(collection.ORDER_COLLECTION).aggregate([
-
-                    {
-                        $match: {
-                            _id: response.insertedId
-                        }
-                    },
+                    // -----------------------------------------------------------now added----
+                    db.get().collection(collection.ADDRESS_COLLECTION).insertOne(addressObj)
 
 
-                    {
-                        $unwind: '$products'
-                    },
-                    {
-                        $project: {
-                            item: "$products.item",
-                            quantity: "$products.quantity"
-                        }
+                    if (orderObj.paymentMethod == 'COD') {
+                        db.get().collection(collection.CART_COLLECTION).deleteOne({ user: objectId(userId) })
                     }
-                ]).toArray().then((response) => {
-                
-                    resolve(response)
 
 
+
+                    db.get().collection(collection.USER_COLLECTION).findOne({ _id: objectId(userId) }).then((user) => {
+
+
+                        db.get().collection(collection.USER_COLLECTION).updateOne({ _id: objectId(userId) }, { $unset: { couponid: user.couponid } })
+
+
+
+
+
+
+
+
+                        db.get().collection(collection.ORDER_COLLECTION).aggregate([
+
+                            {
+                                $match: {
+                                    _id: response.insertedId
+                                }
+                            },
+
+
+                            {
+                                $unwind: '$products'
+                            },
+                            {
+                                $project: {
+                                    item: "$products.item",
+                                    quantity: "$products.quantity"
+                                }
+                            }
+                        ]).toArray().then((response) => {
+
+                            resolve(response)
+
+
+                        })
+
+
+
+                    })
                 })
-
-
-
-                // resolve(response.insertedId)
-
-
-
-            })
+            
         })
-    })
 
 
     },
@@ -1290,15 +1277,15 @@ module.exports = {
     decrementStock: (element) => {
         console.log(element);
         console.log(element.quantity)
-        
-        console.log(typeof(element.quantity))
+
+        console.log(typeof (element.quantity))
 
 
         return new Promise((resolve, reject) => {
             console.log("its entering oh yeah")
             db.get().collection(collection.PRODUCT_COLLECTION).updateOne(
-                { _id:objectId( element.item )}, { $inc: { stock: -element.quantity } }
-               
+                { _id: objectId(element.item) }, { $inc: { stock: -element.quantity } }
+
             )
         })
 
@@ -1357,27 +1344,27 @@ module.exports = {
 
     // --------------------------------------------------------------------GETTING ADDRESS OF USER----------------------------------------------re
 
-    getAddresscoll:(userid)=>{
+    getAddresscoll: (userid) => {
         console.log(userid);
-        return new Promise((resolve,reject)=>{
+        return new Promise((resolve, reject) => {
             db.get().collection(collection.ADDRESS_COLLECTION).aggregate([
                 {
-                $match:{
-                    userId:objectId(userid)
+                    $match: {
+                        userId: objectId(userid)
 
-                }
-            },
-            // {
-            //     $project:{
-            //         name:'$address.name',
-            //         lastname:'$address.lastname',
-            //         email:'$address.email',
-            //         mobile:'$address.mobile',
-            //          useraddress: { $arrayElemAt: ['$houseAddress', 0] }
+                    }
+                },
+                // {
+                //     $project:{
+                //         name:'$address.name',
+                //         lastname:'$address.lastname',
+                //         email:'$address.email',
+                //         mobile:'$address.mobile',
+                //          useraddress: { $arrayElemAt: ['$houseAddress', 0] }
 
-            //     }
-            // }
-        ]).toArray().then((addr)=>{
+                //     }
+                // }
+            ]).toArray().then((addr) => {
                 console.log('--------------');
                 console.log(addr);
                 console.log('--------------');
@@ -1456,13 +1443,13 @@ module.exports = {
 
     },
 
-    deleteSelectedAddress:(id) => {
+    deleteSelectedAddress: (id) => {
         console.log('addressid');
         console.log(id);
         console.log('addressid');
-       
+
         return new Promise((resolve, reject) => {
-            db.get().collection(collection.ADDRESS_COLLECTION).deleteOne({_id:(objectId(id))}).then(() => {
+            db.get().collection(collection.ADDRESS_COLLECTION).deleteOne({ _id: (objectId(id)) }).then(() => {
                 resolve()
 
             })
@@ -1519,112 +1506,113 @@ module.exports = {
     editingAddress: (addressId) => {
         console.log(')))))))))))');
         console.log(addressId);
-       
-        return new Promise(async(resolve, reject) => {
-         let  Address=await db.get().collection(collection.ADDRESS_COLLECTION).findOne({_id:objectId(addressId) })
-         resolve(Address)
-//                 {
-//                 $match:{  $and:
-// [{ userId: objectId(userId) }, { 'address.name': name },{ 'address.houseAddress.streetaddress': address  }]
-//                 }
-//                 ]).then().toArray()
-//                 console.log('????????????');
-//                 console.log(Address);
-//                 console.log('????????????');
-//                 resolve(Address)
-//             })
+
+        return new Promise(async (resolve, reject) => {
+            let Address = await db.get().collection(collection.ADDRESS_COLLECTION).findOne({ _id: objectId(addressId) })
+            resolve(Address)
+            //                 {
+            //                 $match:{  $and:
+            // [{ userId: objectId(userId) }, { 'address.name': name },{ 'address.houseAddress.streetaddress': address  }]
+            //                 }
+            //                 ]).then().toArray()
+            //                 console.log('????????????');
+            //                 console.log(Address);
+            //                 console.log('????????????');
+            //                 resolve(Address)
+            //             })
         })
     },
 
 
 
-    editedAddress:(addressId,editedAddress)=>{
+    editedAddress: (addressId, editedAddress) => {
         console.log('hihihihihihihihihihiihhihihi');
         console.log(addressId);
         console.log(editedAddress);
         console.log('hihihihihihihihihihiihhihihi');
-        return new Promise((resolve,reject)=>{
-            db.get().collection(collection.ADDRESS_COLLECTION).updateOne({_id:objectId(addressId)},
-            {$set:{
-
-                
-                
-                    // --------------------------ippol add cheyyunnath--------------------------------------------
-
-                   'address.name': editedAddress.firstname,
-                   'address.lastname': editedAddress.lastname,
-                   'address.email': editedAddress.email,
-                   'address.mobile': editedAddress.phone,
+        return new Promise((resolve, reject) => {
+            db.get().collection(collection.ADDRESS_COLLECTION).updateOne({ _id: objectId(addressId) },
+                {
+                    $set: {
 
 
-                    
+
+                        // --------------------------ippol add cheyyunnath--------------------------------------------
+
+                        'address.name': editedAddress.firstname,
+                        'address.lastname': editedAddress.lastname,
+                        'address.email': editedAddress.email,
+                        'address.mobile': editedAddress.phone,
+
+
+
                         'address.houseAddress.streetaddress': editedAddress.streetaddress,
                         'address.houseAddress.landmark': editedAddress.landmark,
                         'address.houseAddress.city': editedAddress.city,
                         'address.houseAddress.pincode': editedAddress.postcode,
                         'address.houseAddress.state': editedAddress.state,
                         'address.houseAddress.country': editedAddress.country,
-                }
-               
+                    }
 
 
-            }).then(()=>{
-                resolve()
-            })
+
+                }).then(() => {
+                    resolve()
+                })
 
         })
 
     },
     // ----------------------------------------------------RAZORPAY PAYMENT-------------------------------------------------------------//
-    generateRazorpay: (orderId, amount,discount) => {
-        let disc=discount.TotalAfterDiscount
-        discount.TotalAfterDiscount=parseInt(disc)
+    generateRazorpay: (orderId, amount, discount) => {
+        let disc = discount.TotalAfterDiscount
+        discount.TotalAfterDiscount = parseInt(disc)
         console.log('pppppppppppppppp');
         console.log(discount);
         console.log(discount.TotalAfterDiscount);
-        console.log(typeof(discount.TotalAfterDiscount));
+        console.log(typeof (discount.TotalAfterDiscount));
         return new Promise((resolve, reject) => {
-            if(discount.TotalAfterDiscount){
+            if (discount.TotalAfterDiscount) {
                 console.log('kkkkkkkkkkkkkkkkkkkkkkkkk');
-            var options = {
-                amount:( discount.TotalAfterDiscount * 10),  
-                currency: "INR",
-                receipt: "" + orderId
-            };
-            instance.orders.create(options, function (err, order) {
-                if (err) {
-                }
-                else {
-                    resolve(order)
-                }
-                
-                
-            });
-        }else{
+                var options = {
+                    amount: (discount.TotalAfterDiscount * 10),
+                    currency: "INR",
+                    receipt: "" + orderId
+                };
+                instance.orders.create(options, function (err, order) {
+                    if (err) {
+                    }
+                    else {
+                        resolve(order)
+                    }
 
-            var options = {
-                amount: amount,  // amount in the smallest currency unit
-                currency: "INR",
-                receipt: "" + orderId
-            };
-            instance.orders.create(options, function (err, order) {
-                if (err) {
-                }
-                else {
-                    resolve(order)
-                }
-                
-                
-            });
 
-        }
+                });
+            } else {
+
+                var options = {
+                    amount: amount,  // amount in the smallest currency unit
+                    currency: "INR",
+                    receipt: "" + orderId
+                };
+                instance.orders.create(options, function (err, order) {
+                    if (err) {
+                    }
+                    else {
+                        resolve(order)
+                    }
+
+
+                });
+
+            }
 
         })
     },
 
     verifyPayment: (payment, order) => {
 
-      
+
 
 
         return new Promise((resolve, reject) => {
@@ -1633,12 +1621,12 @@ module.exports = {
             var expectedSignature = crypto.createHmac('sha256', '4HYF41qsxTK81p4qJPRUj7Rx')
                 .update(payment.razorpay_order_id + '|' + payment.razorpay_payment_id)
                 .digest('hex');
-      
-           
+
+
             if (expectedSignature == payment.razorpay_signature) {
                 resolve()
             } else {
-                reject()
+                reject(err)
             }
 
 
@@ -1780,10 +1768,10 @@ module.exports = {
 
     // ----------------------------------------------------PAGINATIONS -----------------------------------------------------------------
 
-     paginatedProducts: (query) => {
+    paginatedProducts: (query) => {
         query = parseInt(query)
         let limit = 4
-        
+
 
         return new Promise(async (resolve, reject) => {
 
@@ -1793,7 +1781,7 @@ module.exports = {
             resolve(products)
         })
     },
-  
+
 
 
 
@@ -1886,7 +1874,7 @@ module.exports = {
 
     removewishlistItem: (cart) => {
         return new Promise(async (resolve, reject) => {
-          
+
             cartId = cart.userid;
             proId = cart.productid;
 
@@ -1989,7 +1977,7 @@ module.exports = {
 
 
     updateShippingStatus: (orderId, productId) => {
-       
+
 
 
         return new Promise((resolve, reject) => {
@@ -2006,16 +1994,16 @@ module.exports = {
         })
     },
 
-    wishlistCount:(userid)=>{
-        
+    wishlistCount: (userid) => {
+
         let count = 0;
-        return new Promise(async(resolve,reject)=>{
-           let wishcount=await db.get().collection(collection.WISHLIST_COLLECTION).findOne({user:objectId(userid)})
-           if (wishcount) {
-            count = wishcount.products.length;    
-        }
-         resolve(count)
-   
+        return new Promise(async (resolve, reject) => {
+            let wishcount = await db.get().collection(collection.WISHLIST_COLLECTION).findOne({ user: objectId(userid) })
+            if (wishcount) {
+                count = wishcount.products.length;
+            }
+            resolve(count)
+
         })
     }
 

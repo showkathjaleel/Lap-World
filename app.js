@@ -20,6 +20,7 @@ const cors = require("cors")
 
 var userRouter = require('./routes/user');
 var adminRouter = require('./routes/admin');
+const { log } = require('console');
 
 
 var app = express();
@@ -59,6 +60,39 @@ const hbs=expbs.create({
     checkGreater:(categoryPrice,productPrice)=>{
       productPrice= (productPrice==undefined)?0:parseInt(productPrice)
       return (parseInt(categoryPrice)>productPrice)?categoryPrice:productPrice
+    },
+
+    checked:(filteredProduct,catid,option)=>{
+      let filtercheck=filteredProduct.map((element)=>{
+        return element.brandname
+      })
+
+    let boolean=filtercheck.some((element)=>{
+    return element.toString()==catid.toString()
+      })
+      console.log('/////////');
+        console.log(boolean);
+
+        if(boolean){
+         return option.fn()
+        }
+        else{
+         return option.inverse()
+        }
+
+      console.log(';;;;;;;;;;;;')
+     console.log(filtercheck)  
+     console.log(';;;;;;;;;;')
+     console.log('=============')
+     console.log(catid)
+     console.log('=============')
+       
+  //  if(filtercheck=catid){
+
+  //  }
+
+
+
     }
    }
 

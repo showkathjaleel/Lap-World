@@ -258,15 +258,22 @@
                                             {{#each cat}}
 											<div class="filter-items filter-items-count">
 
+
                                                 
 
 												<div class="filter-item">
                                                     <form action="/categoryFilter" method="post">
-													<div class="custom-control custom-checkbox">
-														<input type="checkbox" name="brandname" value="{{this._id}}" class="custom-control-input" id="cat{{this._id}}" >
 
-                                                           
-														<label class="custom-control-label" for="cat{{this._id}}">{{this.brandname}}</label>
+													<div class="custom-control custom-checkbox">
+                                                        {{#checked ../category this._id}}
+                                                       
+														<input type="checkbox" name="brandname" value="{{../this._id}}" class="custom-control-input" id="cat{{../this._id}}" checked>                
+														<label class="custom-control-label" for="cat{{../this._id}}">{{../this.brandname}}</label>
+                                                        {{else}}
+                                                        <input type="checkbox" name="brandname" value="{{../this._id}}" class="custom-control-input" id="cat{{../this._id}}">                
+														<label class="custom-control-label" for="cat{{../this._id}}">{{../this.brandname}}</label>
+                                                        
+                                                        {{/checked}}
 													</div><!-- End .custom-checkbox -->
                                                     
 													<span class="item-count">3</span>

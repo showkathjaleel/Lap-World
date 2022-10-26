@@ -659,11 +659,8 @@ returnStatus:(returnDetails)=>{
     getSearchedProducts:(payload)=>{
        
         return new Promise(async(resolve,reject)=>{
-            let search=await db.get().collection(collection.PRODUCT_COLLECTION).find({laptops:{$regex:new RegExp('^'+payload+'.*','i')}}).toArray()
+            let search=await db.get().collection(collection.PRODUCT_COLLECTION).find({laptops:{$regex:new RegExp(payload,'i')}}).toArray()
             search=search.slice(0,10)
-            console.log('***********');
-            console.log(search);
-            console.log('***********');
             resolve(search)
         })
         
@@ -684,7 +681,6 @@ returnStatus:(returnDetails)=>{
        
         return new Promise(async (resolve, reject) => {
          let products = await db.get().collection('product').find().limit(limit).skip(startIndex).toArray()
-
             resolve(products)
         })
 
@@ -696,9 +692,7 @@ returnStatus:(returnDetails)=>{
 
    
     getPaginatedUserResult:(limit,startIndex)=>{
-  
-    console.log(limit);
-    console.log(startIndex);
+
     return new Promise(async (resolve, reject) => {
      let user = await db.get().collection(collection.USER_COLLECTION).find().limit(limit).skip(startIndex).toArray()           
         resolve(user)

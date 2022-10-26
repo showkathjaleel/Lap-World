@@ -362,7 +362,7 @@
                             </div><!-- End .product-cat -->
                             <h3 class="product-title"><a href="product.html">{{this.laptops}}</a></h3>
                             <!-- End .product-title -->
-                            <div class="product-price">
+                            <div>
 
                             
 
@@ -371,113 +371,19 @@
                                                     
                                                       ₹<s>{{this.originalPrice}}</s><br>
                                                        </div>
-                                                       <div class="product-price">
+                                                       <div style="align-items:center; flex-flow:wrap; font-weight:400; font-size:1.6rem; line-height:1.25; color:#fcb941">
                                                        Price:₹{{this.Price }}
                                                       </div>
-                                                         {{!-- {{else}}
-                                                          {{#if this.productOfferPrice}}
-                                                           <div class="product-price text-success">
-                                                            {{this.Offers}}%off
-                                                           </div>
-                                                           <div class="product-price">
-                                                             Price:₹{{this.productOfferPrice}}                                                                                                                                                                                               --}}
-                                                           {{!-- </div><!-- End .product-price --> --}}
                                                           {{else}}
                                                             <div class="product-price">
                                                              Price:₹{{this.Price}}                                                                                                                                                                                              
                                                            </div><!-- End .product-price -->
-                                                           {{/if}}
-                                                         {{!-- {{/if}}  --}}
-
-
-
-
-
-
-                                {{!-- {{this.Price}} --}}
-                            </div><!-- End .product-price -->
-                            <div class="ratings-container">
-                                <div class="ratings">
-                                    <div class="ratings-val" style="width: 100%;"></div><!-- End .ratings-val -->
-                                </div><!-- End .ratings -->
-                                <span class="ratings-text">( 4 Reviews )</span>
-                            </div><!-- End .rating-container -->
+                                                           {{/if}}                              
+                            </div><!-- End .product-price -->                         
                         </div><!-- End .product-body -->
                     </div><!-- End .product -->
                     {{/each}}
                 </div>
-
-
-
-
-
-
-
-                                {{!-- {{#each products}}
-                                <div class="product product-2">
-                                    <figure class="product-media">
-
-                                        <a href="/product/{{this._id}}">
-                                            <img style="width: 210px; height:200px"
-                                                src="/product-images/{{this._id}}.jpg" alt="Product image"
-                                                class="product-image">
-                                        </a>
-
-                                        <div class="product-action-vertical">
-                                            <a href="#" class="btn-product-icon btn-wishlist btn-expandable"><span>add
-                                                    to wishlist</span></a>
-                                        </div><!-- End .product-action -->
-
-                                        <div class="product-action product-action-dark">
-                                            <a href="/add-to-cart/{{this._id}}">ADD TO CART</a>
-                                               
-                                            {{!-- <a href="/product/{{this._id}}" class="btn-product"
-                                                title="Quick view"><span>quick view</span></a> --}}
-                                        {{!-- </div><!-- End .product-action --> --}}
-                                    {{!-- </figure><!-- End .product-media --> --}}
-
-
-
-
-
-
-
-
-
-
-
-                                    {{!-- <div class="product-body">
-                                        <div class="product-cat">
-                                            <a href="#">laptops</a>
-                                        </div><!-- End .product-cat -->
-                                        <h3 class="product-title"><a href="product.html">{{this.laptops}}</a></h3>
-                                        <!-- End .product-title -->
-                                        <div class="product-price">
-                                            {{this.price}}
-                                        </div><!-- End .product-price -->
-                                        <div class="ratings-container">
-                                            <div class="ratings">
-                                                <div class="ratings-val" style="width: 100%;"></div>
-                                                <!-- End .ratings-val -->
-                                            </div><!-- End .ratings -->
-                                            <span class="ratings-text">( 4 Reviews )</span>
-                                        </div><!-- End .rating-container -->
-
-                                        <div class="product-nav product-nav-dots">
-                                            <a href="#" style="background: #edd2c8;"><span class="sr-only">Color
-                                                    name</span></a>
-                                            <a href="#" style="background: #eaeaec;"><span class="sr-only">Color
-                                                    name</span></a>
-                                            <a href="#" class="active" style="background: #333333;"><span
-                                                    class="sr-only">Color name</span></a>
-                                        </div> --}}
-
-{{!-- 
-                                    </div><!-- End .product-body -->
-                                </div><!-- End .product --> --}}
-                                
-                                {{!-- {{/each}} --}}
-                                
 
                         </section>
                    </div><!-- End .tab-content -->
@@ -591,40 +497,28 @@
                             </div><!-- End .product-cat -->
                             <h3 class="product-title"><a href="product.html">{{this.laptops}}</a></h3>
                             <!-- End .product-title -->
-                            <div class="product-price">
-                                                                                   {{#if this.originalPrice}}
+                                                        <div style="align-items:center; flex-flow:wrap; font-weight:400; font-size:1.6rem; line-height:1.25; color:#fcb941">
+                                                     {{#if this.originalPrice}}
                                                 <div class="product-price text-danger">
-                                                    
-                                                      ₹<s>{{this.originalPrice}}</s><br>
-                                                       </div>
-                                                       <div class="product-price">
-                                                       Price:₹{{this.Price }}
+         
+                                                      ₹<s>{{this.originalPrice}}</s></div>
+                                                       <div>
+                                                       Price:₹{{this.Price}}
                                                       </div>
-                                                         {{!-- {{else}}
-                                                          {{#if this.productOfferPrice}}
-                                                           <div class="product-price text-success">
-                                                            {{this.Offers}}%off
-                                                           </div>
-                                                           <div class="product-price">
-                                                             Price:₹{{this.productOfferPrice}}                                                                                                                                                                                               --}}
-                                                           {{!-- </div><!-- End .product-price --> --}}
+                                                                                                            
                                                           {{else}}
                                                             <div class="product-price">
                                                              Price:₹{{this.Price}}                                                                                                                                                                                              
-                                                           </div><!-- End .product-price -->
-                                                           {{/if}}
-                               
-                               
-                               
-                               
-                                {{!-- {{this.Price}} --}}
-                            </div><!-- End .product-price -->
-                            <div class="ratings-container">
+                                                           </div>
+                                                           {{/if}} 
+                                                            </div>                              
+                           
+                            {{!-- <div class="ratings-container">
                                 <div class="ratings">
                                     <div class="ratings-val" style="width: 100%;"></div><!-- End .ratings-val -->
                                 </div><!-- End .ratings -->
                                 <span class="ratings-text">( 4 Reviews )</span>
-                            </div><!-- End .rating-container -->
+                            </div><!-- End .rating-container --> --}}
                         </div><!-- End .product-body -->
                     </div><!-- End .product -->
                     {{/each}}

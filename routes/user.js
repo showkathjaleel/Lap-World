@@ -105,10 +105,12 @@ const sessionHandle = (req, res, next) => {
 router.use('/', async function (req, res, next) {
   if (req.session.loggedIn){
     res.locals.user= req.session.user
+    wishlistCount = await userHelpers.wishlistCount(req.session.user._id)
     cartCount = await userHelpers.getCartCount(req.session.user._id)  
     res.locals.cartCount = cartCount
   } else {
-    cartCount = null   
+    res.locals.wishlistCount=null
+    res.locals.cartCount = null   
   }
   req.app.locals.layout = 'layout'
   next();
@@ -137,8 +139,8 @@ router.get('/', async function (req, res, next) {
     let user = req.session.user
     
   if (req.session.loggedIn) {
-    wishlistCount = await userHelpers.wishlistCount(req.session.user._id)
-    cartCount = await userHelpers.getCartCount(user._id)
+    
+   
     let category=await categoryHelpers.getCategory()
     productHelpers.getAllproducts().then((products) => {
       res.render('user/indextwo', { loginaano: req.session.loggedIn, products, cartCount ,category,wishlistCount})
@@ -442,7 +444,7 @@ router.get('/cart', verifyLogin, async (req, res) => {
     }
     let discounts=await userHelpers. ViewCartDiscount(user._id,grandTotal)
        discount=discounts[0]
-    res.render('user/cart', { products, cartCount, grandTotal, loginaano: req.session.loggedIn,discount})
+    res.render('user/cart', { products, cartCount, grandTotal, loginaano: req.session.loggedIn,discount,wishlistCount})
 
   })
 }catch(e){
@@ -687,6 +689,7 @@ router.get('/success', (req, res) => {
 // ------------------------------------------------------------VERIFY PAYMENT RAZORPAY-----------------------------------------------------------------------------
 
 router.post('/verify-payment', (req, res) => {
+ 
 try{
   let { payment } = req.body
   let { order } = req.body
@@ -694,11 +697,11 @@ try{
   
   userHelpers.verifyPayment(payment, order).then(() => { 
     userHelpers.changePaymentStatus(order.receipt).then(async () => {
-      let deleterder = await userHelpers.DeleteOrder(user._id)  
+      userHelpers.DeleteOrder(user._id)  
       res.json({ status: true })
     })
 
-  }).catch((err) => {
+  }).catch((err) => {   
     console.log(err);
     res.json({ status: false, errMsg: '' })
 
