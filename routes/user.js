@@ -103,15 +103,12 @@ const sessionHandle = (req, res, next) => {
 
 
 router.use('/', async function (req, res, next) {
-  if (req.session.user){
-  
+  if (req.session.loggedIn){
     res.locals.user= req.session.user
-    cartCount = await userHelpers.getCartCount(req.session.user._id)
-    wishlistCount = await userHelpers.wishlistCount(req.session.user._id)
-    res.locals.wishlistCount = wishlistCount
+    cartCount = await userHelpers.getCartCount(req.session.user._id)  
+    res.locals.cartCount = cartCount
   } else {
-    cartCount = null
-    res.locals.wishlistCount = null
+    cartCount = null   
   }
   req.app.locals.layout = 'layout'
   next();
@@ -138,12 +135,9 @@ router.post('/searchProducts',(req,res)=>{
 router.get('/', async function (req, res, next) {
   try{
     let user = req.session.user
-    console.log('req.session.user');
-    console.log(req.session.user);
-    console.log('req.session.user');
-
+    
   if (req.session.loggedIn) {
-   
+    wishlistCount = await userHelpers.wishlistCount(req.session.user._id)
     cartCount = await userHelpers.getCartCount(user._id)
     let category=await categoryHelpers.getCategory()
     productHelpers.getAllproducts().then((products) => {
@@ -960,14 +954,14 @@ router.get('/show-address',verifyLogin, (req, res) => {
   let user=req.session.user
 
   userHelpers.getAddresscoll(user._id).then((allAddress)=>{
-    res.render('user/user-address', { allAddress,loginaano: req.session.loggedIn})
+    res.render('user/user-address', { allAddress , loginaano: req.session.loggedIn})
   })
 })
 
 router.get('/editAddress/:id', (req, res) => {
   let {id}=req.params 
   userHelpers.editingAddress(id).then((getaddress) => {
-    res.render('user/edit-Address',{getaddress})
+    res.render('user/edit-Address',{getaddress,loginaano: req.session.loggedIn})
   })
 })
 
@@ -996,7 +990,7 @@ router.get('/profile', (req, res) => {
   let user=req.session.user
 
   userHelpers.getUserDetails(user._id).then((userdetails) => {
-    res.render('user/user-details',{userdetails})
+    res.render('user/user-details',{userdetails,loginaano: req.session.loggedIn,cartCount})
   })
 })
 
