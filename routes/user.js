@@ -26,7 +26,8 @@ const productHelpers = require('../helpers/product-helpers.js');
 const userHelpers = require('../helpers/user-helpers')
 const categoryHelpers=require('../helpers/category-helpers')
 const offerHelpers=require('../helpers/offer-helpers')
-const couponHelpers=require('../helpers/coupon-helpers')
+const couponHelpers=require('../helpers/coupon-helpers');
+const { Db } = require('mongodb');
 
 
 let loginerror;
@@ -573,7 +574,7 @@ router.post('/place-order',async (req, res) => {
       res.json({ paypal: true, orderId })
     }
     else {
-      console.log("its razorpay")
+      
       
 
       userHelpers.generateRazorpay(orderId, grandTotal,discount).then((response) => {
@@ -689,6 +690,7 @@ router.get('/success', (req, res) => {
 // ------------------------------------------------------------VERIFY PAYMENT RAZORPAY-----------------------------------------------------------------------------
 
 router.post('/verify-payment', (req, res) => {
+  console.log('lalaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa');
  
 try{
   let { payment } = req.body
@@ -709,6 +711,15 @@ try{
 }catch(e){
   console.log(e);
 }
+})
+router.delete('/remove-payfail',(req,res)=>{
+  console.log('qqqqqqqqqqqqqq');
+  console.log(req.body);
+  let {receipt}=req.body.orderId
+  console.log('qqqqqqqqqqqqqq');
+
+
+  userHelpers.removeorder(receipt)
 })
 
 // ------------------------------------------------------------RETURNED PRODUCTS--------------------------------------------------------------//

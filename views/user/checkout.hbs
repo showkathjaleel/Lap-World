@@ -337,7 +337,7 @@
                                                                 <label>
                                                                     <input type="radio" name="paymentMethod"
                                                                         value="Direct-Bank-Transfer">
-                                                                    Direct-Bank-Transfer
+                                                                    Razorpay
                                                                 </label><br>
 
                                                                 <label>
@@ -346,11 +346,11 @@
                                                                     Paypal
                                                                 </label><br>
 
-                                                                <label>
+                                                                {{!-- <label>
                                                                     <input type="radio" name="paymentMethod"
                                                                         id="paymentMethod" value="credit-card">
                                                                     credit-card
-                                                                </label><br>
+                                                                </label><br> --}}
 
 
                                                                 {{!-- <input type="submit">
@@ -435,36 +435,28 @@
                 method: 'post',
                 data: $("#checkout-form").serialize(),
                 success: (response) => {
-                    alert("ajax entered")
+                   
                     if (response.codsuccess) {
-                        alert('its cod')
+                        
                         location.href = '/order-success'                    //  order place aayi
                     } else if (response.paypal) {
-                        alert('its paypal')
+                       
                         console.log(response)
                         paypal(response.orderId)
 
                     } else {
-                        alert('its razor')
+                        
                         razorpayPayment(response)
                     }
-
-
-
-
-
-
-
-
-
 
                 }
             })
         })
 
         function razorpayPayment(order) {
+          
 
-            alert('its entered to the funtion ')
+            
 
             var options = {
                 "key": "rzp_test_NBKIQegHCsjMos", // Enter the Key ID generated from the Dashboard
@@ -475,19 +467,17 @@
                 "image": "https://example.com/your_logo",
                 "order_id": order.id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
 
-                "handler": function (response) {
-                    alert(response.razorpay_payment_id);
-                    alert(response.razorpay_order_id);
-                    alert(response.razorpay_signature);
+                "handler":
+               
+                 function (response) {
+                
+                    verifyPayment(response,order)
+                     console.log('hoooooooooooo')
 
-                    console.log('vannu mone2')
-                    console.log(response, order)
-
-
-                    verifyPayment(response, order)
+                }  ,
 
 
-                },
+    
 
                 "prefill": {
                     "name": "Gaurav Kumar",
@@ -502,16 +492,29 @@
                 }
             };
             var rzp1 = new Razorpay(options);
-            rzp1.open();
 
+            rzp1.on('payment.failed', function (response){
+    alert(response.error.code);
+    alert(response.error.description);
+    alert(response.error.source);
+    alert(response.error.step);
+    alert(response.error.reason);
+    alert(response.error.metadata.order_id);
+    alert(response.error.metadata.payment_id);
+
+    deleteOrder(order)
+})
+
+            rzp1.open();
+            
         }
 
+
+
+
         function verifyPayment(payment, order) {
-
-            console.log('vannu mone3')
-            console.log(payment)
-            console.log(order)
-
+            console.log('hiiiiiiiiii')
+    
             $.ajax({
                 url: '/verify-payment',
                 data: {
@@ -524,6 +527,30 @@
                 }
             })
         }
+
+
+            function deleteOrder(orderId){
+                             fetch('remove-payfail',{
+            method:'delete',
+            headers:{'Content-Type':'application/json'},
+            body:JSON.stringify({orderId:orderId})
+        }).then(res=>
+        {
+            if (res.ok){
+                console.log('success')
+                }
+            else{
+                console.log('failed')
+                }
+            return res;
+       
+        }
+        ).then(res=>{
+            console.log(res)
+            window.location.reload();
+            })
+
+            }
 
 
 

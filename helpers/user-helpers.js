@@ -1275,14 +1275,10 @@ module.exports = {
 
     // -------THINGS SEE IN ORDER PAGE-------------------------------------
     decrementStock: (element) => {
-        console.log(element);
-        console.log(element.quantity)
-
-        console.log(typeof (element.quantity))
-
+       
 
         return new Promise((resolve, reject) => {
-            console.log("its entering oh yeah")
+            
             db.get().collection(collection.PRODUCT_COLLECTION).updateOne(
                 { _id: objectId(element.item) }, { $inc: { stock: -element.quantity } }
 
@@ -1567,13 +1563,10 @@ module.exports = {
     generateRazorpay: (orderId, amount, discount) => {
         let disc = discount.TotalAfterDiscount
         discount.TotalAfterDiscount = parseInt(disc)
-        console.log('pppppppppppppppp');
-        console.log(discount);
-        console.log(discount.TotalAfterDiscount);
-        console.log(typeof (discount.TotalAfterDiscount));
+
         return new Promise((resolve, reject) => {
             if (discount.TotalAfterDiscount) {
-                console.log('kkkkkkkkkkkkkkkkkkkkkkkkk');
+               
                 var options = {
                     amount: (discount.TotalAfterDiscount * 10),
                     currency: "INR",
@@ -1591,7 +1584,7 @@ module.exports = {
             } else {
 
                 var options = {
-                    amount: amount,  // amount in the smallest currency unit
+                    amount: amount* 10,  // amount in the smallest currency unit
                     currency: "INR",
                     receipt: "" + orderId
                 };
@@ -1646,6 +1639,22 @@ module.exports = {
             })
         })
     },
+
+    removeorder:(orderid)=>{
+        console.log('iiiiiiiiiiiiiiiiiiiid');
+        
+        console.log(orderid);
+        console.log('iiiiiiiiiiiiiiiiiiiid');
+        return new Promise((resolve, reject) => {
+            db.get().collection(collection.ORDER_COLLECTION).deleteOne({_id: objectId(orderId)}).then((data) => {
+                console.log(data);
+                resolve()
+            })
+
+        })
+
+    },
+
     DeleteOrder: (userId) => {
         return new Promise((resolve, reject) => {
             db.get().collection(collection.CART_COLLECTION).deleteOne({ user: objectId(userId) }).then(() => {
