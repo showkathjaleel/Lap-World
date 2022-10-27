@@ -146,11 +146,19 @@ module.exports = {
     // -----------------------------------------------------------------CHECKING MOBILE NUMBER EXISTS---------------------------------------------------
 
     mobileOtp: (userData) => {
+        console.log('_____________________');
+        console.log(userData);
+        console.log('_____________________');
+
 
         let response = {}
         return new Promise(async (resolve, reject) => {
             let mob = userData.number
             user = await db.get().collection('user').findOne({ number: mob })
+            console.log('::::::::::::');
+            console.log(user);
+            console.log('::::::::::::');
+
 
             if (user) {
                 response.user = user
@@ -484,23 +492,28 @@ module.exports = {
     // ----------------------------------------------------------CHECKING COUPON IS VALID OR NOT------------------------------------------------
     couponCheck: ({ couponcode }, grandTotal, userid) => {
         let response = {}
-
+     
         return new Promise(async (resolve, reject) => {
+
             let discount = await db.get().collection(collection.COUPON_COLLECTION).findOne({ couponcode: couponcode })
+            
+            
+            console.log(discount);
+
+            if (discount) {
             couponValue = discount.couponvalue
             couponValue = parseInt(couponValue)
             discount.couponvalue = couponValue
 
+                console.log(discount);
+                if (grandTotal>=discount.minamount){
 
-            if (discount) {
                 response.findCoupon = true
                 const nowDate = new Date();
-
 
                 if (nowDate > discount.todate) {
                     response.expired = true
                     response.errMessage = 'Coupon is expired'
-
                     resolve(response)
                     // res.json({error:'Coupon is expired'})
 
@@ -508,7 +521,6 @@ module.exports = {
                 else {
 
                     response.expired = false
-
                     let isCouponused = await db.get().collection(collection.USED_COUPON_COLLECTION).findOne({ userId: userid, couponId: discount._id })
 
                     if (isCouponused) {
@@ -534,22 +546,27 @@ module.exports = {
                         db.get().collection(collection.USED_COUPON_COLLECTION).insertOne(usedCouponObj).then(() => {
                             response.couponPrice = couponPrice
                             response.discountPrice = discountPrice
-
                             db.get().collection(collection.USER_COLLECTION).updateOne({ _id: objectId(userid) }, { $set: { couponid: discount._id } }, { upsert: true })
                             resolve(response)
                         })
                     }
-
-
                 }
-
-            } else {
+            } 
+            else{
+                response.minamount=false
+                response.errMessage = "You want to Purchase for minimum of"+ discount.minamount +" to get coupon discount"
+                resolve(response)
+                console.log( response.errMessage);
+            }
+        }
+            else {
                 response.findCoupon = false
                 response.errMessage = 'No coupon in this code'
                 resolve(response)
 
             }
-
+        
+       
 
         })
     },
@@ -1641,13 +1658,9 @@ module.exports = {
     },
 
     removeorder:(orderid)=>{
-        console.log('iiiiiiiiiiiiiiiiiiiid');
-        
-        console.log(orderid);
-        console.log('iiiiiiiiiiiiiiiiiiiid');
+       
         return new Promise((resolve, reject) => {
             db.get().collection(collection.ORDER_COLLECTION).deleteOne({_id: objectId(orderId)}).then((data) => {
-                console.log(data);
                 resolve()
             })
 

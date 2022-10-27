@@ -374,26 +374,13 @@
                              //ivide response true aanenn set cheythittund                    
 
                         if (response.discount) {       //so response.response 
-                            console.log(response)
-                                 
-
-                            console.log('clicked')
+                            
                             document.getElementById(productId).innerHTML = qty + count
-                           
-
                             Price = parseInt(Price)
                             document.getElementById(productId + 'total').innerHTML = document.getElementById(productId).innerHTML * Price
                             document.getElementById('grand').innerHTML = response.grandTotal
-                            grandTotal = document.getElementById('grand').innerHTML
-
-                            console.log('+++++++++')
-                            console.log(qty + count)
+                            grandTotal = document.getElementById('grand').innerHTML                           
                             discCount=qty + count
-                             console.log(discCount)
-                             console.log(response.discount.discountedPrice)
-                             console.log(document.getElementById('discPrice').innerHTML)
-                             console.log(grandTotal)
-                            console.log('++++++++++')
                             document.getElementById('discPrice').innerHTML = discCount* response.discount.discountedPrice
                             document.getElementById('totalAfterdisc').innerHTML = grandTotal - document.getElementById('discPrice').innerHTML
                            
@@ -401,7 +388,7 @@
 
 
                         } else {
-                            alert('set3')
+                           
                             document.getElementById(productId).innerHTML = qty + count
                             Price = parseInt(Price)
                             document.getElementById(productId + 'total').innerHTML = document.getElementById(productId).innerHTML * Price
@@ -413,14 +400,12 @@
                     }
                     else {
 
-                        alert("product removed from cart")
+                       
                       removeProduct()
+
                         {{!-- let stock=document.getElementById('stockLeft').innerHTML
                         document.getElementById('stockfinished').style.display="block" --}}
 
-                        console.log('----------------------')
-                        console.log(stock)
-                        console.log('----------------------')
                        
                     }
                 }
@@ -464,8 +449,9 @@
                 data: $("#coupon-code").serialize(),
                 success: (response) => {
                     console.log(response)
-                    alert("ajax kary da")
+                   
                     if (response.findCoupon) {
+
                         if (response.expired) {
                             console.log('coupon expired')
                             swal.fire(response.errMessage, "", "warning")
@@ -474,30 +460,17 @@
                                 console.log('coupon already used')
                                 swal.fire(response.errMessage, "", "warning")
                             } else {
-                                alert(response)
-                                console.log('kerittund')
-
+                
                                 let couponPrice = response.couponPrice
-                                let discountPrice = response.discountPrice
-                                console.log(couponPrice)
-                                console.log(discountPrice)
-
-
+                                let discountPrice = response.discountPrice                              
                                 document.getElementById('discPrice').innerHTML = discountPrice
                                 document.getElementById('totalAfterdisc').innerHTML = couponPrice
-
-
-
                             }
-
                         }
-
                     }
                     else {
                         console.log('no coupon ')
                         swal.fire(response.errMessage, "", "warning")
-
-
                     }
                 }
             })

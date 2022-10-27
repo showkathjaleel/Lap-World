@@ -355,17 +355,17 @@ returnStatus:(returnDetails)=>{
             couponValue=coupondetails.couponvalue
             couponValue=parseInt(couponValue)
             coupondetails.couponvalue=couponValue
-
-            
-            return new Promise((resolve,reject)=>{
-               
-
-                
+            coupondetails.minamount=parseInt(coupondetails.minamount)
+    
+            return new Promise((resolve,reject)=>{             
                 db.get().collection(collection.COUPON_COLLECTION).insertOne(coupondetails).then(()=>{
                     resolve()
                 })
             })
         },
+
+
+
         getCoupons:()=>{
             return new Promise ((resolve,reject)=>{
                 db.get().collection(collection.COUPON_COLLECTION).find().toArray().then((coupons)=>{

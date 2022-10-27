@@ -4,6 +4,7 @@ var router = express.Router();
 
 
 require('dotenv').config()
+console.log(process.env.authId)
 
 
 
@@ -134,14 +135,13 @@ router.post('/searchProducts',(req,res)=>{
 }
 })
 
+
 /* ---------------------------------------------------GET home page----------------------------------------------------------------------. */
 router.get('/', async function (req, res, next) {
   try{
-    let user = req.session.user
-    
+    let user = req.session.user    
   if (req.session.loggedIn) {
-    
-   
+
     let category=await categoryHelpers.getCategory()
     productHelpers.getAllproducts().then((products) => {
       res.render('user/indextwo', { loginaano: req.session.loggedIn, products, cartCount ,category,wishlistCount})
@@ -274,16 +274,22 @@ router.get('/resend', (req, res) => {
   res.status(401).send(e)
 }
 })
-// -------------------------resend otp----------------
+
 
 
 // --------------------------------------------------------otp creation-------------------------------------------------------------------------
 router.post('/loginotp', sessionHandle, (req, res) => {
   try{
-  req.session.mobile = req.body.number
-  mob = req.session.mobile
-
+    req.session.mobile = req.body.number
+    mob =parseInt(req.session.mobile)
+    console.log(req.body);
   userHelpers.mobileOtp(req.body).then((response) => {
+  
+  
+    console.log('mob  &&&&&&&&&&');
+    console.log(response);
+    console.log(mob);
+    console.log(typeof(mob));
     req.session.user = response.user
     user = req.session.user
 
@@ -293,6 +299,8 @@ router.post('/loginotp', sessionHandle, (req, res) => {
         to: `+91${mob}`,
         channel: "sms"
       }).then((response) => {
+        console.log('OOOOOOOOOO');
+        console.log(response);
         req.session.user = response.user
         req.session.userloginErr = false
         res.redirect('/mobile')
@@ -464,7 +472,7 @@ router.post('/couponincart', (req, res) => {
       grandTotal = grandtotal[0].grandtotal
     } else {
       grandTotal = grandtotal[0]
-    }
+    } 
     userHelpers.couponCheck(req.body, grandTotal, user._id).then((response) => {
       res.json(response)
     })
@@ -841,6 +849,7 @@ router.get('/orderDetails/:id',verifyLogin,async(req,res)=>{
 //   console.log(e);
 // }
 // })
+
 
 // -------------------------------------------------------------WISHLIST--------------------------------------------------------------//
 router.get('/wishlist/:id', verifyLogin, (req, res) => {

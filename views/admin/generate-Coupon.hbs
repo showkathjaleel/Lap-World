@@ -62,8 +62,7 @@
 
                         <div>
                             <div>
-                                <form action="/admin/generateCoupon" method="post" onsubmit="return validation()"
-                                    >
+                                <form action="/admin/generateCoupon" method="post" onsubmit="return validation()">
 
 
                                     <div class="form-group mb-3">
@@ -85,9 +84,7 @@
                                         <select name="coupontype" class="form-control" id="">
                                             <option value="percentage discount">percentage discount</option>
                                              <option value="Amount discount">Amount discount</option>
-                                            {{!-- {{#each cat.category}} --}}
-                                            {{!-- <option>{{this}}</option> --}}
-                                            {{!-- {{/each}} --}}
+                                           
                                         </select>
                                         <labelfor="name">Coupon Value </label>
                                             <div class="form-group mb-3">
@@ -96,27 +93,37 @@
                                                     class="form-control validate" required />
                                                 <span id="Offers" class="text-danger"></span>
                                             </div>
+
+
+
+                                     <labelfor="name">Minimum Purchase Amount </label>
+                                      <div class="form-group mb-3">
+                                                <input  name="minamount" type="text"
+                                                    class="form-control validate" required />
+                                                <span id="Offers" class="text-danger"></span>
+                                            </div>
+
+
+
+
+
+                                            
                                             <div class="row">
                                                  <label for="stock">COUPON VALID BETWEEN </label>
                                                 <div class="form-group mb-3 col-xs-12 col-sm-6">
                                                    
-                                                    <input id="stock" name="fromdate" type="date"
+                                                    <input  name="fromdate" type="date"
                                                         class="form-control validate" required onkeyup="validStock()" />
                                                     <span id="Stock" class="text-danger"></span>
                                                 </div>
                                                 <div class="form-group mb-3 col-xs-12 col-sm-6">
-                                                    <input id="stock" name="todate" type="date"
+                                                    <input  name="todate" type="date"
                                                         class="form-control validate" required onkeyup="validStock()" />
                                                     <span id="Stock" class="text-danger"></span>
                                                 </div>
                                             </div>
 
-                                                							    {{!-- <div class="col-auto">						    
-								    <a class="btn app-btn-primary" href="/admin/generateCoupon">
-
-									Save
-									</a>
-							    </div> --}}
+                                   
                               <input type="submit" class="btn app-btn-primary">
 
                                            

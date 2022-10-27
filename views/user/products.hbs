@@ -75,8 +75,29 @@
                                             
                                             <div class="product-list-action">
                                                 
-                                              
+
+
                                                    {{#if this.originalPrice}}
+                                                <div class="text-danger" style="align-items:center; flex-flow:wrap; font-weight:400; font-size:1.6rem; line-height:1.25;">
+                                                    
+                                                      ₹<s>{{this.originalPrice}}</s><br>
+                                                       </div>
+                                                       <div  class="product-price">
+                                                       Price:₹{{this.Price}}
+                                                      </div>
+                                                          {{else}}
+                                                            <div class="product-price">
+                                                             Price:₹{{this.Price}}                                                                                                                                                                                              
+                                                           </div><!-- End .product-price -->
+                                                           {{/if}} 
+
+
+
+
+
+
+                                              
+                                                   {{!-- {{#if this.originalPrice}}
                                                 <div class="product-price text-danger">
                                                     
                                                       ₹<s>{{this.originalPrice}}</s>
@@ -97,15 +118,15 @@
                                                              price:₹{{this.Price}}                                                                                                                                                                                              
                                                            </div><!-- End .product-price -->
                                                            {{/if}}
-                                                         {{/if}}  
+                                                         {{/if}}   --}}
                                                     
                                                 {{!-- </div><!-- End .product-price --> --}}
-                                                <div class="ratings-container">
+                                                {{!-- <div class="ratings-container">
                                                     <div class="ratings">
                                                         <div class="ratings-val" style="width: 20%;"></div><!-- End .ratings-val -->
                                                     </div><!-- End .ratings -->
                                                     <span class="ratings-text">( 2 Reviews )</span>
-                                                </div><!-- End .rating-container -->
+                                                </div><!-- End .rating-container --> --}}
 
 
 
@@ -239,7 +260,7 @@
                                     
         						</div><!-- End .widget -->
 
-        						<div class="widget widget-collapsible">
+        						{{!-- <div class="widget widget-collapsible">
     								<h3 class="widget-title">
 									    <a data-toggle="collapse" href="#widget-2" role="button" aria-expanded="true" aria-controls="widget-2">
 									       PROCESSOR
@@ -282,7 +303,7 @@
 														<input type="checkbox" class="custom-control-input" id="size-5">
 														<label class="custom-control-label" for="size-5">Ryzen 7</label>
 													</div><!-- End .custom-checkbox -->
-												</div><!-- End .filter-item -->
+												</div><!-- End .filter-item --> --}}
 
 												{{!-- <div class="filter-item">
 													<div class="custom-control custom-checkbox">
@@ -295,7 +316,7 @@
 									</div><!-- End .collapse -->
         						</div><!-- End .widget --> --}}
 
-        						<div class="widget widget-collapsible">
+        						{{!-- <div class="widget widget-collapsible">
     								<h3 class="widget-title">
 									    <a data-toggle="collapse" href="#widget-3" role="button" aria-expanded="true" aria-controls="widget-3">
 									       
@@ -306,19 +327,19 @@
 										<div class="widget-body">
 											<div class="filter-colors">
 												<a href="#" style="background: #b87145;"><span class="sr-only">Color Name</span></a>
-												<a href="#" style="background: #f0c04a;"><span class="sr-only">Color Name</span></a>
+												<a href="#" style="background: #f0c04a;"><span class="sr-only">Color Name</span></a> --}}
 												{{!-- <a href="#" style="background: #333333;"><span class="sr-only">Color Name</span></a>
 												<a href="#" class="selected" style="background: #cc3333;"><span class="sr-only">Color Name</span></a>
 												<a href="#" style="background: #3399cc;"><span class="sr-only">Color Name</span></a>
 												<a href="#" style="background: #669933;"><span class="sr-only">Color Name</span></a>
 												<a href="#" style="background: #f2719c;"><span class="sr-only">Color Name</span></a>
 												<a href="#" style="background: #ebebeb;"><span class="sr-only">Color Name</span></a> --}}
-											</div><!-- End .filter-colors -->
+											{{!-- </div><!-- End .filter-colors -->
 										</div><!-- End .widget-body -->
 									</div><!-- End .collapse -->
-        						</div><!-- End .widget -->
+        						</div><!-- End .widget --> --}}
 
-        						<div class="widget widget-collapsible">
+        						{{!-- <div class="widget widget-collapsible">
     								<h3 class="widget-title">
 									    <a data-toggle="collapse" href="#widget-4" role="button" aria-expanded="true" aria-controls="widget-4">
 									        Brand
@@ -380,7 +401,7 @@
 											</div><!-- End .filter-items -->
 										</div><!-- End .widget-body -->
 									</div><!-- End .collapse -->
-        						</div><!-- End .widget -->
+        						</div><!-- End .widget --> --}}
 
         						<div class="widget widget-collapsible">
     								<h3 class="widget-title">
