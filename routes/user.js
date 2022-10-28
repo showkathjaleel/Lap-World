@@ -107,7 +107,7 @@ const sessionHandle = (req, res, next) => {
 router.use('/', async function (req, res, next) {
   if (req.session.loggedIn){
     res.locals.user= req.session.user
-    wishlistCount = await userHelpers.wishlistCount(req.session.user._id)
+    wishlistCount= await userHelpers.wishlistCount(req.session.user._id)
     cartCount = await userHelpers.getCartCount(req.session.user._id)  
     res.locals.cartCount = cartCount
   } else {
@@ -384,7 +384,7 @@ router.get('/product/:id', verifyLogin, (req, res) => {
   let category=await categoryHelpers.getCategory()
      
   let wishlistCount = await userHelpers.wishlistCount(req.session.user._id)
-    res.render('user/products', { products,next,previous,pages,pageCount,currentPage,cartCount, loginaano: req.session.loggedIn,category,wishlistCount })
+    res.render('user/products', { products,next,previous,pages,pageCount,currentPage,loginaano: req.session.loggedIn,category,wishlistCount})
   }else{
     let products =res.paginatedResults.products
     let next =res.paginatedResults.next
@@ -777,7 +777,7 @@ router.get('/view-order-products', async (req, res) => {
 
 router.get('/order-success', (req, res) => {
   try{
-  res.render('user/order-placed', { loginaano: req.session.loggedIn })
+  res.render('user/order-placed', { loginaano: req.session.loggedIn,wishlistCount })
   }catch(e){
     console.log(e);
   }
@@ -790,7 +790,7 @@ router.get('/order-history',verifyLogin,async(req,res)=>{
   let user=req.session.user
 
  let orderHistory=await userHelpers.getUserOrders(user._id)
-  res.render('user/order-history',{orderHistory,loginaano: req.session.loggedIn})
+  res.render('user/order-history',{orderHistory,loginaano: req.session.loggedIn,wishlistCount})
 })
 
 
@@ -819,7 +819,7 @@ router.get('/orderDetails/:id',verifyLogin,async(req,res)=>{
     }
   })
  
-   res.render('user/order-Details',{orders,loginaano: req.session.loggedIn,cartCount})
+   res.render('user/order-Details',{orders,loginaano: req.session.loggedIn,cartCount,wishlistCount})
  })
 
 
@@ -874,7 +874,7 @@ router.get('/wishlist-page', verifyLogin, async (req, res) => {
   let user=req.session.user
 
   let wishList = await userHelpers.getwishListProducts(user._id)
-  res.render('user/wishlist', { wishList, loginaano: req.session.loggedIn })
+  res.render('user/wishlist', { wishList, loginaano: req.session.loggedIn ,wishlistCount})
   }catch(e){
     console.log(e);
   }
@@ -953,7 +953,7 @@ router.post('/cancelOrder', (req, res) => {
 // --------------------------------------------------------ACCOUNT-----------------------------------------------------------------------------
 router.get('/account', verifyLogin, (req, res) => {
   try{
-  res.render('user/account', { loginaano: req.session.loggedIn })
+  res.render('user/account', { loginaano: req.session.loggedIn,wishlistCount })
   }catch(e){
     console.log(e);
   }
@@ -962,7 +962,7 @@ router.get('/account', verifyLogin, (req, res) => {
 // --------------------------------------------------------CHANGE PASSWORD--------------------------------------------------------------------
 router.get('/changepassword',verifyLogin, (req, res) => { 
   try{
-  res.render('user/changePassword', { loginaano: req.session.loggedIn })
+  res.render('user/changePassword', { loginaano: req.session.loggedIn,wishlistCount })
   }catch(e){
     console.log(e);
   }
@@ -981,7 +981,7 @@ router.get('/show-address',verifyLogin, (req, res) => {
   let user=req.session.user
 
   userHelpers.getAddresscoll(user._id).then((allAddress)=>{
-    res.render('user/user-address', { allAddress , loginaano: req.session.loggedIn})
+    res.render('user/user-address', { allAddress , loginaano: req.session.loggedIn,wishlistCount})
   })
 })
 
