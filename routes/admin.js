@@ -120,9 +120,7 @@ router.get('/viewproducts', verifyAdmin,async function (req, res, next) {
     const results = {}
   
       let productsCount=await productHelpers.getProductsCount()
-      console.log('!!!!!!!!!!!!');
-      console.log(productsCount);
-      console.log('!!!!!!!!!!!!');
+      
     if (endIndex < productsCount) {
       results.next = {
         page: page + 1,

@@ -21,8 +21,9 @@
     <meta name="msapplication-config" content="/assets/images/icons/browserconfig.xml">
     <meta name="theme-color" content="#ffffff">
 
-	<meta name="google-signin-client_id" content="249952376720-otko94593qf88b4u892a1b8kslpg2e9i.apps.googleusercontent.com">
+	<meta name="google-signin-client_id" content="193183533201-mvsupm28iqbc2vpomh07tamg2ut2rguj.apps.googleusercontent.com">
     <!-- Plugins CSS File -->
+	{{!-- 249952376720-otko94593qf88b4u892a1b8kslpg2e9i.apps.googleusercontent.com --}}
     <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
     <!-- Main CSS File -->
     <link rel="stylesheet" href="/assets/css/style.css">
@@ -80,7 +81,10 @@
 								<p class="text-center">or sign in with</p>
 								<div class="row">
 
-                               <div class="g-signin2" data-onsuccess="onSignIn"></div>
+
+						
+									<div class="col-sm-6">
+                                 <div class="g-signin2" data-onsuccess="onSignIn"></div>
 								<div class="data">
 									<p>Name</p>
 									<p id="alert alert-success"></p>
@@ -95,25 +99,20 @@
 							display:none;
 						}
 						.g-signin2{
-							position:absolute
+							position:absolute;
 							top:50%;
 							left:50%;
-							margin-top:-50px;
-							margin-left:-50px;
+							margin-top:30px;
+							margin-left:50px;
 
 						}
 
 					</style>
-									{{!-- <div class="col-sm-6">
-										<a href="#" class="btn btn-login btn-g">
-											<i class="icon-google"></i>
-											Login With Google
-										</a>
-									</div><!-- End .col-6 --> --}}
+					</div>
 
 
 
-
+{{!-- 
 									<div class="col-sm-6">
 										<a href="#" class="btn btn-login btn-f">
 											<i class="icon-facebook-f"></i>
@@ -121,12 +120,7 @@
 										</a>
 									</div><!-- End .col-6 -->
 								</div><!-- End .row -->
-								{{!--
-							</div><!-- End .form-choice --> --}}
-							{{!--
-						</div><!-- .End .tab-pane --> --}}
-
-
+						 --}}
 
 
 

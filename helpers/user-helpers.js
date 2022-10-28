@@ -146,20 +146,12 @@ module.exports = {
     // -----------------------------------------------------------------CHECKING MOBILE NUMBER EXISTS---------------------------------------------------
 
     mobileOtp: (userData) => {
-        console.log('_____________________');
-        console.log(userData);
-        console.log('_____________________');
-
-
-        let response = {}
+      
+      let response = {}
         return new Promise(async (resolve, reject) => {
             let mob = userData.number
             user = await db.get().collection('user').findOne({ number: mob })
-            console.log('::::::::::::');
-            console.log(user);
-            console.log('::::::::::::');
-
-
+           
             if (user) {
                 response.user = user
                 resolve(response)
@@ -494,18 +486,13 @@ module.exports = {
         let response = {}
      
         return new Promise(async (resolve, reject) => {
-
             let discount = await db.get().collection(collection.COUPON_COLLECTION).findOne({ couponcode: couponcode })
             
-            
-            console.log(discount);
-
             if (discount) {
             couponValue = discount.couponvalue
             couponValue = parseInt(couponValue)
             discount.couponvalue = couponValue
-
-                console.log(discount);
+             
                 if (grandTotal>=discount.minamount){
 
                 response.findCoupon = true
@@ -514,12 +501,10 @@ module.exports = {
                 if (nowDate > discount.todate) {
                     response.expired = true
                     response.errMessage = 'Coupon is expired'
-                    resolve(response)
-                    // res.json({error:'Coupon is expired'})
+                    resolve(response)                  
 
                 }
                 else {
-
                     response.expired = false
                     let isCouponused = await db.get().collection(collection.USED_COUPON_COLLECTION).findOne({ userId: userid, couponId: discount._id })
 
@@ -529,8 +514,7 @@ module.exports = {
                         resolve(response)
                     }
 
-
-                    else {
+                   else {
                         response.alreadyUsed = false
                         discountPrice = (grandTotal * discount.couponvalue) / 100;
                         let couponPrice = grandTotal - discountPrice                       //subtotal aan couponPrice
@@ -556,7 +540,7 @@ module.exports = {
                 response.minamount=false
                 response.errMessage = "You want to Purchase for minimum of"+ discount.minamount +" to get coupon discount"
                 resolve(response)
-                console.log( response.errMessage);
+                
             }
         }
             else {
@@ -1539,25 +1523,15 @@ module.exports = {
 
 
     editedAddress: (addressId, editedAddress) => {
-        console.log('hihihihihihihihihihiihhihihi');
-        console.log(addressId);
-        console.log(editedAddress);
-        console.log('hihihihihihihihihihiihhihihi');
+       
         return new Promise((resolve, reject) => {
             db.get().collection(collection.ADDRESS_COLLECTION).updateOne({ _id: objectId(addressId) },
                 {
-                    $set: {
-
-
-
-                        // --------------------------ippol add cheyyunnath--------------------------------------------
-
+                    $set: {           
                         'address.name': editedAddress.firstname,
                         'address.lastname': editedAddress.lastname,
                         'address.email': editedAddress.email,
                         'address.mobile': editedAddress.phone,
-
-
 
                         'address.houseAddress.streetaddress': editedAddress.streetaddress,
                         'address.houseAddress.landmark': editedAddress.landmark,
@@ -1567,15 +1541,14 @@ module.exports = {
                         'address.houseAddress.country': editedAddress.country,
                     }
 
-
-
                 }).then(() => {
                     resolve()
                 })
-
         })
 
     },
+
+
     // ----------------------------------------------------RAZORPAY PAYMENT-------------------------------------------------------------//
     generateRazorpay: (orderId, amount, discount) => {
         let disc = discount.TotalAfterDiscount
@@ -1596,7 +1569,6 @@ module.exports = {
                         resolve(order)
                     }
 
-
                 });
             } else {
 
@@ -1611,37 +1583,29 @@ module.exports = {
                     else {
                         resolve(order)
                     }
-
-
                 });
-
             }
-
         })
     },
 
+
+
     verifyPayment: (payment, order) => {
-
-
-
-
         return new Promise((resolve, reject) => {
-
             var crypto = require("crypto");
             var expectedSignature = crypto.createHmac('sha256', '4HYF41qsxTK81p4qJPRUj7Rx')
                 .update(payment.razorpay_order_id + '|' + payment.razorpay_payment_id)
                 .digest('hex');
-
 
             if (expectedSignature == payment.razorpay_signature) {
                 resolve()
             } else {
                 reject(err)
             }
-
-
         })
     },
+
+
 
     changePaymentStatus: (orderId) => {
         return new Promise((resolve, reject) => {
@@ -1657,16 +1621,17 @@ module.exports = {
         })
     },
 
-    removeorder:(orderid)=>{
-       
+
+
+    removeorder:(orderid)=>{      
         return new Promise((resolve, reject) => {
             db.get().collection(collection.ORDER_COLLECTION).deleteOne({_id: objectId(orderId)}).then((data) => {
                 resolve()
             })
-
         })
-
     },
+
+
 
     DeleteOrder: (userId) => {
         return new Promise((resolve, reject) => {
@@ -1676,8 +1641,6 @@ module.exports = {
 
         })
     },
-
-
 
 
     //  --------------------------------------------------------ORDER CANCELLATION FROM USER----------------------------------------------------------//
@@ -1695,10 +1658,8 @@ module.exports = {
                         resolve(response)
                     })
         })
-
-
-
     },
+
 
     stockIncrement: ({ cart, product, qty }) => {
         qty = parseInt(qty)
@@ -1707,45 +1668,25 @@ module.exports = {
                 { $inc: { stock: qty } }).then(() => {
                     resolve()
                 })
-
         })
 
     },
-
-
-
-
 
 
 
     incrementStock: ({ cart, product }) => {
-
-
         return new Promise((resolve, reject) => {
             db.get().collection(collection.PRODUCT_COLLECTION).updateOne(
                 { _id: element.item }, { $inc: { stock: +element.quantity } }
-
             )
-
         })
     },
 
-    //  { _id:element.item },{$inc:{stock:-element.quantity}}
-
+    
 
     // -----------------------------------------------------------------CATEGORY-----------------------------------------------------------------//
     addCategory: (data) => {
-
-
-
         return new Promise(async (resolve, reject) => {
-
-
-
-
-
-
-
             db.get().collection(collection.CATEGORY_COLLECTION).findOne({ name: 'category' }).then((management) => {
 
                 if (management) {
@@ -1794,24 +1735,16 @@ module.exports = {
         query = parseInt(query)
         let limit = 4
 
-
         return new Promise(async (resolve, reject) => {
-
             let products = await db.get().collection('product').find()
                 .limit(limit).skip(skip).toArray()
-
             resolve(products)
         })
     },
 
 
-
-
-
     // --------------------------------------------------------------ADD TO WISHLIST------------------------------------------------------------
     addTowishlist: (productid, userId,) => {
-
-
 
         let productObj = {
             item: objectId(productid),
@@ -1820,11 +1753,8 @@ module.exports = {
         return new Promise(async (resolve, reject) => {
             let userCart = await db.get().collection(collection.WISHLIST_COLLECTION).findOne({ user: objectId(userId) })
 
-
-
             if (userCart) {
                 let productExist = userCart.products.findIndex(product => product.item == productid)
-
 
                 if (productExist != -1) {
                     db.get().collection(collection.WISHLIST_COLLECTION).updateOne({ user: objectId(userId), 'products.item': objectId(productid) },
@@ -1934,10 +1864,7 @@ module.exports = {
 
     // ----------------------------------------------------------------RETURN PRODUCTS----------------------------------------------------------//
     getReturnproducts: (orderId, productId) => {
-
-
         return new Promise((resolve, reject) => {
-
             db.get().collection(collection.ORDER_COLLECTION).aggregate([
                 {
                     $match:
@@ -1999,9 +1926,6 @@ module.exports = {
 
 
     updateShippingStatus: (orderId, productId) => {
-
-
-
         return new Promise((resolve, reject) => {
             db.get().collection(collection.ORDER_COLLECTION).updateOne
                 ({
@@ -2016,8 +1940,9 @@ module.exports = {
         })
     },
 
-    wishlistCount: (userid) => {
 
+    
+    wishlistCount: (userid) => {
         let count = 0;
         return new Promise(async (resolve, reject) => {
             let wishcount = await db.get().collection(collection.WISHLIST_COLLECTION).findOne({ user: objectId(userid) })
@@ -2025,7 +1950,6 @@ module.exports = {
                 count = wishcount.products.length;
             }
             resolve(count)
-
         })
     }
 

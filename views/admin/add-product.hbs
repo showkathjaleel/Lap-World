@@ -12,9 +12,9 @@
   <!-- https://fontawesome.com/ -->
   <link rel="stylesheet" href="jquery-ui-datepicker/jquery-ui.min.css" type="text/css" />
   <!-- http://api.jqueryui.com/datepicker/ -->
-  <link rel="stylesheet" href="/css/bootstrap.min.css" />
   <!-- https://getbootstrap.com/ -->
   <link rel="stylesheet" href="/css/templatemo-style.css">
+
   <!--
 	Product Admin CSS Template
 	https://templatemo.com/tm-524-product-admin
@@ -33,6 +33,67 @@
   background-color: white;
 }
 </style>
+<style>
+    .g-height-50 {
+        height: 50px;
+    }
+
+    .g-width-50 {
+        width: 50px !important;
+    }
+
+    @media (min-width: 0) {
+        .g-pa-30 {
+            padding: 2.14286rem !important;
+        }
+    }
+
+    .g-bg-secondary {
+        background-color: #fafafa !important;
+    }
+
+    .u-shadow-v18 {
+        box-shadow: 0 5px 10px -6px rgba(0, 0, 0, 0.15);
+    }
+
+    .g-color-gray-dark-v4 {
+        color: #777 !important;
+    }
+
+    .g-font-size-12 {
+        font-size: 0.85714rem !important;
+    }
+
+    .media-comment {
+        margin-top: 20px
+    }
+
+    .singleImageCanvasContainer {
+        overflow: hidden;
+        height: 350px;
+        width: 30%;
+        display: inline-block;
+        position: relative;
+        padding-right: 0px;
+        margin-right: 15px;
+        border: 2px solid #dfdfdf;
+        margin-bottom: 10px;
+        padding: 4px;
+        border-radius: .25rem;
+    }
+
+    .singleImageCanvasContainer .singleImageCanvasCloseBtn {
+        position: absolute;
+        right: 0;
+    }
+
+    .singleImageCanvasContainer .singleImageCanvas {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+</style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.11/cropper.css">
 <body>
 
 
@@ -112,21 +173,7 @@
                   </select>
 
                   <div class="form-group mb-3">
-                    {{!-- <label for="category">Brand</label> --}}
-
-
-
-                    {{!-- <select name="brands" class="form-control" id="">
-                      {{#each cat.brand}}
-                      <option>{{this}}</option>
-                      {{/each}}
-                    </select> --}}
-
-
-
-
-
-
+                    
                     <div class="form-group mb-3">
                       <label for="category">Color</label>
 
@@ -134,11 +181,9 @@
                         name="color" onkeyup="validCategory()">
                       <span id="Color" class="text-danger"></span>
 
-                      <datalist id="ShowDataList1">
-                        <option value="blue">
+                      <datalist id="ShowDataList1">                  
                         <option value="white">
-                        <option value="yello">
-                        <option value="dark green">
+                        <option value="silver">                   
                         <option value="black">
                       </datalist>
                     </div>
@@ -152,14 +197,13 @@
                         <span id="Stock" class="text-danger"></span>
                       </div>
                     </div>
-                    <div class="form-group mb-3">
-                      <label for="name">image </label>
-                      <input id="gallery-photo-add" name="image" type="file"  required
-                        multiple style="color: black">
-                       
-                      <span id="" class="text-danger"></span>
-                    </div>
-
+                   <div class="form-outline mb-4">
+          
+            <label class="form-label" for="id_image">Image</label>
+            <span id="croppedImages"></span>
+            <input type="file" class="form-control" id="id_image" name="image" data-toggle="modal"
+                data-target="#exampleModal" accept="image/*" multiple>
+        </div>
                   </div>
 
                   <div class="col-12">
@@ -175,7 +219,27 @@
     
   </main>
 
-
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-xl" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group row" id="test">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 {{!-- --------------------------------------------------------CROP LINK---------------------------------------------------------------------------- --}}
 <script defer src="https://cdn.crop.guide/loader/l.js?c=LJWGWC"></script>
@@ -314,11 +378,98 @@
 
 
 
+<script>
+    const input = document.getElementById('id_image')
+    const test = document.getElementById('test')
+    input.addEventListener('change', () => {
+        // Getting image file object from the input variable
+        const img_data = []
+       // const imagebox = []
+       // const crop_btn = []
+       // const confirm_btn = []
+        const url = []
+        const length= input.files.length
+        for (i = 0; i < length; i++) {
+            test.innerHTML += `<div class="col-4"><div id="image-box${i}" class="image-container" style="height: 350px; width: 350px;"> </div>
+    <button class="btn btn-outline-info" id="crop-btn${i}" style="width: 100%; margin-top: 10px; display: block;" type="button">Crop</button> </div>`
+        }
+        for (i = 0; i < length; i++) {
+            img_data[i] = input.files[i]
+        }
+        
+        img_data.forEach((image_data, i) => {
+            url[i] = URL.createObjectURL(image_data)
+        })
+        // createObjectURL() static method creates a DOMString containing a URL representing the object given in the parameter.
+        // The new object URL represents the specified File object or Blob object.
+        url.forEach((url,i)=>{
+            document.getElementById('image-box'+i).innerHTML = `<img src="${url}" id="image${i}" style="width:100%;">`
+        })
+        
+        // Creating a image tag inside imagebox which will hold the cropping view image(uploaded file) to it using the url created before.
+
+        // Storing that cropping view image in a variable
+  
+
+        // Displaying the image box
+        for(i=0;i<length;i++){
+            document.getElementById('image-box'+i).style.display= 'block'
+             document.getElementById('crop-btn'+i).style.display= 'block'
+        }
+       
+
+        for(i=0;i<length;i++){
+            cropper(img_data[i],document.getElementById('image'+i),i,document.getElementById('crop-btn'+i),document.getElementById('image-box'+i))
+        }
+
+        
+
+        // Creating a croper object with the cropping view image
+        // The new Cropper() method will do all the magic and diplay the cropping view and adding cropping functionality on the website
+        // For more settings, check out their official documentation at https://github.com/fengyuanchen/cropperjs
+        let container = new DataTransfer();
+        let fileInputElement = document.getElementById('id_image');
 
 
 
+        function cropper(img_data, image, index, crop_btn, imagebox) {
 
+            const cropper = new Cropper(image, {
+                autoCropArea: 1,
+                viewMode: 1,
+                scalable: false,
+                zoomable: false,
+                movable: false,
+                minCropBoxWidth: 50,
+                minCropBoxHeight: 50,
+            })
 
+            // When crop button is clicked this event will get triggered
+            crop_btn.addEventListener('click', () => {
+                // This method coverts the selected cropped image on the cropper canvas into a blob object
+                cropper.getCroppedCanvas().toBlob((blob) => {
+
+                    // Gets the original image data
+                    // Make a new cropped image file using that blob object, image_data.name will make the new file name same as original image
+                    let file = new File([blob], img_data.name, { type: "image/*", lastModified: new Date().getTime() });
+                    // Create a new container
+
+                    // Add the cropped image file to the container
+                    container.items.add(file);
+
+                    fileInputElement.files = container.files
+
+                    // Replace the original image file with the new cropped image file
+                  // Hide the cropper box
+                    imagebox.style.display = 'none'
+                    // Hide the crop button
+                    crop_btn.style.display = 'none'
+                });
+            });
+        }
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.11/cropper.js"></script>
 
 
 

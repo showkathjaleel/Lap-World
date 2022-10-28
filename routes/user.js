@@ -82,7 +82,7 @@ const client = require('twilio')(accountSSid, authId)
 }
 
 
-let mob;
+// let mob;
 // let user;
 
 
@@ -280,18 +280,22 @@ router.get('/resend', (req, res) => {
 // --------------------------------------------------------otp creation-------------------------------------------------------------------------
 router.post('/loginotp', sessionHandle, (req, res) => {
   try{
-    req.session.mobile = req.body.number
-    mob =parseInt(req.session.mobile)
+    // req.session.mobile = req.body.number
+    // mob =parseInt(req.session.mobile)
     console.log(req.body);
   userHelpers.mobileOtp(req.body).then((response) => {
   
   
     console.log('mob  &&&&&&&&&&');
     console.log(response);
+   
+    
+    req.session.user = response.user
+    mob=parseInt(req.session.user.number)
     console.log(mob);
     console.log(typeof(mob));
-    req.session.user = response.user
-    user = req.session.user
+
+  //  let user = req.session.user
 
     client.verify
       .services(serviceSId)
@@ -309,12 +313,12 @@ router.post('/loginotp', sessionHandle, (req, res) => {
     console.log(err);
   })
 }catch(e){
-  
+
   res.status(500).send(e)
 }
 })
 
-// -----------------otp creation-------------
+
 
 
 // -------------------------------------------------------OTP TYPING PAGE--------------------------------------------------------------------
@@ -329,7 +333,7 @@ router.post('/mobile', (req, res) => {
   try{
 
   const { otp } = req.body
-  const mob = req.session.mobile
+  const mob = parseInt(req.session.user.number)
   client.verify
     .services(serviceSId)
     .verificationChecks.create({

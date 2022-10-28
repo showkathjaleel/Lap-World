@@ -10,26 +10,21 @@ module.exports={
     addProduct:(product)=>{
         let Brand= product.brandname
         product.brandname=objectId(Brand)
+
         let price=product.Price
         product.Price=parseInt(price)
+
         let offer=product.Offers
         product.Offers=parseInt(offer)
+        
         let stock=product.stock
         product.stock=parseInt(stock)
-        
-        console.log(product);
-        console.log(product.Offers);
+         
         // if(product.Offers){
         //    product.productOfferdeductdPrice=Math.ceil((product.Price*product.Offers)/100)
         //    product.productOfferPrice=product.Price-product.productOfferdeductdPrice
-        //    console.log(';;;;;;;;;;;;;');
-        //    console.log(product.productOfferPrice);
-        //    console.log(';;;;;;;;;;;;;');
-
-
         // }
-        
-    
+          
         return new Promise(async(resolve,reject)=>{    
         db.get().collection('product').insertOne(product).then((data)=>{           
             resolve(data.insertedId)
@@ -37,12 +32,15 @@ module.exports={
     })
     },
 
+
 getAllproducts:()=>{
     return new Promise(async(resolve,reject)=>{
         let products=await db.get().collection('product').find().toArray()
         resolve(products)
     })
 },
+
+
 deleteProduct:(id)=>{
     return new Promise((resolve,reject)=>{
        
@@ -51,6 +49,8 @@ deleteProduct:(id)=>{
         })
     })
 },
+
+
 getProductDetails:(id)=>{
     return new Promise((resolve,reject)=>{
         db.get().collection('product').findOne({_id:objectId(id)}).then((product)=>{
@@ -58,34 +58,26 @@ getProductDetails:(id)=>{
            
         })
     })
- }
-,
-
+ },
 
 
  updateProduct:(id,ProDetails)=>{
 
     Category=ProDetails.category
     ProDetails.category=objectId(Category)
+
    let price=ProDetails.Price
    ProDetails.Price=parseInt(price)
-   console.log('*************');
-   console.log(ProDetails)
+  
    let offer=ProDetails.Offers
    ProDetails.Offers=parseInt(offer)
-   console.log(ProDetails.Offers);
-   console.log('*************');
+
    let stock=ProDetails.stock
    ProDetails.stock=parseInt(stock)
 
 //    if(ProDetails.Offers){
 //     ProDetails.productOfferdeductdPrice=(ProDetails.Price*ProDetails.Offers)/100
 //     ProDetails.productOfferPrice=ProDetails.Price-ProDetails.productOfferdeductdPrice
-//     console.log(';;;;;;;;;;;;;');
-//     console.log(ProDetails.productOfferPrice);
-//     console.log(';;;;;;;;;;;;;');
-
-
 //  }
  
     return new Promise((resolve,reject)=>{
@@ -99,8 +91,7 @@ getProductDetails:(id)=>{
            stock:ProDetails.stock,
         //    productOffer:ProDetails.productOfferPrice,
            img:ProDetails.img
-
-          
+       
         }
     },{upsert:true}).then((response)=>{
         resolve()
@@ -118,32 +109,28 @@ getOrderCount:()=>{
     })
 },
 
-getPaginatedOrderResult:(limit,startIndex)=>{
-    
-       
+
+
+getPaginatedOrderResult:(limit,startIndex)=>{      
         return new Promise(async (resolve, reject) => {
          let order = await db.get().collection(collection.ORDER_COLLECTION).find().limit(limit).skip(startIndex).toArray()               
             resolve(order)
         })
-
 },
 
 
 
-
-
 getOrderedProducts:()=>{
-    return new Promise((resolve,reject)=>{
-    
+    return new Promise((resolve,reject)=>{  
          db.get().collection(collection.ORDER_COLLECTION).find().toArray().then((response)=>{
-
                 resolve (response)          
             })
         })
 },
 
-productDetails:(orderId)=>{
-    
+
+
+productDetails:(orderId)=>{  
     return new Promise((resolve, reject) => {
         db.get().collection(collection.ORDER_COLLECTION).aggregate([
             {
@@ -186,8 +173,6 @@ productDetails:(orderId)=>{
                 }
             }
         ]).toArray().then((response) => {
-          
-          console.log('work aavada'+response);
             resolve(response)
         })
     })
@@ -205,7 +190,6 @@ changeDeliveryStatus:(details)=>{
         "products":{$elemMatch:{"item":objectId(productId)}}},
         {$set:{"products.$.status":status}
     }).then((response)=>{
-        console.log('resp'+response);
         resolve(response)
     })
 })
@@ -214,21 +198,15 @@ changeDeliveryStatus:(details)=>{
 
 getCategory:()=>{
     return new Promise(async(resolve,reject)=>{
-
              let categories = await db.get().collection(collection.CATEGORY_COLLECTION).findOne({name:'category'})
-             console.log('////----------/////////');
-             console.log(categories);
-             console.log('////----------/////////');
              resolve(categories)
        
 })
-
 },
 
 // --------------------------------------------------RTURNED PRODUCT PAGE IN ADMIN-------------------------------------------------------
 
 getFullReturnedProducts:()=>{
-
     return new Promise((resolve,reject)=>{
         db.get().collection(collection.RETURN_COLLECTION).aggregate([
         {
@@ -271,23 +249,20 @@ getFullReturnedProducts:()=>{
         }
 
     ]).toArray().then((returnedOrders)=>{
-        console.log(returnedOrders[0]);
         resolve(returnedOrders)
     })
-
     })
 
 },
+
+
 returnStatus:(returnDetails)=>{
-    console.log('((((((((((((');
-    console.log(returnDetails);
+  
     let orderId=objectId(returnDetails.orderId)
     returnDetails.orderId=orderId
 
     let productId=objectId(returnDetails.productId)
-    returnDetails.productId=productId
-    
-       
+    returnDetails.productId=productId   
             return new Promise((resolve, reject) => {
                 db.get().collection(collection.ORDER_COLLECTION).updateOne
                     ({
@@ -296,8 +271,7 @@ returnStatus:(returnDetails)=>{
                     },
                         {
                             $set: { "products.$.status": returnDetails.orderStatus  }
-                        }).then((response) => {                       
-                            console.log(response+'ppppppppp');
+                        }).then((response) => {                               
                             resolve(response)
                         })
             })       
@@ -306,18 +280,15 @@ returnStatus:(returnDetails)=>{
 
         
     returnStatusInreturnColl:(returnDetails)=>{
-    
-    console.log(returnDetails);
+  
     let orderId=objectId(returnDetails.orderId)
     returnDetails.orderId=orderId
 
     let productId=objectId(returnDetails.productId)
     returnDetails.productId=productId
-    
        
             return new Promise((resolve, reject) => {
-                db.get().collection(collection.RETURN_COLLECTION).updateOne({_id: objectId(orderId)} ,{$set: { "orderStatus": returnDetails.orderStatus }}).then(() => {                       
-                     
+                db.get().collection(collection.RETURN_COLLECTION).updateOne({_id: objectId(orderId)} ,{$set: { "orderStatus": returnDetails.orderStatus }}).then(() => {                                          
                             resolve()
                         })                  
         })
@@ -332,6 +303,8 @@ returnStatus:(returnDetails)=>{
                 })
             })
         },
+
+
         getTotalSaleAmount:()=>{
             return new Promise ((resolve,reject)=>{
                 db.get().collection(collection.ORDER_COLLECTION).aggregate([
@@ -475,13 +448,8 @@ returnStatus:(returnDetails)=>{
                 
 
             ]).toArray()
-
-            console.log(weeklySale)
              resolve({weeklySale,monthlySales,yearlySales}) 
-
-
         })
-
     },
 
 
@@ -602,7 +570,6 @@ returnStatus:(returnDetails)=>{
                     }
                 },
 
-
             ]).toArray()
 
            let razor=await db.get().collection(collection.ORDER_COLLECTION).aggregate([
@@ -656,8 +623,7 @@ returnStatus:(returnDetails)=>{
     },
 
 
-    getSearchedProducts:(payload)=>{
-       
+    getSearchedProducts:(payload)=>{     
         return new Promise(async(resolve,reject)=>{
             let search=await db.get().collection(collection.PRODUCT_COLLECTION).find({laptops:{$regex:new RegExp(payload,'i')}}).toArray()
             search=search.slice(0,10)
@@ -677,13 +643,12 @@ returnStatus:(returnDetails)=>{
         })
     },
 
-    getPaginatedResult:(limit,startIndex)=>{
-       
+
+    getPaginatedResult:(limit,startIndex)=>{ 
         return new Promise(async (resolve, reject) => {
          let products = await db.get().collection('product').find().limit(limit).skip(startIndex).toArray()
             resolve(products)
         })
-
     },
 
 
@@ -692,7 +657,6 @@ returnStatus:(returnDetails)=>{
 
    
     getPaginatedUserResult:(limit,startIndex)=>{
-
     return new Promise(async (resolve, reject) => {
      let user = await db.get().collection(collection.USER_COLLECTION).find().limit(limit).skip(startIndex).toArray()           
         resolve(user)
