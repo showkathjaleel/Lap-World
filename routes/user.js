@@ -938,7 +938,9 @@ router.post('/change-product-quantity',(req,res) => {
 // ----------------------------------------------ORDER CANCELLATION FROM USER-------------------------------------------------------------------
 router.post('/cancelOrder', (req, res) => {
   try{
-
+    console.log(';;;;;;;;;;;;;;;;;;;;;;;');
+    console.log(req.body);
+    console.log(';;;;;;;;;;;;;;;;;;;;;;;');
   userHelpers.cancelOrder(req.body).then((response) => {
   userHelpers.stockIncrement(req.body).then(() => {     
   res.json(response)

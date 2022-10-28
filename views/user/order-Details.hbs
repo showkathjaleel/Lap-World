@@ -97,7 +97,7 @@
                                 {{/ifEquals}}
                                  {{#ifEquals this.status "confirmed" false}}
                                                                 <td class="remove-col"> <button class="btn btn-success"
-                                        onclick="CancelProduct('{{this._id}}','{{this.product._id}}','{{this.quantity}}')">Cancel</button>
+                                        onclick="CancelProduct('{{../this._id}}','{{../this.product._id}}','{{../this.quantity}}')">Cancel</button>
                                 </td>
                                 {{/ifEquals}}
                                 {{#ifEquals this.status "Return-requested" false}}
