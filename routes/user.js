@@ -970,7 +970,6 @@ router.get('/changepassword',verifyLogin, (req, res) => {
 
 router.post('/changepassword', (req, res) => {
   let user=req.session.user
-
   userHelpers.changePassword(req.body, user._id)
   res.redirect('/acccount')
 })
@@ -979,11 +978,11 @@ router.post('/changepassword', (req, res) => {
 
 router.get('/show-address',verifyLogin, (req, res) => {
   let user=req.session.user
-
   userHelpers.getAddresscoll(user._id).then((allAddress)=>{
     res.render('user/user-address', { allAddress , loginaano: req.session.loggedIn,wishlistCount})
   })
 })
+
 
 router.get('/editAddress/:id', (req, res) => {
   let {id}=req.params 
@@ -992,9 +991,9 @@ router.get('/editAddress/:id', (req, res) => {
   })
 })
 
+
 router.post("/edit-address/:id", (req, res) => {
-  let {id}=req.params
-  
+  let {id}=req.params 
   userHelpers.editedAddress(id,req.body).then(() => {
     res.redirect('/show-address')   
   })
@@ -1004,18 +1003,15 @@ router.post("/edit-address/:id", (req, res) => {
 
 router.get('/deleteAddress/:id',(req, res) => {
   let {id}=req.params
-
   userHelpers.deleteSelectedAddress(id).then(() => {
    res.redirect('/show-address')
   })
-// }catch(e){
-//   console.log(e);
-// }
 })
+
+
 // -----------------------------------------------------USER PROFILE-----------------------------------------------------------------------//
 router.get('/profile', (req, res) => {
   let user=req.session.user
-
   userHelpers.getUserDetails(user._id).then((userdetails) => {
     res.render('user/user-details',{userdetails,loginaano: req.session.loggedIn,cartCount})
   })
