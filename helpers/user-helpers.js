@@ -836,13 +836,6 @@ module.exports = {
     // },
 
 
-
-
-
-
-
-
-
     getTotalAmount: (userId) => {
 
         return new Promise((resolve, reject) => {
@@ -1003,9 +996,7 @@ module.exports = {
                     }
                 },
             ]).toArray()
-            console.log('@@@@@@@@@@@@@@@@@@@@@');
-            console.log(orderdetail);
-            console.log('@@@@@@@@@@@@@@@@@@@@@');
+          
             resolve(orderdetail)
 
         })
@@ -1112,7 +1103,9 @@ module.exports = {
     // -----------------------------------------------------ORDER COLLECTION CREATION--------------------------------------------------------------//
 
     placeOrder: (order, userId, cartItems, total, discount) => {
-
+        console.log('}}}}}}}}}}}}}}}}}}]');
+        console.log(order);
+        console.log('}}}}}}}}}}}}}}}}}}]');
         let orderObj;
         let addressObj;
         var dateObj = new Date();

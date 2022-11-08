@@ -82,12 +82,10 @@
                                 </td>
                                 <td class="price-col">{{this.product.laptops}}</td>
                                 <td class="price-col">{{this.product.color}}</td>
-                                {{!-- <td class="price-col">{{this.product.Price}}</td> --}}
-                                {{!-- <td class="price-col">{{this.totalAmount}}</td>
-                                <td class="price-col">{{this.totalAmount}}</td> --}}
+                               
                                 <td class="price-col" >{{this.quantity}}</td>
                                 <td class="price-col">{{this.status}}</td>
-                                {{!-- <td class="price-col">{{this._id}}:{{this.product._id}}</td> --}}
+                                
 
 
                                 {{#ifEquals this.status "Delivered" false}}
@@ -101,27 +99,10 @@
                                 </td>
                                 {{/ifEquals}}
                                 {{#ifEquals this.status "Return-requested" false}}
-                                                                {{!-- <td class="remove-col"> <button class="btn btn-primary"
-                                        onclick="CancelProduct('{{this._id}}','{{this.product._id}}','{{this.quantity}}')">Cancel</button>
-                                </td> --}}
+                                                              
                                 {{/ifEquals}}
                                
 
-                                {{!-- {{#if returnStatus}}
-
-                                <td class="remove-col"> <a href="/return-product/?orderid={{this._id}}&productid={{this.product._id}}" class="btn btn-primary"
-                                      >Return</a>
-                                </td>
-                                
-
-                                {{else}}
-
-                                   {{#unless cancelStatus}}
-                                <td class="remove-col"> <button class="btn btn-danger"
-                                        onclick="CancelProduct('{{this._id}}','{{this.product._id}}','{{this.quantity}}')">Cancel</button>
-                                </td>
-                                  {{/unless}}
-                                  {{/if}} --}}
 
                             </tr>
                             {{/each}}

@@ -7,18 +7,12 @@ require('dotenv').config()
 console.log(process.env.authId)
 
 
-
-
 const paypal = require('paypal-rest-sdk');
 paypal.configure({
   'mode': 'sandbox',
   'client_id': process.env.PAYPAL_CLIENT_ID,
   'client_secret': process.env.PAYPAL_CLIENT_SECRET
 });
-
-
-
-
 
 
 
@@ -586,9 +580,7 @@ router.post('/place-order',async (req, res) => {
       res.json({ paypal: true, orderId })
     }
     else {
-      
-      
-
+  
       userHelpers.generateRazorpay(orderId, grandTotal,discount).then((response) => {
         res.json(response)
       })
@@ -604,6 +596,20 @@ router.post('/place-order',async (req, res) => {
 })
 
 
+
+
+router.post('/selected-address', (req, res) => {
+  try{
+  let user=req.session.user
+  userHelpers.gettingSelectedAddress(req.body, user._id).then((selectedAddress) => {
+    res.json(selectedAddress)
+  })
+}catch(e){
+  console.log(e);
+}
+})
+
+
 // --------------------------------------------------------------PAYPAL PAYMENT------------------------------------------------------------------
  router.post('/pay', (req, res) => {
   try{
@@ -614,8 +620,8 @@ router.post('/place-order',async (req, res) => {
       "payment_method": "paypal"
     },
     "redirect_urls": {
-      "return_url": "http://localhost:3000/success",
-      "cancel_url": "http://localhost:3000/cancel"
+      "return_url": "https://lapworld.cf/success",
+      "cancel_url": "https://lapworld.cf/cancel"
     },
     "transactions": [{
       "amount": {
@@ -648,17 +654,6 @@ router.get('/cancel', (req, res) => res.send('Cancelled'));
 
 
 
-router.post('/selected-address', (req, res) => {
-  try{
-  let user=req.session.user
-
-  userHelpers.gettingSelectedAddress(req.body, user._id).then((selectedAddress) => {
-    res.json(selectedAddress)
-  })
-}catch(e){
-  console.log(e);
-}
-})
 
 
 
@@ -702,7 +697,6 @@ router.get('/success', (req, res) => {
 // ------------------------------------------------------------VERIFY PAYMENT RAZORPAY-----------------------------------------------------------------------------
 
 router.post('/verify-payment', (req, res) => {
-  console.log('lalaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa');
  
 try{
   let { payment } = req.body
@@ -724,13 +718,11 @@ try{
   console.log(e);
 }
 })
-router.delete('/remove-payfail',(req,res)=>{
-  console.log('qqqqqqqqqqqqqq');
-  console.log(req.body);
+
+
+
+router.delete('/remove-payfail',(req,res)=>{ 
   let {receipt}=req.body.orderId
-  console.log('qqqqqqqqqqqqqq');
-
-
   userHelpers.removeorder(receipt)
 })
 
@@ -775,12 +767,8 @@ router.get('/view-order-products', async (req, res) => {
 
 // ------------------------------------------------0RDER SUCCESS PAGE----------------------------------------------------------------//
 
-router.get('/order-success', (req, res) => {
-  try{
+router.get('/order-success',verifyLogin, (req, res) => {  
   res.render('user/order-placed', { loginaano: req.session.loggedIn,wishlistCount })
-  }catch(e){
-    console.log(e);
-  }
 })
 
 // -------------------------------------------------------------ORDER PAGE-------------------------------------------------------------------//
@@ -884,13 +872,15 @@ router.get('/wishlist-page', verifyLogin, async (req, res) => {
 router.delete('/remove-wishlist', (req, res) => {
   try{
   
-  userHelpers.removewishlistItem(req.body).then(() => {
-    res.redirect('/')
+  userHelpers.removewishlistItem(req.body)
+  .then(() => {
+    res.redirect('/wishlist-page')
   })
 }catch(e){
   console.log(e);
 }
 })
+
 
 // router.post('/remove-wishlist', (req, res) => {
 //   userHelpers.removewishlistItem(req.body).then((response) => {
@@ -938,9 +928,7 @@ router.post('/change-product-quantity',(req,res) => {
 // ----------------------------------------------ORDER CANCELLATION FROM USER-------------------------------------------------------------------
 router.post('/cancelOrder', (req, res) => {
   try{
-    console.log(';;;;;;;;;;;;;;;;;;;;;;;');
-    console.log(req.body);
-    console.log(';;;;;;;;;;;;;;;;;;;;;;;');
+   
   userHelpers.cancelOrder(req.body).then((response) => {
   userHelpers.stockIncrement(req.body).then(() => {     
   res.json(response)

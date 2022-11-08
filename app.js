@@ -80,12 +80,7 @@ const hbs=expbs.create({
          return option.inverse()
         }
 
-      console.log(';;;;;;;;;;;;')
-     console.log(filtercheck)  
-     console.log(';;;;;;;;;;')
-     console.log('=============')
-     console.log(catid)
-     console.log('=============')
+      
        
   //  if(filtercheck=catid){
 
@@ -138,10 +133,12 @@ db.connect((err)=>{
 app.use('/', userRouter);
 app.use('/admin', adminRouter);
 
+
+
+
 app.get('/admin/*',(req,res)=>{
   res.render('admin/error',{admin:true,noheader:true})
 })
-
 
 app.get('/*',(req,res)=>{
   res.render('user/error')
